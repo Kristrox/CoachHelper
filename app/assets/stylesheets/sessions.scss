@@ -1,0 +1,11 @@
+body, html {
+    height: 100%;
+}
+
+.sign-up.container, .log-in.container {
+    background-image: url('soccer.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
