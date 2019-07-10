@@ -33,6 +33,9 @@ gem 'jbuilder', '~> 2.5'
 #LoginRegister Gem
 gem 'devise'
 
+#HAML Support
+gem "haml-rails", "~> 2.0"
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

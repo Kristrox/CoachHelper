@@ -1,0 +1,6 @@
+%h1 Home Page
+%h2
+  User: #{current_user.email}
+%h2
+  Team: #{current_user.team}
+= link_to('Logout', destroy_user_session_path, method: :delete)
