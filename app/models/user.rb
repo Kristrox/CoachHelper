@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validate :password_complexity
   
   def password_complexity
-    return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,16}$/
+    return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[.#?!@$%^&*-]).{8,16}$/
     errors.add :password, 'Complexity requirement not met. Length should be 8-16 characters and include: 1 uppercase, 1 lowercase and 1 special character'
   end
 end
