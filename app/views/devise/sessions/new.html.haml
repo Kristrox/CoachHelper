@@ -1,20 +1,21 @@
 .log-in.container
-  .jumbotron-fluid
-    .text-center
-      %h2 Log in
-      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .form-group
-          = f.label :email
-          %br/
-          = f.email_field :email, autofocus: true, autocomplete: "email"
-        .form-group
-          = f.label :password
-          %br/
-          = f.password_field :password, autocomplete: "current-password"
-        - if devise_mapping.rememberable?
+  .jumbotron-fluid.col-md-4.col-md-offset-4
+    .card
+      .text-center
+        %h2 Log in
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           .form-group
-            = f.check_box :remember_me
-            = f.label :remember_me
-        .actions
-          = f.submit "Log in"
-      = render "devise/shared/links"
+            = f.label :email
+            %br/
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+          .form-group
+            = f.label :password
+            %br/
+            = f.password_field :password, autocomplete: "current-password", class: "form-control"
+          - if devise_mapping.rememberable?
+            .form-check
+              = f.check_box :remember_me, class: "form-check-input"
+              = f.label :remember_me, class: "form-check-labe"
+          .actions
+            = f.submit "Log in", class: "btn btn-primary"
+        = render "devise/shared/links"
