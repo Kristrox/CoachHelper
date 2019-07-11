@@ -15,3 +15,11 @@
   .actions
     = f.submit "Log in"
 = render "devise/shared/links"
+
+%br
+
+= month_calendar do |date| 
+  = date
+%br 
+= month_calendar do |meeting| 
+  = meeting
