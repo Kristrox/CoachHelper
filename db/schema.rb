@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_07_12_080547) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,8 +24,15 @@ ActiveRecord::Schema.define(version: 2019_07_12_080547) do
     t.integer "red_cards", null: false
     t.integer "yellow_cards", null: false
     t.datetime "end_of_contusion"
+>>>>>>> 07e79bb6ffcae06e7a3a4eedf015feeb03125c24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tactics", id: false, force: :cascade do |t|
+    t.integer "id"
+    t.string "name"
+    t.string "img"
   end
 
   create_table "users", force: :cascade do |t|

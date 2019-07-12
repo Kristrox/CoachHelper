@@ -31,6 +31,11 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Calendar
+gem 'simple_calendar', '~> 2.0', '>= 2.0.6'
+
+# PaperClip (adding images to database)
+gem "paperclip", "~> 6.1.0"
 
 #LoginRegister Gem
 gem 'devise'

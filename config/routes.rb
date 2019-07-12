@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
 
   resources :team,  only: [:index,:show]
   resources :calendar, only: [:index,:show]
