@@ -7,6 +7,7 @@
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = render partial: 'sidebar', style: "font-size: 40"
   %body
     - if notice
       %p.alert.alert-success= notice
