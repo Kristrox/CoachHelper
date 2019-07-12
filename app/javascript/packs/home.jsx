@@ -5,8 +5,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import SideBar from "components/SideBar";
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<SideBar />, document.getElementById("sidebarx"));
+  ReactDOM.render(<></>, document.getElementById("sidebarx"));
 });

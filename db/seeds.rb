@@ -10,6 +10,5 @@ User.find_or_create_by(email: 'user@user.com', team: 'User Team') do |user|
     user.password = 'Haslo123.'
   end
 
-player1= Player.create(name: "Adam", surname: "Nowak")
-
-player2= Player.create(name: "Piotrek", surname:"Kowalski")
+#Player.create(name: "Adam", surname: "Nowak")
+#Player.create(name: "Piotrek", surname:"Kowalski")
