@@ -14,8 +14,7 @@
  *= require_self
  *= require simple_calendar
  */
-
-
-/* The side navigation menu */
+@import "bootstrap-sprockets";
 @import "bootstrap";
+/* The side navigation menu */
 @import "./sidebar.scss";

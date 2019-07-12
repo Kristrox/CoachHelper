@@ -11,12 +11,15 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass', '~>3.4.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
+#Bootstrap JavaScript depends on jQuery
+gem 'jquery-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -32,6 +35,9 @@ gem 'jbuilder', '~> 2.5'
 # Calendar
 gem 'simple_calendar', '~> 2.0', '>= 2.0.6'
 
+# PaperClip (adding images to database)
+gem "paperclip", "~> 6.1.0"
+
 #LoginRegister Gem
 gem 'devise'
 
@@ -39,7 +45,7 @@ gem 'devise'
 gem "haml-rails", "~> 2.0"
 
 #BOOTSTRAP Support
-gem 'bootstrap', '~> 4.3.1'
+#gem 'bootstrap', '~> 4.3.1'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
