@@ -20,7 +20,6 @@ gem 'webpacker'
 #Bootstrap JavaScript depends on jQuery
 gem 'jquery-rails'
 
-# Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
@@ -30,12 +29,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-# Calendar
-gem 'simple_calendar', '~> 2.0', '>= 2.0.6'
-
-# PaperClip (adding images to database)
-gem "paperclip", "~> 6.1.0"
 
 #LoginRegister Gem
 gem 'devise'
@@ -79,3 +72,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'twitter-bootstrap-rails'

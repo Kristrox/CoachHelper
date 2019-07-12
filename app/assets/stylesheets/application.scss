@@ -12,6 +12,9 @@
  *
  *= require_tree .
  *= require_self
- *= require simple_calendar
  */
 @import "bootstrap";
+
+.background-whole {
+  background-color: red;
+}
