@@ -38,6 +38,9 @@ gem 'devise'
 #HAML Support
 gem "haml-rails", "~> 2.0"
 
+#BOOTSTRAP Support
+gem 'bootstrap', '~> 4.3.1'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
