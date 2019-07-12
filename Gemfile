@@ -11,7 +11,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '~>3.4.1'
+#gem 'bootstrap-sass', '~>3.4.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -40,7 +40,7 @@ gem 'devise'
 gem "haml-rails", "~> 2.0"
 
 #BOOTSTRAP Support
-#gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap', '~> 4.3.1'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
