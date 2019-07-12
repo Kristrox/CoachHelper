@@ -1,0 +1,10 @@
+= render partial: 'sidebar', style: "font-size: 40"
+= render partial: 'sidebar', collection: @sidebar, locals: {size: 30}
+.content
+  %h1 Calendar#index
+  %p Find me in app/views/calendar/index.html.haml
+  =link_to "Team" , team_index_path, :locals =>  { :f => "ok" }, class: "active a"
+  
+
+
+

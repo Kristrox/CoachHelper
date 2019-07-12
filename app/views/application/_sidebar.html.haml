@@ -1,5 +1,23 @@
-.sidebar
+#sidebar
   %h3 CoachHelper
-  %a.active{:href => "#team"} Team
-  %a{:href => "#callendar"} Callendar
-  %a{:href => "#play_book"} Play Book
+  /%a.active{:href => "/team/index"}   
+  - if request.path == "/calendar"
+    =link_to "Team" , team_index_path,id: 'team', class: "a"
+    =link_to "Calendar" , calendar_index_path, id: 'calendar', class: "active a"
+    =link_to "Play Books" , play_books_path, id: 'play_books', class: "a"
+  - elsif request.path == "/team"
+    =link_to "Team" , team_index_path,id: 'team', class: "active a"
+    =link_to "Calendar" , calendar_index_path, id: 'calendar', class: "a"
+    =link_to "Play Books" , play_books_path, id: 'play_books', class: "a"
+  - elsif request.path == "/play_books"
+    =link_to "Team" , team_index_path,id: 'team', class: "a"
+    =link_to "Calendar" , calendar_index_path, id: 'calendar', class: "a"
+    =link_to "Play Books" , play_books_path, id: 'play_books', class: "active a"  
+  - else 
+    =link_to "Team" , team_index_path,id: 'team', class: "a"
+    =link_to "Calendar" , calendar_index_path, id: 'calendar', class: "a"
+    =link_to "Play Books" , play_books_path, id: 'play_books', class: "a"
+  
+  
+
+  
