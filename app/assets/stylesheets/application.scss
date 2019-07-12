@@ -13,6 +13,6 @@
  *= require_tree .
  *= require_self
  */
-
-/* The side navigation menu */
+@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "./sidebar.scss";
