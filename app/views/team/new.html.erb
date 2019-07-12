@@ -1,0 +1,52 @@
+<%= form_for(@player) do |f| %>  
+    
+  
+    <div class="field"> 
+      <%= f.label :name %><br> 
+      <%= f.text_area :name %> 
+    </div> 
+ 
+
+    <div class="field"> 
+      <%= f.label :surname %><br> 
+      <%= f.text_area :surname %> 
+    </div> 
+ 
+    <div class="field"> 
+      <%= f.label :bith_date %><br> 
+      <%= f.text_area :bith_date %> 
+    </div> 
+   
+ 
+    <div class="field"> 
+      <%= f.label :trained_in_club %><br> 
+      <%= f.text_area :trained_in_club %> 
+    </div> 
+  
+
+    <div class="field"> 
+      <%= f.label :trained_in_country %><br> 
+      <%= f.text_area :trained_in_country %> 
+    </div> 
+  
+
+    <div class="field"> 
+      <%= f.label :European %><br> 
+      <%= f.text_area :European %> 
+    </div> 
+
+    <div class="field"> 
+      <%= f.label :red_cards  %><br> 
+      <%= f.text_area :red_cards %> 
+    </div> 
+
+    <div class="field"> 
+      <%= f.label :yellow_cards %><br> 
+      <%= f.text_area :yellow_cards %> 
+    </div> 
+
+    <div class="actions"> 
+      <%= f.submit "Submit" %> 
+    </div> 
+
+  <% end %> 
