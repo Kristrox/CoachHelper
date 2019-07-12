@@ -1,5 +1,23 @@
-.sidebar
-  %h3 CoachHelper
-  %a.active{:href => "#team"} Team
-  %a{:href => "#callendar"} Callendar
-  %a{:href => "#play_book"} Play Book
+
+-unless request.path.start_with?('/users')
+  #sidebar
+    %h3 CoachHelper
+    /%a.active{:href => "/team/index"}   
+    - if request.path.start_with?("/calendar")
+      =link_to "Team" , team_index_path,id: 'team', class: "a"
+      =link_to "Calendar" , calendar_index_path, id: 'calendar', class: "active a"
+      =link_to "Play Books" , new_play_book_path, id: 'play_books', class: "a"
+    - elsif request.path.start_with?("/team")
+      =link_to "Team" , team_index_path,id: 'team', class: "active a"
+      =link_to "Calendar" , calendar_index_path, id: 'calendar', class: "a"
+      =link_to "Play Books" , new_play_book_path, id: 'play_books', class: "a"
+    - elsif request.path.start_with?("/play_books","/play_book")
+      =link_to "Team" , team_index_path,id: 'team', class: "a"
+      =link_to "Calendar" , calendar_index_path, id: 'calendar', class: "a"
+      =link_to "Play Books" , new_play_book_path, id: 'play_books', class: "active a"
+      -(1..100).each do |n|
+        =link_to n , new_play_book_path, id: 'play_books', class: "a"
+    - else 
+      =link_to "Team" , team_index_path,id: 'team', class: "a"
+      =link_to "Calendar" , calendar_index_path, id: 'calendar', class: "a"
+      =link_to "Play Books" , new_play_book_path, id: 'play_books', class: "a"
