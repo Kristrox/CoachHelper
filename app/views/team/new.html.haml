@@ -1,0 +1,35 @@
+= form_for(@player) do |f|
+  .field
+    = f.label :name
+    %br/
+    = f.text_area :name
+  .field
+    = f.label :surname
+    %br/
+    = f.text_area :surname
+  .field
+    = f.label :bith_date
+    %br/
+    = f.text_area :bith_date
+  .field
+    = f.label :trained_in_club
+    %br/
+    = f.text_area :trained_in_club
+  .field
+    = f.label :trained_in_country
+    %br/
+    = f.text_area :trained_in_country
+  .field
+    = f.label :European
+    %br/
+    = f.text_area :European
+  .field
+    = f.label :red_cards
+    %br/
+    = f.text_area :red_cards
+  .field
+    = f.label :yellow_cards
+    %br/
+    = f.text_area :yellow_cards
+  .actions
+    = f.submit "Submit"
