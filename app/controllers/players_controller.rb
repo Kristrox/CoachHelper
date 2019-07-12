@@ -10,9 +10,6 @@ class PlayersController < ApplicationController
     @players = Player.all
   end
 
- 
-  
-  # POST /posts
   # POST /posts.json
   def create 
     @player = Player.new(player_params) 
@@ -23,8 +20,6 @@ class PlayersController < ApplicationController
     end 
   end 
 
-
-  # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
     @player.destroy
