@@ -10,15 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_081412) do
-
+ActiveRecord::Schema.define(version: 2019_07_12_080547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "meetings", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_time"
-    t.datetime "end_time"
+  create_table "players", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "surname", null: false
+    t.datetime "bith_date", null: false
+    t.boolean "trained_in_club", null: false
+    t.boolean "trained_in_country", null: false
+    t.boolean "european", null: false
+    t.integer "red_cards", null: false
+    t.integer "yellow_cards", null: false
+    t.datetime "end_of_contusion"
+>>>>>>> 07e79bb6ffcae06e7a3a4eedf015feeb03125c24
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
