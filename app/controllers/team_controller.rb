@@ -1,5 +1,5 @@
 class TeamController < ApplicationController
-  
+
   def index
     @players = Player.all
   end
@@ -10,6 +10,8 @@ class TeamController < ApplicationController
 
   def create 
     @player = Player.new(player_params) 
+    @player.red_cards = 0
+    @player.yellow_cards = 0
     if @player.save 
       redirect_to '/team' 
     else 
@@ -21,15 +23,6 @@ class TeamController < ApplicationController
     @player = Player.find(params[:id])
   end
 
- # def destroy
-  #  @player = Player.find(params[:id])
-   # @player.destroy
-  
-    #respond_to do |format|
-     # format.html { redirect_to(team_index_url) }
-    #format.xml  { head :ok }
-    #end
-  #end
   def destroy
     @player = Player.find(params[:id])
     @player.destroy
@@ -40,9 +33,10 @@ class TeamController < ApplicationController
   end
 
   def update
+    @player = Player.find(params[:id])
     respond_to do |format|
       if @player.update(player_params)
-        format.html { redirect_to @player, notice: 'Post was successfully updated.' }
+        format.html { redirect_to team_index_url, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }

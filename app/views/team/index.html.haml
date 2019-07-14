@@ -4,9 +4,11 @@
     .player
     %tr
       %p.content
-        %td= player.name
-        %td= player.surname
-        %td= link_to 'Edit', edit_team_path(player) 
-        %td= link_to 'Destroy', team_path(player), method: :delete, data: { confirm: 'Are you sure?' }
-
+        %td
+          = player.name
+          = player.surname
+          %button.btn.btn-outline-primary.btn-sm
+            = link_to 'Edit', edit_team_path(player), :class => ".btn.btn-outline-primary.btn-sm"
+            |
+            \#{link_to "Delete", team_path(player), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
   %button.btn.btn-outline-primary{:type => "button"}= link_to 'New Player', new_team_path()
