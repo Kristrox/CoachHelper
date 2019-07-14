@@ -1,0 +1,14 @@
+.container
+  %h1 Edit player data
+  - form_for @player, url: {action: "update"} do |f|
+    %p
+      = f.label :name
+      %br/
+      = f.text_field :name
+    %p
+      = f.label :surname
+      %br/
+      = f.text_field :surname
+    %p
+      = f.submit "Update"
+  = link_to 'Back', team_index_path

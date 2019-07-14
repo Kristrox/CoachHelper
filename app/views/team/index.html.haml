@@ -1,9 +1,12 @@
 .content
-  %h1 Team#index
-  %p Find me in app/views/team/index.html.haml
-  =Time.now.beginning_of_month
-  /- @players.each do |player|
-  /.player
-  /  %p.content= player.id
-  = link_to 'New Player', new_team_path()
+  %h1 List of your players
+  - @players.each do |player|
+    .player
+    %tr
+      %p.content
+        %td= player.name
+        %td= player.surname
+        %td= link_to 'Edit', edit_team_path(player) 
+        %td= link_to 'Destroy', team_path(player), method: :delete, data: { confirm: 'Are you sure?' }
 
+  %button.btn.btn-outline-primary{:type => "button"}= link_to 'New Player', new_team_path()

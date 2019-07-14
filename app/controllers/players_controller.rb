@@ -1,3 +1,4 @@
+=begin
 class PlayersController < ApplicationController
   def players
   end
@@ -20,6 +21,8 @@ class PlayersController < ApplicationController
     end 
   end 
 
+
+  # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
     @player.destroy
@@ -37,8 +40,7 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:name)
+      params.require(:player).permit(:name, :surname, :bith_date, :trained_in_club, :trained_in_country, :European, :red_cards, :yellow_cards)
     end
 end
-
-
+=end
