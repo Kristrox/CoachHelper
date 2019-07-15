@@ -1,21 +1,5 @@
 body, html, .view {
-    height: 100%;
-}
-
-@media (max-width: 740px) {
-        html,
-        body,
-        .view {
-          height: 1000px;
-        }
-}
-
-@media (max-width: 800px) and (max-width: 850px) {
-        html,
-        body,
-        .view {
-          height: 650px;
-        }
+    min-height: 100vh;
 }
 
 .bg {
@@ -24,8 +8,6 @@ body, html, .view {
         background-repeat: no-repeat;
         background-size: cover;
 }
-
-
 
 #access {
     
