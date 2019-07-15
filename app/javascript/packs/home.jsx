@@ -4,8 +4,10 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
+import DrawArea from "./draw_area"
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<></>, document.getElementById("sidebarx"));
+  ReactDOM.render(React.createElement(DrawArea, null), document.getElementById("container"));
 });
+
+
