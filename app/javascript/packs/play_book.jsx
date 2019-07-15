@@ -8,7 +8,7 @@ import TopToolBar from "../components/TopToolBar";
 import BottomToolBar from "../components/BottomToolBar";
 import DrawerField from "../components/DrawerField";
 
-export default class App extends Component {
+export default class PlayBook extends Component {
   constructor(props) {
     super();
 
@@ -23,7 +23,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="PlayBook">
         <button onClick={this.goFull}>Go Fullscreen</button>
         <Fullscreen
           enabled={this.state.isFull}
@@ -41,5 +41,5 @@ export default class App extends Component {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<App />, document.getElementById("play_book"));
+  ReactDOM.render(<PlayBook />, document.getElementById("play_book"));
 });
