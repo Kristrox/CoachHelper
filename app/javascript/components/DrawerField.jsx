@@ -1,93 +1,69 @@
-import React, { Component } from "react";
-import Immutable from 'immutable';
+import React, {Component} from 'react';
 
 export default class DrawerField extends Component {
-  constructor() {
-    super();
-
+  
+  constructor(props) {
+    super(props);
     this.state = {
-      lines: new Immutable.List(),
-      isDrawing: false };
-
-
-    this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handleMouseUp = this.handleMouseUp.bind(this);
+      mode: 'draw',
+      pen : 'up',
+      lineWidth : 10,
+      penColor : 'red'
+    };
+    this.canvas = React.createRef();
   }
 
   componentDidMount() {
-    document.addEventListener("mouseup", this.handleMouseUp);
+    this.ctx = this.canvas.current.getContext('2d');
+    this.ctx.fillStyle = "green";
+    this.ctx.fillRect(0, 0, 800, 600);
+    this.ctx.lineWidth = 10;
   }
 
-  componentWillUnmount() {
-    document.removeEventListener("mouseup", this.handleMouseUp);
-  }
+  handleDrawing(e) {
 
-  handleMouseDown(mouseEvent) {
-    if (mouseEvent.button != 0) {
-      return;
+    if (this.state.pen === 'down') {
+      
+      this.ctx.beginPath();
+      this.ctx.lineWidth = this.state.lineWidth;
+      this.ctx.lineCap = 'round';
+
+      if (this.state.mode === 'draw') {
+          this.ctx.strokeStyle = this.state.penColor;
+      }
+
+      this.ctx.moveTo(this.state.penCoords[0], this.state.penCoords[1]);
+      this.ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+      this.ctx.stroke();
+
+      this.setState({ 
+          penCoords: [e.nativeEvent.offsetX, e.nativeEvent.offsetY]
+      })
     }
-
-    const point = this.relativeCoordinatesForEvent(mouseEvent);
-
-    this.setState(prevState => ({
-      lines: prevState.lines.push(new Immutable.List([point])),
-      isDrawing: true }));
-
-  }
-
-  handleMouseMove(mouseEvent) {
-    if (!this.state.isDrawing) {
-      return;
-    }
-
-    const point = this.relativeCoordinatesForEvent(mouseEvent);
-
-    this.setState(prevState => ({
-      lines: prevState.lines.updateIn([prevState.lines.size - 1], line => line.push(point)) }));
-
-  }
-
-  handleMouseUp() {
-    this.setState({ isDrawing: false });
-  }
-
-  relativeCoordinatesForEvent(mouseEvent) {
-    const boundingRect = this.refs.drawArea.getBoundingClientRect();
-    return new Immutable.Map({
-      x: mouseEvent.clientX - boundingRect.left,
-      y: mouseEvent.clientY - boundingRect.top });
-
-  }
-
-  render() {
-    return (
-      React.createElement("div", {
-        className: "drawArea",
-        ref: "drawArea",
-        onMouseDown: this.handleMouseDown,
-        onMouseMove: this.handleMouseMove },
-
-      React.createElement(Drawing, { lines: this.state.lines })));
-
-
-  }}
-
-
-function Drawing({ lines }) {
-  return (
-    React.createElement("svg", { className: "drawing" },
-    lines.map((line, index) =>
-    React.createElement(DrawingLine, { key: index, line: line }))));
 }
 
-function DrawingLine({ line }) {
-  const pathData = "M " +
-  line.
-  map(p => {
-    return `${p.get('x')} ${p.get('y')}`;
-  }).
-  join(" L ");
+handlePenDown(e) {
+  this.setState({
+    pen: 'down',
+    penCoords: [e.nativeEvent.offsetX, e.nativeEvent.offsetY]
+  })
+}
 
-  return React.createElement("path", { className: "path", d: pathData });
+handlePenUp() {
+  this.setState({
+      pen: 'up'
+  })
+}
+
+render() {
+    return (
+      <div>
+        <canvas ref={this.canvas} class="drawArea" width="800px" height="600px"
+          onMouseMove={ (e) => this.handleDrawing(e) } 
+          onMouseDown={ (e) => this.handlePenDown(e) } 
+          onMouseUp={ (e) => this.handlePenUp(e) }>
+        </canvas>
+      </div>
+    )
+  }
 }

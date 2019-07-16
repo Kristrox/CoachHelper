@@ -33,7 +33,7 @@ export default class PlayBook extends Component {
         >
           <div className="full-screenable-node d-flex flex-column mb-3" >
             <TopToolBar onChangeToFullScreen={this.handleFullScreen}/>
-            <DrawerField />
+            <DrawerField/>
             <BottomToolBar />
           </div>
         </Fullscreen>

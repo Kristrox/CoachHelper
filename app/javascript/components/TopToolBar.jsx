@@ -13,7 +13,7 @@ export default class TopToolBar extends Component {
 
   render() {
     return (
-      <div class="TopToolBar">
+      <div className="TopToolBar">
         <button onClick={this.handleChange}>Go Fullscreen</button>
       </div>
     );
