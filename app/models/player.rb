@@ -9,7 +9,7 @@ class Player < ApplicationRecord
     before_create :default_yellow_cards, :default_red_cards, :default_end_of_contusion
 
     def expiration_date_cannot_be_in_the_past
-        if end_of_contusion < Date.today
+        if end_of_contusion == Date.today
           errors.add(:expiration_date, "contusion can't be in the past")
         end
     end
