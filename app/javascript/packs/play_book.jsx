@@ -10,27 +10,29 @@ import DrawerField from "../components/DrawerField";
 
 export default class PlayBook extends Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       isFull: false
     };
+
+    this.handleFullScreen =this.handleFullScreen.bind(this);
+
   }
 
-  goFull = () => {
-    this.setState({ isFull: true });
-  };
+  handleFullScreen() {
+    this.setState({isFull:true})
+  }
 
   render() {
     return (
       <div className="PlayBook">
-        <button onClick={this.goFull}>Go Fullscreen</button>
         <Fullscreen
           enabled={this.state.isFull}
           onChange={isFull => this.setState({ isFull })}
         >
-          <div className="full-screenable-node">
-            <TopToolBar />
+          <div className="full-screenable-node d-flex flex-column mb-3" >
+            <TopToolBar onChangeToFullScreen={this.handleFullScreen}/>
             <DrawerField />
             <BottomToolBar />
           </div>
