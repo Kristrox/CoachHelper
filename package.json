@@ -4,12 +4,17 @@
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
     "@rails/webpacker": "^4.0.7",
+    "ag-grid-react": "^21.0.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "install": "^0.13.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-dom-factories": "^1.0.2",
     "react-full-screen": "^0.2.4",
-    "react_ujs": "^2.5.0"
+    "react-grid-layout": "^0.16.6",
+    "react_ujs": "^2.5.0",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.7.2"
