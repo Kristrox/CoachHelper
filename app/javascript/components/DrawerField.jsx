@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from "react";
 import Immutable from 'immutable';
 
-class DrawArea extends React.Component {
+export default class DrawerField extends Component {
   constructor() {
     super();
 
@@ -91,5 +91,3 @@ function DrawingLine({ line }) {
 
   return React.createElement("path", { className: "path", d: pathData });
 }
-
-export default DrawArea;
