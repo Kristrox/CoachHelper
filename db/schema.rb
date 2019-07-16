@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_142203) do
+ActiveRecord::Schema.define(version: 2019_07_16_143233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,9 +27,6 @@ ActiveRecord::Schema.define(version: 2019_07_15_142203) do
     t.string "name", null: false
     t.string "surname", null: false
     t.datetime "birth_date", null: false
-    t.boolean "trained_in_club", null: false
-    t.boolean "trained_in_country", null: false
-    t.boolean "european", null: false
     t.integer "red_cards", null: false
     t.integer "yellow_cards", null: false
     t.datetime "end_of_contusion"
@@ -37,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_07_15_142203) do
     t.datetime "updated_at", null: false
     t.integer "number", default: 0, null: false
     t.integer "coach_id", default: 0, null: false
+    t.integer "trained_in"
   end
 
   create_table "tactics", id: false, force: :cascade do |t|

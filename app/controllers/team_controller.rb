@@ -51,6 +51,6 @@ class TeamController < ApplicationController
     end
 
     def player_params
-      params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in_club, :trained_in_country, :european, :red_cards, :yellow_cards)
+      params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
     end
 end

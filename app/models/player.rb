@@ -1,6 +1,7 @@
 class Player < ApplicationRecord
-    
-    validates :name, :surname, :birth_date, :trained_in_club, :trained_in_country, :european, presence: true
+    enum trained_in: [:club, :country, :europe, :world]
+
+    validates :name, :surname, :birth_date, :trained_in , presence: true
     validates :red_cards, :yellow_cards, numericality: {only_inteager: true}
     validates :red_cards, numericality: {less_than_or_equal_to: 1, greater_than_or_equal_to: 0}
     validates :yellow_cards, numericality: {less_than_or_equal_to: 4, greater_than_or_equal_to: 0} 

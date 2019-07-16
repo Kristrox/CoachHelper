@@ -10,20 +10,7 @@
     .field
       = f.text_field :birth_date, class: "col-md-3 control-label"
     %h2 Choose one of them:
-    .field
-      = f.check_box(:trained_in_club,{:id => "Monday",:value => "TRAINED"})
-    .field
-      = f.check_box(:trained_in_country,{:id => "Monday",:value => "TRAINED"})
-    .field
-      = f.check_box(:european,{:id => "Monday",:value => "TRAINED"})
-
-    %h2 Tutaj
-    .field
-      = f.text_field :trained_in_club, class: "col-md-3 control-label"
-    .field
-      = f.text_field :trained_in_country, class: "col-md-3 control-label"
-    .field
-      = f.text_field :european, class: "col-md-3 control-label"
+    = f.select(:trained_in, options_for_select(Player.trained_ins))
     .actions
       = link_to 'Back', team_index_path
       = f.submit "Submit"
