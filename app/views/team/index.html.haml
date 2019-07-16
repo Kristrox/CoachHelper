@@ -1,15 +1,23 @@
 .content
-  %h1 List of your players
+  %h1 List of your Players  
+  %p
+  = link_to 'New Player', new_team_path(), class: "btn btn-outline-primary"
   - @players.each do |player|
     .player
-    %tr
-      %p.content
-        %td
-          =player.number
-          = player.name
-          = player.surname
-          %button.btn.btn-outline-primary.btn-sm
-            = link_to 'Edit', edit_team_path(player), :class => ".btn.btn-outline-primary.btn-sm"
-            |
-            \#{link_to "Delete", team_path(player), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
-  = link_to 'New Player', new_team_path(), class: "btn btn-outline-primary"
+    %br
+    %table
+      %tr
+        %p.content
+          %td
+            = player.number
+          %td
+            = player.name
+          %td
+            = player.surname
+          %td
+            %button.btn.btn-outline-primary.btn-sm
+              = link_to 'Edit', edit_team_path(player), :class => ".btn.btn-outline-primary.btn-sm"
+              |
+              \#{link_to "Delete", team_path(player), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
+  %br
+  -# = link_to 'New Player', new_team_path(), class: "btn btn-outline-primary"

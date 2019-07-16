@@ -6,9 +6,33 @@
     text-align: left;
 }
 button {
-    position: absolute; right:10;
+//    position: absolute; right:10;
 }
 
 .field{
     text-align: left;
 }
+
+table{
+    font-size: 25px;
+}
+
+p.content{
+    background-color: aquamarine;
+}
+
+
+th {
+    width:150px;
+    height: 50px;
+    vertical-align: bottom;
+    //padding-right: 20px;
+    font-size: 160%;
+  }
+td {
+    width: 150px;
+    height: 50px;
+    vertical-align: bottom;
+    //padding-left: 60px;
+    font-size: 120%;
+  }
