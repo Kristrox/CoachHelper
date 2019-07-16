@@ -36,3 +36,8 @@ td {
     //padding-left: 60px;
     font-size: 120%;
   }
+
+tr{
+ //   background-color: lightgrey;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}

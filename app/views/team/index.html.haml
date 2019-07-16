@@ -2,6 +2,11 @@
   %h1 List of your Players  
   %p
   = link_to 'New Player', new_team_path(), class: "btn btn-outline-primary"
+  %table
+    %tr
+      %td Number
+      %td Name
+      %td Surname
   - @players.each do |player|
     .player
     %br
