@@ -18,12 +18,14 @@ ActiveRecord::Schema.define(version: 2019_07_12_080547) do
   create_table "players", force: :cascade do |t|
     t.string "name", null: false
     t.string "surname", null: false
+    t.integer "number", null: false
     t.datetime "bith_date", null: false
+    t.integer "coach_id", null: false
     t.boolean "trained_in_club", null: false
     t.boolean "trained_in_country", null: false
     t.boolean "european", null: false
-    t.integer "red_cards", null: false
-    t.integer "yellow_cards", null: false
+    t.integer "red_cards", default: 0, null: false
+    t.integer "yellow_cards", default: 0, null: false
     t.datetime "end_of_contusion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
