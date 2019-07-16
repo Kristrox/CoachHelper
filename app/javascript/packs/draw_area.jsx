@@ -79,9 +79,6 @@ function Drawing({ lines }) {
     React.createElement("svg", { className: "drawing" },
     lines.map((line, index) =>
     React.createElement(DrawingLine, { key: index, line: line }))));
-
-
-
 }
 
 function DrawingLine({ line }) {
