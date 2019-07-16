@@ -1,28 +1,31 @@
 .content
   %h1 List of your Players  
-  %p
   = link_to 'New Player', new_team_path(), class: "btn btn-outline-primary"
   %table
-    %tr
+    %tr.list
       %td Number
       %td Name
       %td Surname
-  - @players.each do |player|
-    .player
-    %br
-    %table
+      %td Status
+      %td
+    - @players.each do |player|
+      -# .player
+      -# %br
+      -# %table
       %tr
-        %p.content
-          %td
-            = player.number
-          %td
-            = player.name
-          %td
-            = player.surname
-          %td
-            %button.btn.btn-outline-primary.btn-sm
-              = link_to 'Edit', edit_team_path(player), :class => ".btn.btn-outline-primary.btn-sm"
-              |
-              \#{link_to "Delete", team_path(player), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
+        %td
+          = player.number
+        %td
+          = player.name
+        %td
+          = player.surname
+        %td
+          Git
+          -#tutaj napierdzielac status gdy ma kontuzje lub czerwona kartke
+        %td
+          %button.btn.btn-outline-primary.btn-sm
+            = link_to 'Edit', edit_team_path(player), :class => ".btn.btn-outline-primary.btn-sm"
+            |
+            \#{link_to "Delete", team_path(player), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
   %br
   -# = link_to 'New Player', new_team_path(), class: "btn btn-outline-primary"

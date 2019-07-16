@@ -1,7 +1,7 @@
 class TeamController < ApplicationController
 
   def index
-    @players = Player.all
+    @players = Player.all.order(:number)
   end
 
   def new
