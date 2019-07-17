@@ -1,6 +1,7 @@
 class Player < ApplicationRecord
-    
-    validates :name, :surname, :bith_date, :trained_in_club, :trained_in_country, :european, presence: true
+    enum trained_in: [:club, :country, :europe, :world]
+
+    validates :name, :surname, :birth_date, :trained_in, presence: true
     validates :red_cards, :yellow_cards, numericality: {only_inteager: true}
     validates :red_cards, numericality: {less_than_or_equal_to: 1, greater_than_or_equal_to: 0}
     validates :yellow_cards, numericality: {less_than_or_equal_to: 4, greater_than_or_equal_to: 0} 
@@ -9,7 +10,7 @@ class Player < ApplicationRecord
     before_create :default_yellow_cards, :default_red_cards, :default_end_of_contusion
 
     def expiration_date_cannot_be_in_the_past
-        if end_of_contusion < Date.today
+        if end_of_contusion == Date.today
           errors.add(:expiration_date, "contusion can't be in the past")
         end
     end
