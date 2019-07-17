@@ -22,8 +22,11 @@ export default class DrawerField extends Component {
 
   handleDrawing(e) {
 
-    if (this.state.pen === 'down') {
+    if (this.pen === 'down') {
       
+      const ratioX = this.canvas.current.clientWidth / this.canvas.current.width;
+      const ratioY = this.canvas.current.clientHeight / this.canvas.current.height;
+
       this.ctx.beginPath();
       this.ctx.lineWidth = this.state.lineWidth;
       this.ctx.lineCap = 'round';
@@ -32,33 +35,29 @@ export default class DrawerField extends Component {
           this.ctx.strokeStyle = this.state.penColor;
       }
 
-      this.ctx.moveTo(this.state.penCoords[0], this.state.penCoords[1]);
-      this.ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+      this.ctx.moveTo(this.penCoords[0], this.penCoords[1]);
+      this.ctx.lineTo(e.nativeEvent.offsetX / ratioX , e.nativeEvent.offsetY / ratioY);
       this.ctx.stroke();
-
-      this.setState({ 
-          penCoords: [e.nativeEvent.offsetX, e.nativeEvent.offsetY]
-      })
+      this.penCoords = [e.nativeEvent.offsetX / ratioX, e.nativeEvent.offsetY / ratioY];
+      
     }
 }
 
 handlePenDown(e) {
-  this.setState({
-    pen: 'down',
-    penCoords: [e.nativeEvent.offsetX, e.nativeEvent.offsetY]
-  })
+  const ratioX = this.canvas.current.clientWidth / this.canvas.current.width;
+  const ratioY = this.canvas.current.clientHeight / this.canvas.current.height;
+  this.pen = 'down';
+  this.penCoords = [e.nativeEvent.offsetX / ratioX, e.nativeEvent.offsetY / ratioY];
 }
 
 handlePenUp() {
-  this.setState({
-      pen: 'up'
-  })
+  this.pen = 'up';
 }
 
 render() {
     return (
       <div>
-        <canvas ref={this.canvas} class="drawArea" width="800px" height="600px"
+        <canvas ref={this.canvas} className="drawArea" width="800px" height="600px"
           onMouseMove={ (e) => this.handleDrawing(e) } 
           onMouseDown={ (e) => this.handlePenDown(e) } 
           onMouseUp={ (e) => this.handlePenUp(e) }>
