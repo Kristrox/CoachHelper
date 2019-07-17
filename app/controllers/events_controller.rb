@@ -1,36 +1,39 @@
 class EventsController < ApplicationController
 
   def index
-    @events = Event.all
+    @events = Event.all.order(:event_date)
   end
 
-  # GET /events/new
+
   def new
     @event = Event.new
   end
 
-  # GET /events/1/edit
+
   def edit
+    @event = Event.find(params[:id])
   end
 
-  # POST /events
-  # POST /events.json
   def create
     @event = Event.new(event_params)
+    if @event.save 
+      redirect_to '/events' 
+    else 
+      render 'new' 
+    end 
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @event.save
+    #     format.html { redirect_to @event, notice: 'Event was successfully created.' }
+    #     format.json { render :show, status: :created, location: @event }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @event.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
+
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -43,8 +46,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
+
   def destroy
     @event.destroy
     respond_to do |format|
@@ -61,6 +63,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:opponent, :event_date)
+      params.require(:event).permit(:opponent, :event_date, :event_type)
     end
 end

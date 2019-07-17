@@ -6,16 +6,18 @@
       %td Event date
       %td Opponent
       %td
+      %td
+      %td
     - @events.each do |event|
       %tr
         %td
           = event.event_date
         %td
-          = player.type
+          = event.opponent.capitalize
         %td
-          = player.opponent
+          = event.event_type.capitalize
         %td
-          Git działa
+          Tutaj bedzie taktyka i squad
         %td
           %button.btn.btn-outline-primary.btn-sm
             = link_to 'Edit', edit_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
