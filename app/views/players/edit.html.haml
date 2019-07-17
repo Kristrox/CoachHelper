@@ -1,6 +1,6 @@
 .content
-  %h1 Create a new player
-  = bootstrap_form_for @player, url: {action: "create"} do |f|
+  %h1 Edit player data 
+  = bootstrap_form_for @player, url: {action: 'update'} do |f|
     .field.align-middle
       = f.text_field :name, class: "col-md-3 control-label" 
     .field
@@ -10,6 +10,6 @@
     .field
       = f.text_field :birth_date, class: "col-md-3 control-label"
     = f.select :trained_in, options_for_select(Player.trained_ins.map { |key, value| [key.humanize, key] }), {prompt: "Choose one of them: ..."}, class: "form-control"
-    .actions
-      = link_to 'Back', team_index_path
-      = f.submit "Submit"
+    = f.submit "Update"
+  = link_to 'Back', players_path
+

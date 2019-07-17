@@ -7,6 +7,7 @@ import Fullscreen from "react-full-screen";
 import TopToolBar from "../components/TopToolBar";
 import BottomToolBar from "../components/BottomToolBar";
 import DrawerField from "../components/DrawerField";
+import Movement from "../components/ball/Movement";
 
 export default class PlayBook extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ export default class PlayBook extends Component {
           <div className="full-screenable-node">
             <TopToolBar />
             <DrawerField />
+            <Movement />
             <BottomToolBar />
           </div>
         </Fullscreen>

@@ -16,6 +16,8 @@ const droppableStyle2 = {
 };
 
 const droppableStyle1 = {
+  border: "solid",
+
   width: "50px",
   height: "50px"
 };
@@ -32,6 +34,7 @@ export default class Movement extends Component {
 
   renderToolbar = () => {
     const firtsRow = [];
+
     for (let i = 0; i < 23; i++) {
       if (i == 0) {
         if (this.state.ball === IN_TOOLBAR) {
