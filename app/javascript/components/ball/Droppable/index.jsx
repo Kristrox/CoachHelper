@@ -5,11 +5,13 @@ export default class Droppable extends Component {
   drop = e => {
     e.preventDefault();
     const data = e.dataTransfer.getData("transfer");
-    if (e.preventDefault) {
-      e.preventDefault(); // Necessary. Allows us to drop. return false;
-    }
-
-    e.target.appendChild(document.getElementById(data));
+    this.props.updateBallPosition(this.props.x, this.props.y);
+    // if (data == null) {
+    //   e.preventDefault();
+    //   e.stopImmediatePropagation();
+    // } else {
+    //   e.target.appendChild(document.getElementById(data));
+    // }
   };
 
   allowDrop = e => {
