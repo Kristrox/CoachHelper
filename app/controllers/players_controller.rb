@@ -1,7 +1,7 @@
 class PlayersController < ApplicationController
 
   def index
-    @players = Player.all
+    @players = Player.all.order(:number)
   end
 
   def new
@@ -12,8 +12,9 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params) 
     @player.red_cards = 0
     @player.yellow_cards = 0
+    @player.user = current_user
     if @player.save 
-      redirect_to '/team' 
+      redirect_to '/players' 
     else 
       render 'new' 
     end 
@@ -27,7 +28,7 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     @player.destroy
     respond_to do |format|
-      format.html { redirect_to team_index_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to players_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -36,7 +37,7 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     respond_to do |format|
       if @player.update(player_params)
-        format.html { redirect_to team_index_url, notice: 'Post was successfully updated.' }
+        format.html { redirect_to players_url, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -51,6 +52,6 @@ class PlayersController < ApplicationController
     end
 
     def player_params
-      params.require(:player).permit(:name, :surname, :bith_date, :trained_in_club, :trained_in_country, :european, :red_cards, :yellow_cards)
+      params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
     end
 end
