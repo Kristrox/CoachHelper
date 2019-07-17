@@ -14,14 +14,14 @@
  *= require_self
  */
 @import "bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700&display=swap&subset=latin-ext');
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700&display=swap&subset=latin-ext");
 // @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap&subset=latin-ext');
 
 .background-whole {
   background-color: red;
 }
 
-body{
+body {
   // font-family: 'Lato', sans-serif;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
