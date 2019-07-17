@@ -1,18 +1,21 @@
 class Player < ApplicationRecord
-    
-    validates :name, :surname, :bith_date, :trained_in_club, :trained_in_country, :european, presence: true
+    has_many :injuries, dependent: :destroy
+    belongs_to :user
+    enum trained_in: [:club, :country, :europe, :world]
+
+    validates :name, :surname, :birth_date, :trained_in, presence: true
     validates :red_cards, :yellow_cards, numericality: {only_inteager: true}
     validates :red_cards, numericality: {less_than_or_equal_to: 1, greater_than_or_equal_to: 0}
     validates :yellow_cards, numericality: {less_than_or_equal_to: 4, greater_than_or_equal_to: 0} 
-    validate :expiration_date_cannot_be_in_the_past, on: :update
+   # validate :expiration_date_cannot_be_in_the_past, on: :update
 
-    before_create :default_yellow_cards, :default_red_cards, :default_end_of_contusion
-
-    def expiration_date_cannot_be_in_the_past
-        if end_of_contusion < Date.today
-          errors.add(:expiration_date, "contusion can't be in the past")
-        end
-    end
+    before_create :default_yellow_cards, :default_red_cards # :default_end_of_contusion
+   
+    # def expiration_date_cannot_be_in_the_past
+    #     if default_end_of_contusion.where("")== Date.today
+    #       errors.add(:expiration_date, "contusion can't be in the past")
+    #     end
+    # end
 
     def default_yellow_cards
         self.yellow_cards = 0
@@ -22,8 +25,8 @@ class Player < ApplicationRecord
         self.red_cards = 0
     end
 
-    def default_end_of_contusion
-        self.end_of_contusion = nil
-    end
+    # def default_end_of_contusion
+    #     end_of_contusion = nil
+    # end
 
 end

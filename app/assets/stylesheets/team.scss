@@ -1,15 +1,63 @@
 // Place all the styles related to the Team controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.content {
-  position: initial;
-  text-align: left;
-}
-button {
-  position: absolute;
-  right: 10;
+.content{
+//    position:initial;
+    text-align: center;
 }
 
-.field {
-  text-align: left;
+  tr:hover {
+    background-color: #ffa;
+  }
+  
+  td, th {
+    position: relative;
+  }
+  td:hover::after,
+  th:hover::after {
+    content: "";
+    position: absolute;
+    background-color: #ffa;
+    left: 0;
+    top: -5000px;
+    height: 10000px;
+    width: 100%;
+    z-index: -1;
+  }
+
+.field{
+    text-align: left;
+}
+
+table{
+    overflow: hidden;
+
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+}
+
+p.content{
+    background-color: aquamarine;
+}
+
+td {
+    text-align: center;
+  }
+
+tr{
+    background-color: lightgrey;
+}
+tr.list:nth-child(odd) {background-color:#4caf50; // #f2f2f2;
+}
+
+tr.list{
+    height: 10% ;
+    color: white;
+    font-weight: bold;
+}
+
+.btn{
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
