@@ -7,8 +7,18 @@
         %td
           = player.name
           = player.surname
+          = player.number
+          = player.birth_date
+          = player.trained_in_club
+          = player.trained_in_country
+          = player.european
+          = player.red_cards
+          = player.yellow_cards
+          = player.created_at
+          = player.updated_at
+          = player.user_id
           %button.btn.btn-outline-primary.btn-sm
             = link_to 'Edit', edit_team_path(player), :class => ".btn.btn-outline-primary.btn-sm"
             |
             \#{link_to "Delete", team_path(player), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
-  = link_to 'New Player', new_team_path(), class: "btn btn-outline-primary"
+  = link_to 'New Player', new_player_path(), class: "btn btn-outline-primary"
