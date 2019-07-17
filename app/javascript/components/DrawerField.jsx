@@ -1,68 +1,44 @@
-import React, {Component} from 'react';
+import React from 'react';
+import { Stage, Layer } from 'react-konva';
+import Drawing from './Drawing';
+import Ball from './Ball';
 
-export default class DrawerField extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      mode: 'draw',
-      pen : 'up',
-      lineWidth : 10,
-      penColor : 'red'
-    };
-    this.canvas = React.createRef();
-  }
-
-  componentDidMount() {
-    this.ctx = this.canvas.current.getContext('2d');
-    this.ctx.fillStyle = "green";
-    this.ctx.fillRect(0, 0, 800, 600);
-    this.ctx.lineWidth = 10;
-  }
-
-  handleDrawing(e) {
-
-    if (this.pen === 'down') {
-      
-      const ratioX = this.canvas.current.clientWidth / this.canvas.current.width;
-      const ratioY = this.canvas.current.clientHeight / this.canvas.current.height;
-
-      this.ctx.beginPath();
-      this.ctx.lineWidth = this.state.lineWidth;
-      this.ctx.lineCap = 'round';
-
-      if (this.state.mode === 'draw') {
-          this.ctx.strokeStyle = this.state.penColor;
-      }
-
-      this.ctx.moveTo(this.penCoords[0], this.penCoords[1]);
-      this.ctx.lineTo(e.nativeEvent.offsetX / ratioX , e.nativeEvent.offsetY / ratioY);
-      this.ctx.stroke();
-      this.penCoords = [e.nativeEvent.offsetX / ratioX, e.nativeEvent.offsetY / ratioY];
-      
+export default class DrawerField extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
     }
-}
 
-handlePenDown(e) {
-  const ratioX = this.canvas.current.clientWidth / this.canvas.current.width;
-  const ratioY = this.canvas.current.clientHeight / this.canvas.current.height;
-  this.pen = 'down';
-  this.penCoords = [e.nativeEvent.offsetX / ratioX, e.nativeEvent.offsetY / ratioY];
-}
+    componentDidMount() {
+        this.checkSize();
+        window.addEventListener("resize", this.checkSize);
+    }
 
-handlePenUp() {
-  this.pen = 'up';
-}
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.checkSize);
+    }
 
-render() {
-    return (
-      <div>
-        <canvas ref={this.canvas} className="drawArea" width="800px" height="600px"
-          onMouseMove={ (e) => this.handleDrawing(e) } 
-          onMouseDown={ (e) => this.handlePenDown(e) } 
-          onMouseUp={ (e) => this.handlePenUp(e) }>
-        </canvas>
-      </div>
-    )
-  }
+    checkSize = () => {
+        const width = this.container.offsetWidth;
+        this.setState({ stageWidth: width });
+    }
+
+    render() {
+        return (
+            <div className="drawArea" ref={ node => { this.container = node; } }>
+                <Stage width ={ this.state.stageWidth } height={ window.innerHeight }>
+                    <Layer>
+                        <Ball />
+                    </Layer>
+                    <Layer>
+                        <Drawing
+                        width ={ this.state.stageWidth } 
+                        height={ window.innerHeight } 
+                        stopDrawing={ this.props.stopDrawing } 
+                        />
+                    </Layer>
+                </Stage> 
+            </div>
+        );
+    }
 }

@@ -13,28 +13,32 @@ export default class PlayBook extends Component {
     super(props);
 
     this.state = {
-      isFull: false
+      isFull: false,
+      isDrawing: true,
     };
 
-    this.handleFullScreen =this.handleFullScreen.bind(this);
-
+    this.handleFullScreen = this.handleFullScreen.bind(this);
+    this.handleStopDrawing = this.handleStopDrawing.bind(this);
   }
 
   handleFullScreen() {
-    this.setState({isFull:true})
+    this.setState({ isFull: true });
+  }
+
+  handleStopDrawing() {
+    this.setState({
+      isDrawing: this.state.isDrawing ? false : true,
+    });
   }
 
   render() {
     return (
       <div className="PlayBook">
-        <Fullscreen
-          enabled={this.state.isFull}
-          onChange={isFull => this.setState({ isFull })}
-        >
-          <div className="full-screenable-node d-flex flex-column mb-3" >
-            <TopToolBar onChangeToFullScreen={this.handleFullScreen}/>
-            <DrawerField/>
-            <BottomToolBar />
+        <Fullscreen enabled={ this.state.isFull } onChange={ isFull => this.setState({ isFull }) }>
+          <div className="full-screenable-node d-flex flex-column">
+            <TopToolBar onChangeToFullScreen={ this.handleFullScreen } />
+            <DrawerField stopDrawing={ this.state.isDrawing }/>
+            <BottomToolBar onHandleStopDrawing={ this.handleStopDrawing } />
           </div>
         </Fullscreen>
       </div>
