@@ -31,7 +31,7 @@ export default class PlayBook extends Component {
     return (
       <div className="PlayBook">
 
-      <i class="icon-fullscreen"></i>
+  
         <button onClick={this.goFull}>Go Fullscreen</button>
         <Fullscreen
           enabled={this.state.isFull}
