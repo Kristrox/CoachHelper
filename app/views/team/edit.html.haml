@@ -12,3 +12,4 @@
     = f.select :trained_in, options_for_select(Player.trained_ins.map { |key, value| [key.humanize, key] }), {prompt: "Choose one of them: ..."}, class: "form-control"
     = f.submit "Update"
   = link_to 'Back', team_index_path
+
