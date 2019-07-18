@@ -19,6 +19,7 @@ export default class PlayBook extends Component {
 
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStopDrawing = this.handleStopDrawing.bind(this);
+    this.handleCopyTshirt = this.handleCopyTshirt.bind(this);
   }
 
   handleFullScreen() {
@@ -31,12 +32,20 @@ export default class PlayBook extends Component {
     });
   }
 
+  handleCopyTshirt(tshirt) {
+    this.setState({
+      tShirt: tshirt,
+    })
+
+    console.log(this.state.tshirt)
+  }
+
   render() {
     return (
       <div className="PlayBook">
         <Fullscreen enabled={ this.state.isFull } onChange={ isFull => this.setState({ isFull }) }>
           <div className="full-screenable-node d-flex flex-column">
-            <TopToolBar onChangeToFullScreen={ this.handleFullScreen } />
+            <TopToolBar onCopyTshirt={ this.handleCopyTshirt } onChangeToFullScreen={ this.handleFullScreen } />
             <DrawerField stopDrawing={ this.state.isDrawing }/>
             <BottomToolBar onHandleStopDrawing={ this.handleStopDrawing } />
           </div>

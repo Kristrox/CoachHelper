@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Stage, Layer, Path } from 'react-konva';
+import Ball from './Ball';
 
 export default class TopToolBar extends Component {
 
@@ -10,6 +12,11 @@ export default class TopToolBar extends Component {
   handleChange = () => {
     this.props.onChangeToFullScreen();
   }
+  
+  handleClick = () => {
+    this.props.onCopyTshirt(this.data)
+  }
+
 
   render() {
     return (

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Text } from 'react-konva';
+import { Text, Group } from 'react-konva';
 
 export default class Ball extends Component{
     constructor(props) {
@@ -19,14 +19,16 @@ export default class Ball extends Component{
 
     render() {
         return (
-            <Text 
-                text="⚽" 
-                fontSize={ 30 }
-                x={ this.state.x }
-                y={ this.state.y }
-                draggable
-                onDragEnd={ this.handleDragEnd } 
-            />
+            <Group draggable x={ this.state.x } y={ this.state.y } onDragEnd={ this.handleDragEnd }>
+                <Text 
+                    text="⚽" 
+                    fontSize={ 30 }
+                />
+                <Text 
+                    text={1} 
+                    fontSize={ 30 }
+                 />
+            </Group>
         );
     }
 }
