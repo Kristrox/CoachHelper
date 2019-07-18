@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Stage, Layer } from 'react-konva';
 import Drawing from './Drawing';
 import Ball from './Ball';
 
-export default class DrawerField extends React.Component {
+export default class DrawerField extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -20,13 +20,17 @@ export default class DrawerField extends React.Component {
 
     checkSize = () => {
         const width = this.container.offsetWidth;
-        this.setState({ stageWidth: width });
+        const height = this.container.offsetHeight;
+        this.setState({ 
+            stageWidth: width,
+            stageHeight: height
+        });
     }
 
     render() {
         return (
-            <div className="drawArea" ref={ node => { this.container = node; } }>
-                <Stage width ={ this.state.stageWidth } height={ window.innerHeight }>
+            <div className="DrawArea" ref={ node => { this.container = node; } }>
+                <Stage width ={ this.state.stageWidth } height={ this.state.stageHeight }>
                     <Layer>
                         <Ball />
                     </Layer>

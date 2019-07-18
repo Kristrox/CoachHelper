@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Text } from 'react-konva';
 
-export default class Ball extends React.Component{
+export default class Ball extends Component{
     constructor(props) {
         super(props);
         this.state = {

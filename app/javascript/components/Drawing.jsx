@@ -37,6 +37,8 @@ export default class Drawing extends Component {
       context.globalCompositeOperation = "source-over";
       context.beginPath();
 
+      //800 - canvas.width
+      //600 - canvas.height
       const ratioX = this.props.width / 800;
       const ratioY = this.props.height / 600;
 

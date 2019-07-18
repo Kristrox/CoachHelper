@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class TopToolBar extends Component {
 
@@ -7,14 +7,14 @@ export default class TopToolBar extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   
-  handleChange() {
+  handleChange = () => {
     this.props.onChangeToFullScreen();
   }
 
   render() {
     return (
       <div className="TopToolBar">
-        <button onClick={this.handleChange}>Go Fullscreen</button>
+        <button onClick={ this.handleChange }>Go Fullscreen</button>
       </div>
     );
   }
