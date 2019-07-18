@@ -7,7 +7,7 @@ export default class TopToolBar extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   
-  handleChange(e) {
+  handleChange() {
     this.props.onChangeToFullScreen();
   }
 

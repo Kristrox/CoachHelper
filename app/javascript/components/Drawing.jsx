@@ -11,8 +11,8 @@ export default class Drawing extends Component {
 
   componentDidMount() {
     const canvas = document.createElement("canvas");
-    canvas.width = 300;
-    canvas.height = 300;
+    canvas.width = 800;
+    canvas.height = 600;
     const context = canvas.getContext("2d");
     this.setState({ canvas, context });
   }
@@ -33,22 +33,25 @@ export default class Drawing extends Component {
     if (isDrawing) {
       context.strokeStyle = "#df4b26";
       context.lineJoin = "round";
-      context.lineWidth = 5;
+      context.lineWidth = 2;
       context.globalCompositeOperation = "source-over";
       context.beginPath();
 
+      const ratioX = this.props.width / 800;
+      const ratioY = this.props.height / 600;
+
       let localPos = {
-        x: this.lastPointerPosition.x - this.image.x(),
-        y: this.lastPointerPosition.y - this.image.y()
+        x: this.lastPointerPosition.x / ratioX,
+        y: this.lastPointerPosition.y / ratioY
       };
-      
+
       context.moveTo(localPos.x, localPos.y);
       const stage = this.image.parent.parent;
       let pos = stage.getPointerPosition();
       
       localPos = {
-        x: pos.x - this.image.x(),
-        y: pos.y - this.image.y()
+        x: pos.x / ratioX,
+        y: pos.y / ratioY
       };
       
       context.lineTo(localPos.x, localPos.y);
