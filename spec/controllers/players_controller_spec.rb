@@ -31,4 +31,39 @@ RSpec.describe PlayersController, type: :controller do
       end
     end
   end
+
+  describe 'GET #new' do
+    before { get :new }
+
+    describe 'successful response' do
+      it { expect(response).to be_successful }
+      it { expect(response).to render_template }
+    end
+
+    context 'player' do
+      it 'returns one outhor by given id' do
+        expect(assigns(:player)).to be_a(Player)
+        expect(assigns(:player).persisted?).to eq(false)
+      end
+    end
+  end
+
+  describe 'GET #edit' do
+    let!(:user) { create(:user) }
+    before { sign_in user }
+    let(:player) { create(:player, user_id: user.id) }
+    before { get :edit, params: { id: player.id } }
+
+    describe 'successful response' do
+      it { expect(response).to be_successful }
+      it { expect(response).to render_template }
+    end
+
+    context 'player' do
+      it 'returns one author by given id' do
+        expect(assigns(:player)).to eq(player)
+      end
+    end
+  end
+
 end
