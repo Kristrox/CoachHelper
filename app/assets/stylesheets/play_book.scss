@@ -3,13 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .DrawArea {
-  height: calc(100vh - 200px);
+  height: 600px;
+  background-image: url('playgroundfield_background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .TopToolBar {
-  height: 100px;
+  height: 50px;
 }
 
 .BottomToolBar {
+  height: 100px;
+}
+
+.PlayerNumberChoice {
   height: 100px;
 }

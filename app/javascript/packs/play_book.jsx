@@ -43,7 +43,7 @@ export default class PlayBook extends Component {
       <div className="PlayBook">
         <Fullscreen enabled={ this.state.isFull } onChange={ isFull => this.setState({ isFull }) }>
           <div className="full-screenable-node d-flex flex-column">
-            <TopToolBar onCopyTshirt={ this.handleCopyTshirt } onChangeToFullScreen={ this.handleFullScreen } />
+            <TopToolBar onChangeToFullScreen={ this.handleFullScreen } />
             <DrawerField stopDrawing={ this.state.isDrawing }/>
             <BottomToolBar onHandleStopDrawing={ this.handleStopDrawing } />
           </div>
