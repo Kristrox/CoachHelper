@@ -9,25 +9,3 @@ FactoryBot.define do
         yellow_cards {0}
     end
 end
-
-# FactoryBot.define do
-#     factory :author do
-#       name { Faker::Name.first_name }
-#       surname { Faker::Name.last_name }
-#       age { Faker::Number.between(10, 80) }
-#     end
-#   end
-
-# create_table "players", force: :cascade do |t|
-#     t.string "name", null: false
-#     t.string "surname", null: false
-#     t.integer "number", null: false
-#     t.datetime "birth_date", null: false
-#     t.integer "red_cards", default: 0, null: false
-#     t.integer "yellow_cards", default: 0, null: false
-#     t.datetime "created_at", null: false
-#     t.datetime "updated_at", null: false
-#     t.bigint "user_id"
-#     t.integer "trained_in"
-#     t.index ["user_id"], name: "index_players_on_user_id"
-#   end
