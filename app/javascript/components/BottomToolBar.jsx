@@ -1,8 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class BottomToolBar extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
-    return <h2 className="BottomToolBar">BottomToolBar</h2>;
+    return <button onClick={ (e) => this.props.onHandleStopDrawing() } >Click Me!</button>;
   }
 }

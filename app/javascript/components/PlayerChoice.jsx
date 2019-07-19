@@ -21,7 +21,7 @@ export default class PlayerChoice extends Component {
 
   render() {
     return (
-      <div>
+      <div className="PlayerNumberChoice" >
         <form>
           Player number:{" "}
           <input type="text" name="playerNumber" onChange={this.onChange} />

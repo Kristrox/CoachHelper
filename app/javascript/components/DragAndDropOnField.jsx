@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Stage, Layer, Text, Group } from "react-konva";
-import PlayerChoice from "./PlayerChoice";
-import App from "./FieldImage";
 
 export default class DragAndDropOnField extends Component {
   addPlayersToinitialList(playerNumber, team) {
@@ -56,6 +54,7 @@ export default class DragAndDropOnField extends Component {
   }
 
   renderPlayers = (allPlayers, playerNumber, playersOnField) => {
+    console.log(this.props.playerNumber)
     let playerAlredyOnField = playersOnField.some(function(player) {
       return player.id === playerNumber;
     });
@@ -111,19 +110,15 @@ export default class DragAndDropOnField extends Component {
 
   render() {
     return (
-      <div>
-        <PlayerChoice onClickChange={this.handleClick} />
-        <div />
-        <Stage width={window.innerWidth} height={window.innerHeight}>
-          <App />
-          <Layer>
+      <>
+      {/* <PlayerChoice onClickChange={this.handleClick} /> */}
             <Text text="👚" x={500} y={20} fontSize={80} />
             {this.renderEnemies()}
 
             <Text text="👕" x={100} y={20} fontSize={80} />
             {this.renderPlayers(
               this.state.players,
-              parseInt(this.state.playerNumber),
+              parseInt(this.props.playerNumber),
               this.state.playersOnField
             )}
 
@@ -147,9 +142,7 @@ export default class DragAndDropOnField extends Component {
                 });
               }}
             />
-          </Layer>
-        </Stage>
-      </div>
+      </>
     );
   }
 }
