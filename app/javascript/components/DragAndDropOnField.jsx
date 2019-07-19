@@ -1,26 +1,27 @@
 import React, { Component } from "react";
 import { Stage, Layer, Text, Group } from "react-konva";
 import PlayerChoice from "./PlayerChoice";
+import App from "./FieldImage";
 
 export default class DragAndDropOnField extends Component {
-  setPlayers(playerNumber, team) {
-    var ourPlayerX = 100;
-    var OurPlayerY = 20;
-    var EnemyPlayerX = 500;
-    var EnemyPlayerY = 20;
+  addPlayersToinitialList(playerNumber, team) {
+    const ourPlayerX = 100;
+    const ourPlayerY = 20;
+    const enemyPlayerX = 500;
+    const enemyPlayerY = 20;
 
-    var playerList = [];
+    let playerList = [];
     for (
       let playerIterator = 1;
       playerIterator <= playerNumber;
       playerIterator++
     ) {
       if (team == "ourTeam") {
-        playerList.push({ x: ourPlayerX, y: OurPlayerY, id: playerIterator });
+        playerList.push({ x: ourPlayerX, y: ourPlayerY, id: playerIterator });
       } else {
         playerList.push({
-          x: EnemyPlayerX,
-          y: EnemyPlayerY,
+          x: enemyPlayerX,
+          y: enemyPlayerY,
           id: playerIterator
         });
       }
@@ -28,8 +29,8 @@ export default class DragAndDropOnField extends Component {
     return playerList;
   }
 
-  renderEnemies = players => {
-    const listPlayers = players.map(player => (
+  renderEnemies = () => {
+    const listPlayers = this.state.enemyPlayers.map(player => (
       <Group
         key={player.id}
         draggable
@@ -37,9 +38,8 @@ export default class DragAndDropOnField extends Component {
         y={player.y}
         onDragEnd={this.handleDragEnd}
       >
-        <Text key={player.id + "a"} text="👚" fontSize={80} />
+        <Text text="👚" fontSize={80} />
         <Text
-          key={player.id + "b"}
           x={player.x - 467}
           y={player.y + 5}
           text={player.id}
@@ -51,22 +51,18 @@ export default class DragAndDropOnField extends Component {
     return listPlayers;
   };
 
-  renderPlayers = (allPlayers, playerNumber, playersOnField) => {
-    for (var i = 0; i < playersOnField.length; i++) {
-      if (playersOnField[i].id === playerNumber) {
-        var playerAlredyOnField = 1;
-      }
-    }
+  checkIfPlayerIsOnField(element) {
+    return element === playerNumber;
+  }
 
-    for (
-      var playerIterator = 0;
-      playerIterator < allPlayers.length;
-      playerIterator++
-    ) {
-      if (allPlayers[playerIterator].id === playerNumber) {
-        var playerWaitingToBeAddOnField = allPlayers[playerIterator];
-      }
-    }
+  renderPlayers = (allPlayers, playerNumber, playersOnField) => {
+    let playerAlredyOnField = playersOnField.some(function(player) {
+      return player.id === playerNumber;
+    });
+
+    let playerWaitingToBeAddOnField = allPlayers.find(function(player) {
+      return player.id === playerNumber;
+    });
 
     if (playerAlredyOnField != 1) {
       playersOnField.push(playerWaitingToBeAddOnField);
@@ -76,7 +72,7 @@ export default class DragAndDropOnField extends Component {
       .filter(player => player.id != 0)
       .map(player => (
         <Group
-          key="player.id"
+          key={player.id}
           draggable
           x={player.x}
           y={player.y}
@@ -95,18 +91,15 @@ export default class DragAndDropOnField extends Component {
     return listPlayers;
   };
 
-  HandleClick = playerNumber => {
-    this.setState(
-      {
-        playerNumber: playerNumber
-      },
-      () => console.log(this.state.playerNumber)
-    );
+  handleClick = playerNumber => {
+    this.setState({
+      playerNumber: playerNumber
+    });
   };
 
   state = {
-    players: this.setPlayers(99, "ourTeam"),
-    enemyPlayers: this.setPlayers(18, "enemy"),
+    players: this.addPlayersToinitialList(99, "ourTeam"),
+    enemyPlayers: this.addPlayersToinitialList(18, "enemy"),
     enemiesOnField: [{ x: 300, y: 20, id: 0 }],
     playersOnField: [{ x: 100, y: 20, id: 0 }],
     playerNumber: 0,
@@ -119,12 +112,13 @@ export default class DragAndDropOnField extends Component {
   render() {
     return (
       <div>
-        <PlayerChoice onClickChange={this.HandleClick} />
+        <PlayerChoice onClickChange={this.handleClick} />
         <div />
         <Stage width={window.innerWidth} height={window.innerHeight}>
+          <App />
           <Layer>
             <Text text="👚" x={500} y={20} fontSize={80} />
-            {this.renderEnemies(this.state.enemyPlayers)}
+            {this.renderEnemies()}
 
             <Text text="👕" x={100} y={20} fontSize={80} />
             {this.renderPlayers(

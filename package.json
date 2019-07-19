@@ -22,7 +22,8 @@
     "react-konva": "^16.8.7-3",
     "react-widgets": "^4.4.11",
     "react_ujs": "^2.5.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "use-image": "^1.0.4"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.7.2"
