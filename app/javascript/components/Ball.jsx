@@ -2,13 +2,11 @@ import React, {Component} from 'react';
 import { Text, Group } from 'react-konva';
 
 export default class Ball extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            x: 500,
-            y: 50,
-        };
-    }
+    
+    state = {
+        x: 500,
+        y: 50,
+    };
 
     handleDragEnd = (e) => {
         this.setState({ 

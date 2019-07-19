@@ -4,17 +4,16 @@ import { Image } from 'react-konva';
 export default class Drawing extends Component {
   constructor(props) {
     super(props);
+    const canvas = document.createElement("canvas");
+    const canvasWidth = 800;
+    const canvasHeight = 600;
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
     this.state = {
       isDrawing: false,
-    } 
-  }
-
-  componentDidMount() {
-    const canvas = document.createElement("canvas");
-    canvas.width = 800;
-    canvas.height = 600;
-    const context = canvas.getContext("2d");
-    this.setState({ canvas, context });
+      canvas: canvas,
+      context: canvas.getContext("2d")
+    };
   }
 
   handleMouseDown = () => {
@@ -37,10 +36,10 @@ export default class Drawing extends Component {
       context.globalCompositeOperation = "source-over";
       context.beginPath();
 
-      //800 - canvas.width
-      //600 - canvas.height
-      const ratioX = this.props.width / 800;
-      const ratioY = this.props.height / 600;
+      const canvasWidth = 800;
+      const canvasHeight = 600;
+      const ratioX = this.props.width / canvasWidth;
+      const ratioY = this.props.height / canvasHeight;
 
       let localPos = {
         x: this.lastPointerPosition.x / ratioX,

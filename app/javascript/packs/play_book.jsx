@@ -27,9 +27,7 @@ export default class PlayBook extends Component {
   }
 
   handleStopDrawing() {
-    this.setState({
-      isDrawing: this.state.isDrawing ? false : true,
-    });
+    this.setState(previousState => ({ isDrawing: !previousState.isDrawing }))
   }
 
   handleCopyTshirt(tshirt) {
