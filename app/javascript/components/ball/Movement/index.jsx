@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Droppable from "../Droppable";
 import Draggable from "../Draggable";
-import Card from "../Card";
+
 import img from "../img/playgroundfield_background.png";
 import DropdownButton from "react-bootstrap/DropdownButton";
 //import { Col, Row } from 'react-grid-system';
-
-var keyo = 0;
 
 const droppableStyle2 = {
   border: "solid",
@@ -17,7 +15,6 @@ const droppableStyle2 = {
 
 const droppableStyle1 = {
   border: "solid",
-
   width: "50px",
   height: "50px"
 };
@@ -25,55 +22,72 @@ const droppableStyle1 = {
 export default class Movement extends Component {
   state = {
     ball: IN_TOOLBAR,
-    players: [{ position: { x: 0, y: 0 }, number: 2 }]
+    player: IN_TOOLBAR,
+    players: [{ position: { x: 0, y: 1 }, number: 2 }]
   };
 
   updateBallPosition = (x, y) => {
     this.setState({ ball: { x: x, y: y } });
   };
-
+  /*
+  updatePlayerPosition = (x, y) => {
+    this.setState({ player: { x: x, y: y } });
+  };
+*/
   renderToolbar = () => {
-    const firtsRow = [];
+    const toolbar = [];
 
     for (let i = 0; i < 23; i++) {
       if (i == 0) {
         if (this.state.ball === IN_TOOLBAR) {
-          firtsRow.push(
+          toolbar.push(
             <div key={i} style={droppableStyle2}>
-              <Draggable id="item1">
+              <Draggable>
                 <h2>⚽</h2>
               </Draggable>
             </div>
           );
         } else {
-          firtsRow.push(<div key={i} style={droppableStyle2} />);
+          toolbar.push(<div key={i} style={droppableStyle2} />);
         }
+        /* } else if (i == 1) {
+        console.log(this.state.players[0]);
+        if (this.state.player === IN_TOOLBAR) {
+          toolbar.push(
+            <div key={i} style={droppableStyle2}>
+              <Draggable>
+                <h2>😃</h2>
+              </Draggable>
+            </div>
+          );
+        } else {
+          toolbar.push(<div key={i} style={droppableStyle2} />);
+        }*/
       } else {
-        firtsRow.push(<div key={i} style={droppableStyle2} />);
+        toolbar.push(<div key={i} style={droppableStyle2} />);
       }
     }
-    return firtsRow;
+    return toolbar;
   };
 
-  renderColumn = () => {
-    const column = [];
+  renderRows = () => {
+    const rows = [];
     for (let y = 0; y < 12; y++) {
-      column.push(<Row key={`Wrapper1_${y}`}>{this.renderRow(y)}</Row>);
-      keyo = keyo + 1;
+      rows.push(<Row key={`Wrapper1_${y}`}>{this.renderColumns(y)}</Row>);
     }
-    return column;
+    return rows;
   };
 
-  renderRow = y => {
+  renderColumns = y => {
     const grid = [];
-    for (let x = 0; x < 16; x++) {
+    for (let x = 0; x < 25; x++) {
       grid.push(
         <Droppable
           x={x}
           y={y}
-          key={x + "cos" + keyo}
           style={droppableStyle1}
           updateBallPosition={this.updateBallPosition}
+          updatePlayerPosition={this.updatePlayerPosition}
         >
           {this.state.ball !== IN_TOOLBAR &&
           this.state.ball.x === x &&
@@ -91,7 +105,7 @@ export default class Movement extends Component {
   };
 
   renderPlayer = (x, y) => {
-    console.log(x, y);
+    //console.log(x, y);
     const player = this.state.players.find(
       player => player.position.x === x && player.position.y === y
     );
@@ -100,32 +114,24 @@ export default class Movement extends Component {
       return null;
     }
 
-    return <div>{player.number}</div>;
-  };
-
-  button() {
-    const but = [];
-    but.push(
-      <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-        <Dropdown.Item>Action</Dropdown.Item>
-        <Dropdown.Item>Another action</Dropdown.Item>
-        <Dropdown.Item>Something else</Dropdown.Item>
-      </DropdownButton>
+    return (
+      <Draggable>
+        <div>😃{player.number}</div>
+      </Draggable>
     );
-    return but;
-  }
+  };
 
   render() {
     return (
       <Wrapper>
         <Toolbar>{this.renderToolbar()}</Toolbar>
-        <Field>{this.renderColumn()}</Field>
+        <Field>{this.renderRows()}</Field>
       </Wrapper>
     );
   }
 }
 
-const IN_TOOLBAR = "IN_TOOLBAR";
+const IN_TOOLBAR = "true";
 
 const Wrapper = styled.div`
   width: 100%;

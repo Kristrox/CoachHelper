@@ -6,6 +6,7 @@ export default class Droppable extends Component {
     e.preventDefault();
     const data = e.dataTransfer.getData("transfer");
     this.props.updateBallPosition(this.props.x, this.props.y);
+
   };
 
   allowDrop = e => {
