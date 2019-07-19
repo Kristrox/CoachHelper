@@ -29,11 +29,7 @@ export default class Movement extends Component {
   updateBallPosition = (x, y) => {
     this.setState({ ball: { x: x, y: y } });
   };
-  /*
-  updatePlayerPosition = (x, y) => {
-    this.setState({ player: { x: x, y: y } });
-  };
-*/
+
   renderToolbar = () => {
     const toolbar = [];
 
@@ -50,19 +46,6 @@ export default class Movement extends Component {
         } else {
           toolbar.push(<div key={i} style={droppableStyle2} />);
         }
-        /* } else if (i == 1) {
-        console.log(this.state.players[0]);
-        if (this.state.player === IN_TOOLBAR) {
-          toolbar.push(
-            <div key={i} style={droppableStyle2}>
-              <Draggable>
-                <h2>😃</h2>
-              </Draggable>
-            </div>
-          );
-        } else {
-          toolbar.push(<div key={i} style={droppableStyle2} />);
-        }*/
       } else {
         toolbar.push(<div key={i} style={droppableStyle2} />);
       }
@@ -131,7 +114,7 @@ export default class Movement extends Component {
   }
 }
 
-const IN_TOOLBAR = "true";
+const IN_TOOLBAR = "IN_TOOLBAR";
 
 const Wrapper = styled.div`
   width: 100%;
