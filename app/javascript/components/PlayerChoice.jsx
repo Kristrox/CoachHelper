@@ -25,9 +25,7 @@ export default class PlayerChoice extends Component {
         <form>
           Player number:{" "}
           <input type="text" name="playerNumber" onChange={this.onChange} />
-          <br />
-          <br />
-          <input type="button" value="Submit" onClick={this.submitForm} />
+          <input className="PlayerNumberChoiceButton btn btn-success" type="button" value="Submit" onClick={this.submitForm} />
         </form>
       </div>
     );

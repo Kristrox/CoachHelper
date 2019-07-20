@@ -41,18 +41,20 @@ export default class DrawerField extends Component {
             <>
             <PlayerChoice onClickChange={this.handleClick}/>
                 <div className="DrawArea" ref={ node => { this.container = node; } }>
-                    <Stage  width ={ this.state.stageWidth } height={ this.state.stageHeight }>
-                        <Layer>
-                        <Drag playerNumber={this.state.playerNumber}/>              
-                        </Layer>
-                        <Layer>
-                            <Drawing
-                            width ={ this.state.stageWidth } 
-                            height={ window.innerHeight } 
-                            stopDrawing={ this.props.stopDrawing } 
-                            />
-                        </Layer>
-                    </Stage> 
+                    <div className="DrawAreaBg">
+                        <Stage  width ={ this.state.stageWidth } height={ window.innerHeight}>
+                            <Layer>
+                            <Drag playerNumber={this.state.playerNumber}/>              
+                            </Layer>
+                            <Layer>
+                                <Drawing
+                                width ={ this.state.stageWidth } 
+                                height={ window.innerHeight } 
+                                stopDrawing={ this.props.stopDrawing } 
+                                />
+                            </Layer>
+                        </Stage>
+                    </div> 
                 </div>
             </>
         );

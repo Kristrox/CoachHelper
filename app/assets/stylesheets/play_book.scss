@@ -4,8 +4,11 @@
 
 .DrawArea {
   height: 600px;
+}
+
+.DrawAreaBg {
   background-image: url('playgroundfield_background.png');
-  background-position: center;
+  background-position: center 100px;
   background-repeat: no-repeat;
   background-size: cover;
 }
