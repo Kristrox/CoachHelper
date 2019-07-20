@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import { Stage, Layer, Path } from 'react-konva';
-import Ball from './Ball';
+import React, { Component } from "react";
 
 export default class TopToolBar extends Component {
 
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      drawing: true,
+    }
+    this.handleStopDrawing = this.handleStopDrawing.bind(this);
   }
   
-  handleChange = () => {
-    this.props.onChangeToFullScreen();
+  handleStopDrawing = (e) => {
+    this.props.onHandleStopDrawing();
+      this.setState({
+        drawing: this.state.drawing ? false : true
+      });
   }
   
-  handleClick = () => {
-    this.props.onCopyTshirt(this.data)
-  }
-
-
   render() {
     return (
-      <div className="TopToolBar">
-        <button onClick={ this.handleChange }>Go Fullscreen</button>
+      <div className="TopToolBar d-flex justify-content-end">
+        <button className="TopToolBar btn btn-success" onClick={ this.handleStopDrawing }>{ this.state.drawing ? "Stop drawing" : "Start drawing" }</button>
+        <button className="TopToolBar btn btn-success" onClick={ () => this.props.onChangeToFullScreen() }>Go Fullscreen</button>
       </div>
     );
   }

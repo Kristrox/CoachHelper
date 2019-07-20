@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Fullscreen from 'react-full-screen';
 import TopToolBar from '../components/TopToolBar';
-import BottomToolBar from '../components/BottomToolBar';
 import DrawerField from '../components/DrawerField';
 
 export default class PlayBook extends Component {
@@ -43,9 +42,8 @@ export default class PlayBook extends Component {
       <div className="PlayBook">
         <Fullscreen enabled={ this.state.isFull } onChange={ isFull => this.setState({ isFull }) }>
           <div className="full-screenable-node d-flex flex-column">
-            <TopToolBar onChangeToFullScreen={ this.handleFullScreen } />
+            <TopToolBar onHandleStopDrawing={ this.handleStopDrawing } onChangeToFullScreen={ this.handleFullScreen } />
             <DrawerField stopDrawing={ this.state.isDrawing }/>
-            <BottomToolBar onHandleStopDrawing={ this.handleStopDrawing } />
           </div>
         </Fullscreen>
       </div>
