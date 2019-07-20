@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { Stage, Layer } from 'react-konva';
 import Drawing from './Drawing';
-import Ball from './Ball';
 import Drag from '../components/DragAndDropOnField.jsx';
 import PlayerChoice from "./PlayerChoice";
 
@@ -44,7 +43,11 @@ export default class DrawerField extends Component {
                     <div className="DrawAreaBg">
                         <Stage  width ={ this.state.stageWidth } height={ window.innerHeight}>
                             <Layer>
-                            <Drag playerNumber={this.state.playerNumber}/>              
+                                <Drag 
+                                playerNumber={this.state.playerNumber}
+                                width ={ this.state.stageWidth } 
+                                height={ window.innerHeight } 
+                                />              
                             </Layer>
                             <Layer>
                                 <Drawing
