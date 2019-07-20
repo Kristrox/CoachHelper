@@ -32,7 +32,7 @@ export default class Drawing extends Component {
     if (isDrawing) {
       context.strokeStyle = "#df4b26";
       context.lineJoin = "round";
-      context.lineWidth = 2;
+      context.lineWidth = 7;
       context.globalCompositeOperation = "source-over";
       context.beginPath();
 
