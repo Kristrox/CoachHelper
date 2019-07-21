@@ -1,3 +1,3 @@
 json.data do
-    json.array! @players, :name, :surname, :number, :user_id 
+    json.array! @players, :name, :id, :number, :surname
 end

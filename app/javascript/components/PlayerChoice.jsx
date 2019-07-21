@@ -1,12 +1,32 @@
 import React, { Component } from "react";
+import axios from 'axios'
 
 export default class PlayerChoice extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      playerNumber: ""
+      playerNumber: "",
+      players: [],
+      isLoading: false
     };
+  }
+
+  fetchPlayers = () => {
+    axios
+      .get("/api/v1/players.json", {
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+            .content
+        }
+      })
+      .then(response => {
+        this.setState({ players: response.data.data, isLoading: false });
+      });
+  };
+
+  componentDidMount() {
+    this.fetchPlayers();
   }
 
   submitForm = () => {
@@ -14,19 +34,22 @@ export default class PlayerChoice extends Component {
   };
 
   onChange = e => {
+    console.log(e.target.value)
     this.setState({
       playerNumber: e.target.value
     });
+    this.props.onClickChange(e.target.value);
   };
 
   render() {
     return (
       <div className="PlayerNumberChoice" >
-        <form>
-          Player number:{" "}
-          <input type="text" name="playerNumber" onChange={this.onChange} />
-          <input className="PlayerNumberChoiceButton btn btn-success" type="button" value="Submit" onClick={this.submitForm} />
-        </form>
+        <select onChange={ this.onChange } >{ this.state.players.map(player => 
+        <option value={player.number} key={ player.id }>
+        { player.name + " " + player.surname + " " + player.number}
+        </option>
+        )}
+        </select>
       </div>
     );
   }
