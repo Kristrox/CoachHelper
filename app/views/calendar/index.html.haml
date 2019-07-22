@@ -5,6 +5,8 @@
   %p Find me in app/views/calendar/index.html.haml
   =link_to "Team" , players_path, :locals =>  { :f => "ok" }, class: "active a"
   
-
+%button.btn.btn-outline-primary.btn-sm
+  = link_to 'Edit', index_calendar_path(calendar), :class => ".btn.btn-outline-primary.btn-sm"
+  
 
 
