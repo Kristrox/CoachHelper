@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Fullscreen from 'react-full-screen';
 import TopToolBar from '../components/TopToolBar';
-import BottomToolBar from '../components/BottomToolBar';
 import DrawerField from '../components/DrawerField';
 
 export default class PlayBook extends Component {
@@ -15,11 +14,12 @@ export default class PlayBook extends Component {
     this.state = {
       isFull: false,
       isDrawing: true,
+      isDrawingArrows: false
     };
 
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStopDrawing = this.handleStopDrawing.bind(this);
-    this.handleCopyTshirt = this.handleCopyTshirt.bind(this);
+    this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
   }
 
   handleFullScreen() {
@@ -30,12 +30,10 @@ export default class PlayBook extends Component {
     this.setState(previousState => ({ isDrawing: !previousState.isDrawing }))
   }
 
-  handleCopyTshirt(tshirt) {
-    this.setState({
-      tShirt: tshirt,
-    })
-
-    console.log(this.state.tshirt)
+  handleStartDrowingArrows() {
+    this.setState(previousState => ({ isDrawingArrows: !previousState.isDrawingArrows }))
+    console.log(this.state.isDrawing)
+    console.log(this.state.isDrawingArrows)
   }
 
   render() {
@@ -43,9 +41,8 @@ export default class PlayBook extends Component {
       <div className="PlayBook">
         <Fullscreen enabled={ this.state.isFull } onChange={ isFull => this.setState({ isFull }) }>
           <div className="full-screenable-node d-flex flex-column">
-            <TopToolBar onChangeToFullScreen={ this.handleFullScreen } />
-            <DrawerField stopDrawing={ this.state.isDrawing }/>
-            <BottomToolBar onHandleStopDrawing={ this.handleStopDrawing } />
+            <TopToolBar onHandleStopDrawing={ this.handleStopDrawing } onChangeToFullScreen={ this.handleFullScreen}  onHandleStartDrowingArrows={this.handleStartDrowingArrows} />
+            <DrawerField stopDrawing={ this.state.isDrawing } startDrawingArrows={ this.state.isDrawingArrows}/>
           </div>
         </Fullscreen>
       </div>

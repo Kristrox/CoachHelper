@@ -41,4 +41,4 @@ yarn-debug.log*
 .vscode/*
 
 # Ignore OSX directory attributes
-**/.DS_Store
+**/.DS_Storecoverage

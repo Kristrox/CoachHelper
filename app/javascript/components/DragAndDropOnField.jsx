@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Stage, Layer, Text, Group } from "react-konva";
 
 export default class DragAndDropOnField extends Component {
+
   addPlayersToinitialList(playerNumber, team) {
     const ourPlayerX = 100;
     const ourPlayerY = 20;
-    const enemyPlayerX = 500;
+    const enemyPlayerX = 180;
     const enemyPlayerY = 20;
 
     let playerList = [];
@@ -36,12 +37,12 @@ export default class DragAndDropOnField extends Component {
         y={player.y}
         onDragEnd={this.handleDragEnd}
       >
-        <Text text="👚" fontSize={80} />
+        <Text text="👚" fontSize={50} />
         <Text
-          x={player.x - 467}
-          y={player.y + 5}
+          x={player.x - 168}
+          y={player.y - 10}
           text={player.id}
-          fontSize={30}
+          fontSize={20}
         />
       </Group>
     ));
@@ -54,7 +55,7 @@ export default class DragAndDropOnField extends Component {
   }
 
   renderPlayers = (allPlayers, playerNumber, playersOnField) => {
-    console.log(this.props.playerNumber)
+
     let playerAlredyOnField = playersOnField.some(function(player) {
       return player.id === playerNumber;
     });
@@ -77,13 +78,16 @@ export default class DragAndDropOnField extends Component {
           y={player.y}
           onDragEnd={this.handleDragEnd}
         >
-          <Text key={player.id + "a"} text="👕" fontSize={80} />
+          <Text 
+            key={player.id + "a"} 
+            text="👕" 
+            fontSize={50} />
           <Text
             key={player.id + "b"}
-            x={player.x - 60}
-            y={player.y + 5}
+            x={player.x - 87}
+            y={player.y - 14}
             text={player.id}
-            fontSize={30}
+            fontSize={20}
           />
         </Group>
       ));
@@ -99,23 +103,22 @@ export default class DragAndDropOnField extends Component {
   state = {
     players: this.addPlayersToinitialList(99, "ourTeam"),
     enemyPlayers: this.addPlayersToinitialList(18, "enemy"),
-    enemiesOnField: [{ x: 300, y: 20, id: 0 }],
+    enemiesOnField: [{ x: 180, y: 20, id: 0 }],
     playersOnField: [{ x: 100, y: 20, id: 0 }],
     playerNumber: 0,
 
     ballisDragging: false,
-    movableBallX: 335,
+    movableBallX: 50,
     movableBallY: 20
   };
 
   render() {
     return (
       <>
-      {/* <PlayerChoice onClickChange={this.handleClick} /> */}
-            <Text text="👚" x={500} y={20} fontSize={80} />
+            <Text text="👚" x={180} y={20} fontSize={50} />
             {this.renderEnemies()}
 
-            <Text text="👕" x={100} y={20} fontSize={80} />
+            <Text text="👕" x={100} y={20} fontSize={50} />
             {this.renderPlayers(
               this.state.players,
               parseInt(this.props.playerNumber),
@@ -124,11 +127,10 @@ export default class DragAndDropOnField extends Component {
 
             <Text
               text="⚽"
-              fontSize={20}
+              fontSize={30}
               x={this.state.movableBallX}
               y={this.state.movableBallY}
               draggable
-              fill={this.state.ballisDragging ? "green" : "black"}
               onDragStart={() => {
                 this.setState({
                   ballisDragging: true
