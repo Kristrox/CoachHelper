@@ -15,3 +15,7 @@
 //= require_tree .
 //= require jquery
 //= require bootstrap-sprockets
+//= require moment
+// If you require timezone data (see moment-timezone-rails for additional file options)
+//= require moment-timezone-with-data
+//= require tempusdominus-bootstrap-4
