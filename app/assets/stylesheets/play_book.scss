@@ -1,3 +1,30 @@
 // Place all the styles related to the PlayBook controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.DrawArea {
+  height: 600px;
+}
+
+.DrawAreaBg {
+  background-image: url('playgroundfield_background.png');
+  background-position: center 75px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.TopToolBar {
+  height: 50px;
+}
+
+.BottomToolBar {
+  height: 100px;
+}
+
+.PlayerNumberChoice {
+  height: 100px;
+}
+
+:fullscreen {
+  background-color: white;
+}
