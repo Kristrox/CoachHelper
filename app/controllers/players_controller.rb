@@ -24,6 +24,10 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
   end
 
+  def editAfterMatch
+    @player = Player.find(params[:id])
+  end
+
   def destroy
     @player = Player.find(params[:id])
     @player.destroy

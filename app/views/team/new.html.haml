@@ -1,15 +1,8 @@
 .content
-  %h1 Create a new player
-  = bootstrap_form_for @player, url: {action: "create"} do |f|
-    .field.align-middle
-      = f.text_field :name, class: "col-md-3 control-label" 
-    .field
-      = f.text_field :surname, class: "col-md-3 control-label"
-    .field
-      = f.text_field :number, class: "col-md-3 control-label"
-    .field
-      = f.text_field :birth_date, class: "col-md-3 control-label"
-    = f.select :trained_in, options_for_select(Player.trained_ins.map { |key, value| [key.humanize, key] }), {prompt: "Choose one of them: ..."}, class: "form-control"
-    .actions
-      = link_to 'Back', team_index_path
-      = f.submit "Submit"
+  .modal-header
+    %button.close{"data-dismiss" => "modal", :type => "button"} x
+    %h4#myModalLabel.modal-title Modal title
+  .modal-body
+    *Modal content comes here*
+  .modal-footer
+    %button.btn.btn-primary Save

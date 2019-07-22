@@ -1,5 +1,7 @@
+
 .content
   %h1 New Event
+  = @event.errors.full_messages.inspect
   = bootstrap_form_for @event do |f|
     .field.align-middle
       = f.text_field :event_date, class: "col-md-3 control-label" 

@@ -87,3 +87,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'twitter-bootstrap-rails'
 
 gem 'bootstrap_form'
+
+gem 'popper_js', '~> 1.14.5'

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @events = Event.all.order(:event_date)
@@ -15,22 +16,14 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = current_user.events.build(event_params)
+
     if @event.save 
-      redirect_to '/events' 
+      redirect_to events_path
     else 
       render 'new' 
     end 
 
-    # respond_to do |format|
-    #   if @event.save
-    #     format.html { redirect_to @event, notice: 'Event was successfully created.' }
-    #     format.json { render :show, status: :created, location: @event }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @event.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
 
@@ -48,6 +41,7 @@ class EventsController < ApplicationController
 
 
   def destroy
+    @event = Event.find(params[:id])
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
