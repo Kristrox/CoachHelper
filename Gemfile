@@ -40,7 +40,7 @@ gem 'haml-rails', '~> 2.0'
 gem 'bootstrap', '~> 4.3.1'
 
 # RUBOCOP Support
-gem 'rubocop', '~> 0.72.0', require: false
+gem 'rubocop-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -52,6 +52,7 @@ gem 'rubocop', '~> 0.72.0', require: false
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+  gem 'bundler-audit'
   gem 'faker'
   # Testing framework
   gem 'rspec-rails', '~> 3.8'

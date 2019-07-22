@@ -16,10 +16,20 @@ export default class Drawing extends Component {
     };
   }
 
-  handleMouseDown = () => {
+  handleMouseDown = ({evt}) => {
     this.setState({ isDrawing: true });
     const stage = this.image.parent.parent;
     this.lastPointerPosition = stage.getPointerPosition();
+   
+    if (this.props.startDrawingArrows === true) {
+      const { offsetX, offsetY } = evt;
+      let localPos = {
+        x: offsetX,
+        y: offsetY
+      };
+      this.props.onHandleDrawingArrows(localPos);
+      this.setState({ isDrawing: false });
+    }
   };
 
   handleMouseUp = () => {
@@ -30,9 +40,9 @@ export default class Drawing extends Component {
     const { context, isDrawing } = this.state;
 
     if (isDrawing) {
-      context.strokeStyle = "#df4b26";
+      context.strokeStyle = "red";
       context.lineJoin = "round";
-      context.lineWidth = 2;
+      context.lineWidth = 7;
       context.globalCompositeOperation = "source-over";
       context.beginPath();
 
@@ -76,7 +86,7 @@ export default class Drawing extends Component {
         onMouseDown={ this.handleMouseDown }
         onMouseUp={ this.handleMouseUp }
         onMouseMove={ this.handleMouseMove }
-        listening={ this.props.stopDrawing}
+        listening={ this.props.stopDrawing }
       />
     );
   }
