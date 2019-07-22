@@ -11,7 +11,7 @@ AllCops:
     - 'node_modules/**/*'
   TargetRubyVersion:                   2.6
 Metrics/LineLength:
-  Max:                                 120
+  Max:                                 160
 Metrics/MethodLength:
   Max:                                 25
 Metrics/AbcSize:
