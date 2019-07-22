@@ -35,6 +35,7 @@ class EventsController < ApplicationController
 
 
   def update
+    @event = Event.find(params[:id])
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -48,6 +49,7 @@ class EventsController < ApplicationController
 
 
   def destroy
+    @event = Event.find(params[:id])
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
