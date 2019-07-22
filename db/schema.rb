@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_143233) do
+ActiveRecord::Schema.define(version: 2019_07_17_194809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2019_07_16_143233) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "opponent"
+    t.datetime "event_date"
+    t.integer "event_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "injuries", force: :cascade do |t|
     t.bigint "player_id"
     t.text "description", default: "", null: false
@@ -45,18 +53,32 @@ ActiveRecord::Schema.define(version: 2019_07_16_143233) do
     t.index ["player_id"], name: "index_injuries_on_player_id"
   end
 
+  create_table "meetings", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "name", null: false
     t.string "surname", null: false
-    t.integer "number", null: false
     t.datetime "birth_date", null: false
-    t.integer "red_cards", default: 0, null: false
-    t.integer "yellow_cards", default: 0, null: false
+    t.integer "red_cards", null: false
+    t.integer "yellow_cards", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.integer "number", default: 0, null: false
     t.integer "trained_in"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_players_on_user_id"
+  end
+
+  create_table "tactics", id: false, force: :cascade do |t|
+    t.integer "id"
+    t.string "name"
+    t.string "img"
   end
 
   create_table "users", force: :cascade do |t|
