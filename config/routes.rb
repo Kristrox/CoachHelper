@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :players
   resources :calendar, only: [:index,:show]
   resources :play_books, only: [:show,:new,:create]
