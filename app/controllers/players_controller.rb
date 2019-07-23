@@ -1,5 +1,4 @@
 class PlayersController < ApplicationController
-
   def index
     @players = Player.all.order(:number)
   end
@@ -8,17 +7,17 @@ class PlayersController < ApplicationController
     @player = Player.new
   end
 
-  def create 
-    @player = Player.new(player_params) 
+  def create
+    @player = Player.new(player_params)
     @player.red_cards = 0
     @player.yellow_cards = 0
     @player.user = current_user
-    if @player.save 
-      redirect_to '/players' 
-    else 
-      render 'new' 
-    end 
-  end 
+    if @player.save
+      redirect_to '/players'
+    else
+      render 'new'
+    end
+  end
 
   def edit
     @player = Player.find(params[:id])
@@ -47,11 +46,8 @@ class PlayersController < ApplicationController
   end
 
   private
-    def set_player
-      @player = Player.find(params[:id])
-    end
 
-    def player_params
-      params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
-    end
+  def player_params
+    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
+  end
 end

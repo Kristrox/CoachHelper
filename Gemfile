@@ -71,6 +71,7 @@ end
 
 group :test do
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers', '~> 3.1'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
@@ -78,11 +79,10 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'simplecov', require: false
-  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'twitter-bootstrap-rails'
 

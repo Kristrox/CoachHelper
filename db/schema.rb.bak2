@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_194809) do
     t.string "name", null: false
     t.string "surname", null: false
     t.integer "number", null: false
-    t.datetime "bith_date", null: false
+    t.datetime "birth_date", null: false
     t.integer "red_cards", default: 0, null: false
     t.integer "yellow_cards", default: 0, null: false
     t.datetime "created_at", null: false

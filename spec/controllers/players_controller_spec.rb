@@ -17,8 +17,8 @@ RSpec.describe PlayersController, type: :controller do
 
     context 'players' do
 
-      let!(:player1) { create(:player, user_id: user.id) }
-      let!(:player2) { create(:player, user_id: user.id) }
+      let!(:player1) { create(:player, user_id: user.id, number: 1) }
+      let!(:player2) { create(:player, user_id: user.id, number: 2) }
 
       it 'returns all players' do
         subject
