@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: CoachHelper_development
+  database: coach_helper_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -75,6 +75,6 @@ test:
 #
 production:
   <<: *default
-  database: CoachHelper_production
+  database: coach_helper_production
   username: CoachHelper
   password: <%= ENV['COACHHELPER_DATABASE_PASSWORD'] %>
