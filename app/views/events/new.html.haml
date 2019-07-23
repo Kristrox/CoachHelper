@@ -4,10 +4,10 @@
     -#.field.align-middle
       = f.text_field :event_date, class: "col-md-3 control-label" 
     .form-group
-      -# = f.label :event_date, class: 'control-label'
-      #datetimepicker2.input-group.date{"data-target-input" => "nearest"}
-        = f.text_field(:event_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker2"})
-        .input-group-append{"data-target" => "#datetimepicker2", "data-toggle" => "datetimepicker"}
+      = f.label :starts_at, 'Start Date and Time', class: 'control-label'
+      #datetimepicker1.input-group.date{"data-target-input" => "nearest"}
+        = f.text_field(:event_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"})
+        .input-group-append{"data-target" => "#datetimepicker1", "data-toggle" => "datetimepicker"}
           .input-group-text
             Pick date
             %i.fas.fa-calendar-plus
