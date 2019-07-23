@@ -54,6 +54,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'bundler-audit'
   gem 'faker'
+  gem 'brakeman'
   # Testing framework
   gem 'rspec-rails', '~> 3.8'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
