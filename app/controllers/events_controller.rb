@@ -31,6 +31,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    @event = Event.find(params[:id])
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -43,6 +44,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event = Event.find(params[:id])
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
@@ -51,11 +53,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_event
-    @event = Event.find(params[:id])
-  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
