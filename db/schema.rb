@@ -53,32 +53,18 @@ ActiveRecord::Schema.define(version: 2019_07_17_194809) do
     t.index ["player_id"], name: "index_injuries_on_player_id"
   end
 
-  create_table "meetings", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "players", force: :cascade do |t|
     t.string "name", null: false
     t.string "surname", null: false
+    t.integer "number", null: false
     t.datetime "birth_date", null: false
-    t.integer "red_cards", null: false
-    t.integer "yellow_cards", null: false
+    t.integer "red_cards", default: 0, null: false
+    t.integer "yellow_cards", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "number", default: 0, null: false
-    t.integer "trained_in"
     t.bigint "user_id"
+    t.integer "trained_in"
     t.index ["user_id"], name: "index_players_on_user_id"
-  end
-
-  create_table "tactics", id: false, force: :cascade do |t|
-    t.integer "id"
-    t.string "name"
-    t.string "img"
   end
 
   create_table "users", force: :cascade do |t|
