@@ -38,7 +38,24 @@
           %h4#myModalLabel.modal-title Edit players data after match
           %button.close{"data-dismiss" => "modal", :type => "button"} x
         .modal-body
+          
+          #accordion
+            - @players.each do |player|
+              .card
+                #headingTwo.card-header
+                  %h5.mb-0
+                    %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{player.name}", "data-toggle" => "collapse"}
+                      %tr
+                        %td= player.name
+                        %td= player.surname
+              .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{player.name}"}
+                .card-body
+                  %tr
+                    %td= player.yellow_cards
+                    %td= player.red_cards
           - @events.each do |post|
-            %p= post.user_id
+            %p= post.user.email
+
+          
         .modal-footer
           %button.btn.btn-primary Save

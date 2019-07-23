@@ -3,7 +3,9 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all.order(:event_date)
-  end
+    @players = Player.where(:user_id => current_user.id)
+
+end
 
 
   def new
