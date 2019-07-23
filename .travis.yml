@@ -1,13 +1,20 @@
 language: ruby
 cache: bundler
+env:
+  - DB=pgsql
 services:
   - postgresql
 jobs:
   include:
     - stage: build
       before_script:
-        - psql -c "create database CoachHelper_test;" -U postgres
+        - cp config/database.yml.travis config/database.yml
+        - psql -c 'create database CoachHelper_test;' -U postgres
+
       script:
+        - RAILS_ENV=test bundle exec rake db:migrate --trace
+        - bundle exec rake db:test:prepare
+        - bundle exec rake
         - bundle exec rspec spec
         - bundle exec brakeman --quiet
         - bundle exec rubocop
