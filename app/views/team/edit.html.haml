@@ -8,7 +8,7 @@
     .field
       = f.text_field :number, class: "col-md-3 control-label"
     .field
-      = f.text_field :birth_date, class: "col-md-3 control-label"
+      = f.text_field :bith_date, class: "col-md-3 control-label"
     = f.select :trained_in, options_for_select(Player.trained_ins.map { |key, value| [key.humanize, key] }), {prompt: "Choose one of them: ..."}, class: "form-control"
     = f.submit "Update"
   = link_to 'Back', team_index_path

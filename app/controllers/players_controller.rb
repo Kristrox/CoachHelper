@@ -24,9 +24,6 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
   end
 
-  def editAfterMatch
-    @player = Player.find(params[:id])
-  end
 
   def destroy
     @player = Player.find(params[:id])
@@ -39,15 +36,11 @@ class PlayersController < ApplicationController
 
   def update
     @player = Player.find(params[:id])
-    respond_to do |format|
-      if @player.update(player_params)
-        format.html { redirect_to players_url, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
-      end
-    end
+    if @player.update(player_params)
+      redirect_to events_path, notice: 'Player was successfully updated.' 
+    else
+      redirect_to events_path, alert: 'Player has not been updated!' 
+     end
   end
 
   private
@@ -56,6 +49,6 @@ class PlayersController < ApplicationController
     end
 
     def player_params
-      params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
+      params.require(:player).permit(:name, :surname, :number, :bith_date, :trained_in, :red_cards, :yellow_cards,:id)
     end
 end

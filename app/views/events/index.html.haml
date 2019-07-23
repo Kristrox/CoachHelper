@@ -28,9 +28,6 @@
             \#{link_to "Delete", event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
     %br
 
-  %button.btn.btn-primary{"data-target" => "#editDataAfterMatchModal", "data-toggle" => "modal", :type => "button"}
-    Launch demo modal
-
   #editDataAfterMatchModal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
       .modal-content
@@ -53,9 +50,17 @@
                   %tr
                     %td= player.yellow_cards
                     %td= player.red_cards
+                    %h4 Edit player data                                        
+                    = bootstrap_form_for player do |f|
+                      .field.align-middle  
+                        %tr
+                          = f.select :yellow_cards, options_for_select(Player.trained_ins.map { |key, value| [key.humanize, key] }), {prompt: "Choose one of them: ..."}, class: "form-control"
+                          %td= f.text_field :yellow_cards, class: "col-md-3 control-label" 
+                          %td= f.text_field :red_cards, class: "col-md-3 control-label"
+                          = f.submit "Update"
           - @events.each do |post|
             %p= post.user.email
 
           
         .modal-footer
-          %button.btn.btn-primary Save
+        
