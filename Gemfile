@@ -52,12 +52,13 @@ gem 'rubocop-rails'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+  gem 'brakeman'
   gem 'bundler-audit'
+  gem 'byebug'
   gem 'faker'
   # Testing framework
   gem 'rspec-rails', '~> 3.8'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
 end
 
 group :development do
