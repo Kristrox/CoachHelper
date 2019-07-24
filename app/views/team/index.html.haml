@@ -1,9 +1,30 @@
 .content
-  %h1 Team#index
-  %p Find me in app/views/team/index.html.haml
-  =Time.now.beginning_of_month
-  /- @players.each do |player|
-  /.player
-  /  %p.content= player.id
-  = link_to 'New Player', new_team_path()
-
+  %h1 List of your Players  
+  = link_to 'New Player', new_team_path(), class: "btn btn-outline-primary"
+  %table
+    %tr.list
+      %td Number
+      %td Name
+      %td Surname
+      %td Status
+      %td
+    - @players.each do |player|
+      -# .player
+      -# %br
+      -# %table
+      %tr
+        %td
+          = player.number
+        %td
+          = player.name
+        %td
+          = player.surname
+        %td
+          Git
+          -#tutaj napierdzielac status gdy ma kontuzje lub czerwona kartke
+        %td
+          %button.btn.btn-outline-primary.btn-sm
+            = link_to 'Edit', edit_team_path(player), :class => ".btn.btn-outline-primary.btn-sm a"
+            |
+            \#{link_to "Delete", team_path(player), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm a"}
+  %br
