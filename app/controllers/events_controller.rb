@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def index
     @events = Event.all.order(:event_date)
+    @event = Event.new
   end
 
   def new
@@ -56,6 +57,6 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:opponent, :event_date, :event_type)
+    params.require(:event).permit(:opponent, :event_date)
   end
 end

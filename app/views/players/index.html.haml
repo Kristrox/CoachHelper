@@ -3,11 +3,11 @@
   = link_to 'New Player', new_player_path(), class: "btn btn-outline-primary"
   %table
     %tr.list
-      %td Number
-      %td Name
-      %td Surname
-      %td Status
-      %td
+      %td.list Number
+      %td.list Name
+      %td.list Surname
+      %td.list Status
+      %td.list
     - @players.each do |player|
       %tr
         %td
