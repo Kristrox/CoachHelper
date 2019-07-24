@@ -1,8 +1,8 @@
 class Player < ApplicationRecord
   has_many :injuries, dependent: :destroy
+  has_and_belongs_to_many :events
   belongs_to :user
   enum trained_in: [:club, :country, :europe, :world] 
-  enum cards_quantity: [:zero, :one] 
   validates :name, :surname, :bith_date, :trained_in, presence: true
   validates :red_cards, :yellow_cards, numericality: {only_inteager: true}
   validates :red_cards, numericality: { less_than_or_equal_to: 1, greater_than_or_equal_to: 0, only_integer: true }
