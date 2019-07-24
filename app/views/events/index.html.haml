@@ -9,15 +9,12 @@
       %td
       %td
       %td
-      %td
     - @events.each do |event|
       %tr
         %td
           = event.event_date
         %td
           = event.opponent.capitalize
-        %td
-          = event.event_type.capitalize
         %td
           Tutaj bedzie taktyka i squad
         %td

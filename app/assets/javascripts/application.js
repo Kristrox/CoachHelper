@@ -13,6 +13,9 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
-//= require jquery3
-//= require popper
-//= require bootstrap
+//= require jquery
+//= require bootstrap-sprockets
+//= require moment
+// If you require timezone data (see moment-timezone-rails for additional file options)
+//= require moment-timezone-with-data
+//= require tempusdominus-bootstrap-4
