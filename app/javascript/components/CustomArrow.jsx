@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Arrow } from "react-konva";
 
 export default function CustomArrow(props) {
-  const { startPos, endPos } = props;
+  const { startPos, endPos, dashed } = props;
 
   return (
     <Arrow
@@ -11,7 +11,7 @@ export default function CustomArrow(props) {
       pointerWidth={20}
       fill="red"
       stroke="red"
-      // dash={[30, 10]}
+      dash={ dashed }
       strokeWidth={4}
     />
   );

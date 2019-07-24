@@ -4,7 +4,6 @@ import Drawing from './Drawing';
 import Drag from '../components/DragAndDropOnField.jsx';
 import PlayerChoice from "./PlayerChoice";
 import CustomArrow from "./CustomArrow"
-import { Arrow } from "react-konva";
 
 export default class DrawerField extends Component {
     constructor(props) {
@@ -14,7 +13,7 @@ export default class DrawerField extends Component {
             arrowStartPos: { x: 0, y: 0 },
             arrowEndPos: { x: 0, y: 0 },
             countClick: 0,
-            itemArray: []
+            itemArray: [],
         };
     }
 
@@ -26,6 +25,17 @@ export default class DrawerField extends Component {
     handleDrawingArrows = localPos => {
 
         const item = this.state.itemArray;
+        let dashed = [0, 0];
+        this.setState({
+            dashed: dashed
+        });
+
+        if (this.props.startDrawingArrowsDashed) {
+            dashed = [30, 10];
+            this.setState({
+                dashed: dashed
+            });
+        }
 
         if (this.state.countClick == 0) {
             this.setState({
@@ -43,6 +53,7 @@ export default class DrawerField extends Component {
             item.push({
                 arrowStartPos: this.state.arrowStartPos,
                 arrowEndPos: this.state.arrowEndPos,
+                dashed: dashed
             });
 
             this.setState({
@@ -97,12 +108,14 @@ export default class DrawerField extends Component {
                             <CustomArrow
                                 startPos={ this.state.arrowStartPos } 
                                 endPos={ this.state.arrowEndPos }
+                                dashed={ this.state.dashed }
                              />
                               {this.state.itemArray.map((item, index) => {
                                 return (
                                     <CustomArrow key={index}
                                     startPos={ item.arrowStartPos } 
                                     endPos={ item.arrowEndPos }
+                                    dashed={ item.dashed }
                                     /> 
                                  );
                                 })}

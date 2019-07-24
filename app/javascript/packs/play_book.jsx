@@ -14,7 +14,8 @@ export default class PlayBook extends Component {
     this.state = {
       isFull: false,
       isDrawing: true,
-      isDrawingArrows: false
+      isDrawingArrows: false,
+      dashed: false
     };
 
     this.handleFullScreen = this.handleFullScreen.bind(this);
@@ -30,10 +31,12 @@ export default class PlayBook extends Component {
     this.setState(previousState => ({ isDrawing: !previousState.isDrawing }))
   }
 
-  handleStartDrowingArrows() {
-    this.setState(previousState => ({ isDrawingArrows: !previousState.isDrawingArrows }))
-    console.log(this.state.isDrawing)
-    console.log(this.state.isDrawingArrows)
+  handleStartDrowingArrows(dashed) {
+    this.setState(previousState => ({ 
+      isDrawingArrows: !previousState.isDrawingArrows,
+      dashed: dashed
+     }))
+    console.log(this.state.dashed)
   }
 
   render() {
@@ -42,7 +45,7 @@ export default class PlayBook extends Component {
         <Fullscreen enabled={ this.state.isFull } onChange={ isFull => this.setState({ isFull }) }>
           <div className="full-screenable-node d-flex flex-column">
             <TopToolBar onHandleStopDrawing={ this.handleStopDrawing } onChangeToFullScreen={ this.handleFullScreen}  onHandleStartDrowingArrows={this.handleStartDrowingArrows} />
-            <DrawerField stopDrawing={ this.state.isDrawing } startDrawingArrows={ this.state.isDrawingArrows}/>
+            <DrawerField stopDrawing={ this.state.isDrawing } startDrawingArrows={ this.state.isDrawingArrows} startDrawingArrowsDashed={this.state.dashed}/>
           </div>
         </Fullscreen>
       </div>
