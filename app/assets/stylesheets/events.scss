@@ -3,61 +3,95 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .content{
-    //    position:initial;
-        text-align: center;
+  text-align: center;
 }
 
 tr:hover {
-    background-color: #ffa;
+  background-color: #ffa;
 }
+
+td.date{
+  background-color: lightgoldenrodyellow;
   
+}
+
+td.list{
+  padding: 20px;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+
 td, th {
-    position: relative;
-  }
+  position: relative;
+}
 td:hover::after,
 th:hover::after {
-    content: "";
-    position: absolute;
-    background-color: #ffa;
-    left: 0;
-    top: -5000px;
-    height: 10000px;
-    width: 100%;
-    z-index: -1;
-  }
+  content: "";
+  position: absolute;
+  background-color: #ffa;
+  left: 0;
+  top: -5000px;
+  height: 10000px;
+  width: 100%;
+  z-index: -1;
+}
 
 .field{
-    text-align: left;
+  text-align: left;
 }
 table{
-    overflow: hidden;
-
-    width: 100%;
-    font-size: 20px;
-    text-align: center;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
 }
 
 p.content{
-    background-color: aquamarine;
+  background-color: aquamarine;
 }
 
 td {
-    text-align: center;
-  }
+  text-align: center;
+  font-size: 18px;
+}
 
 tr{
-    background-color: lightgrey;
+  background-color: lightgrey;
 }
 tr.list:nth-child(odd) {background-color:#4caf50; // #f2f2f2;
 }
 
 tr.list{
-    height: 10% ;
-    color: white;
-    font-weight: bold;
+  height: 10% ;
+  color: white;
+  font-weight: bold;
 }
 
 .btn{
   margin-bottom: 10px;
   margin-top: 10px;
+}
+
+button.btn.btn-outline-primary.btn-sm{
+  color: white;
+  background-color: rgb(184, 230, 184);
+  font-weight: bold;
+}
+button.btn.btn-outline-primary.btn-sm:hover{
+  background-color: white;
+}
+
+button.btn.btn-outline-primary.btn-sm:hover::after{
+  color:red;
+  background-color: white;
+}
+a:hover::after {
+  color: #fff;
+  background-color: white;
+}
+
+
+.input-group-text{
+  height: 40px;
+  margin-top: 30px;
 }
