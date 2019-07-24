@@ -1,14 +1,11 @@
 class EventsController < ApplicationController
-
   def index
     @events = Event.all.order(:event_date)
   end
 
-
   def new
     @event = Event.new
   end
-
 
   def edit
     @event = Event.find(params[:id])
@@ -16,11 +13,11 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    if @event.save 
-      redirect_to '/events' 
-    else 
-      render 'new' 
-    end 
+    if @event.save
+      redirect_to '/events'
+    else
+      render 'new'
+    end
 
     # respond_to do |format|
     #   if @event.save
@@ -32,7 +29,6 @@ class EventsController < ApplicationController
     #   end
     # end
   end
-
 
   def update
     @event = Event.find(params[:id])
@@ -47,7 +43,6 @@ class EventsController < ApplicationController
     end
   end
 
-
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
@@ -58,13 +53,9 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:opponent, :event_date, :event_type)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:opponent, :event_date, :event_type)
+  end
 end
