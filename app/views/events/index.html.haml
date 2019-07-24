@@ -3,21 +3,27 @@
   = link_to 'New Event', new_event_path(), class: "btn btn-outline-primary"
   %table
     %tr.list
-      %td Event date
-      %td Opponent
-      %td
-      %td
-      %td
+      %td.list Event Date
+      %td.list Time
+      %td.list Opponent
+      %td.list Type of Event
+      %td.list
+      %td.list Rate your match
+      %td.list
     - @events.each do |event|
       %tr
+        %td.date
+          = event.event_date.to_date
+        %td.date
+          = event.event_date.to_s(:time)
         %td
-          = event.event_date
+          = event.opponent.titleize
         %td
-          = event.opponent.capitalize
-        %td
-          = event.event_type.capitalize
+          = event.event_type
         %td
           Tutaj bedzie taktyka i squad
+        %td
+          Ocenka
         %td
           %button.btn.btn-outline-primary.btn-sm
             = link_to 'Edit', edit_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"

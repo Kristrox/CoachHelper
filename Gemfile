@@ -88,3 +88,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'twitter-bootstrap-rails'
 
 gem 'bootstrap_form'
+
+gem 'bootstrap4-datetime-picker-rails'
