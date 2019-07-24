@@ -40,12 +40,12 @@ class PlayersController < ApplicationController
     end
   end
 
-  def updatePlayer
+  def update_player
     @player = Player.find(params[:id])
     if @player.update(player_params)
       redirect_to players_path, notice: 'Player was successfully updated.'
     else
-      format.html { render :edit }
+      redirect_to players_path, alert: 'Player has not been updated!'
     end
   end
 

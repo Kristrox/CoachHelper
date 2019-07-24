@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   resources :events
   resources :players do
-    collection do
-      put 'updatePlayer'
-      patch 'updatePlayer'
-
+    member do
+      put 'update_player'
+      patch 'update_player'
     end
   end
   resources :calendar
@@ -13,8 +12,6 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
   root to: "home#index"
 
-  put '/players/:id', to: 'players#updatePlayer', as: :update_player_cal
-#post '/players/:id', to: 'players#index', as: 'players'
 
   
 

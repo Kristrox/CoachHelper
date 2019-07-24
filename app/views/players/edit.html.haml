@@ -1,6 +1,6 @@
 .content
   %h1 Edit player data 
-  = bootstrap_form_for @player, method: "updatePlayer", url: players_path do |f|
+  = bootstrap_form_for @player, url: update_player_player_path(@player.id) do |f|
     .field.align-middle
       = f.text_field :name, class: "col-md-3 control-label" 
     .field
