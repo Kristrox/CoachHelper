@@ -5,21 +5,20 @@
       #headingTwo.card-header
         %h5.mb-0
           %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo", "data-toggle" => "collapse"}
-            New Event
+            Create New Event
     .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo"}
       .card-body
-        %h1 Create New Event
         = bootstrap_form_for @event do |f|
-          %table  
-            %tr
-              .form-group
-                #datetimepicker4.input-group.date{"data-target-input" => "nearest"}
-                  -# %input.form-control.datetimepicker-input{"data-target" => "#datetimepicker4", :type => "text"}/
-                  =f.text_field(:event_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker4"})
-                  .input-group-append{"data-target" => "#datetimepicker4", "data-toggle" => "datetimepicker"}
-                    .input-group-text
-                      Pick date
-                      %i.fa.fa-calendar
+          .down
+            %td
+              -# .form-group
+              #datetimepicker4.input-group.date{"data-target-input" => "nearest"}
+                -# %input.form-control.datetimepicker-input{"data-target" => "#datetimepicker4", :type => "text"}/
+                =f.text_field(:event_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker4"})
+                .input-group-append{"data-target" => "#datetimepicker4", "data-toggle" => "datetimepicker"}
+                  .input-group-text
+                    Pick date
+                    %i.fa.fa-calendar
               :javascript
                 $(function () {
                     $('#datetimepicker4').datetimepicker({
@@ -27,19 +26,18 @@
                         format: 'YYYY-MM-DD'
                     });
                 });
-            %tr
+            %td
               .field
                 = f.text_field :opponent, class: "col-md-3 control-label"
             .actions
               = link_to 'Back', events_path
               = f.submit "Submit"
-      = link_to 'New Event', new_event_path(), class: "btn btn-outline-primary"
+      -# = link_to 'New Event', new_event_path(), class: "btn btn-outline-primary"
   %table
     %tr.list
       %td.list Event Date
       -# %td.list Time
       %td.list Opponent
-      %td.list
       %td.list Rate your match
       %td.list
     - @events.each do |event|
@@ -50,8 +48,6 @@
         -#   = event.event_date.to_s(:time)
         %td
           = event.opponent.titleize
-        %td
-          Tutaj bedzie taktyka i squad
         %td
           Ocenka
         %td

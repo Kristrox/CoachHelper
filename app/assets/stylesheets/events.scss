@@ -52,7 +52,7 @@ p.content{
 
 td {
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 tr{
@@ -96,24 +96,40 @@ a:hover::after {
   margin-top: 30px;
 }
 
-
+.form-control.datetimepicker-input{
+  
+}
 
 .form-group{
-  text-align: center;
-  justify-content: center;
+  // text-align: center;
+  // justify-content: center;
 }
 
-.form-control {
-  text-align: center;
-  justify-content: center;
+// .form-control {
+//   text-align: center;
+//   justify-content: center;
+// }
+
+// .input-group.append{
+
+// }
+
+// .input-group.date{
+//   max-width: 50%;
+//   text-align: center;
+//   justify-content: center;
+// }
+
+// .new_event{
+//   text-align: center;
+//   justify-content: center;
+// }
+
+.down{
+width: 100%;
 }
 
-.input-group.date{
-  text-align: center;
-  justify-content: center;
-}
-
-.new_event{
-  text-align: center;
-  justify-content: center;
+.downhalf{
+width: 45%;
+text-align: center;
 }
