@@ -40,7 +40,7 @@ gem 'haml-rails', '~> 2.0'
 gem 'bootstrap', '~> 4.3.1'
 
 # RUBOCOP Support
-gem 'rubocop', '~> 0.72.0', require: false
+gem 'rubocop-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -52,11 +52,13 @@ gem 'rubocop', '~> 0.72.0', require: false
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'byebug'
   gem 'faker'
   # Testing framework
   gem 'rspec-rails', '~> 3.8'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
 end
 
 group :development do
@@ -70,18 +72,21 @@ end
 
 group :test do
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers', '~> 3.1'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
-  gem 'rails-controller-testing'
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'twitter-bootstrap-rails'
 
 gem 'bootstrap_form'
+
+gem 'bootstrap4-datetime-picker-rails'

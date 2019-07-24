@@ -1,0 +1,19 @@
+.content
+  %h1 New Event
+  = bootstrap_form_for @event do |f|
+    -#.field.align-middle
+      = f.text_field :event_date, class: "col-md-3 control-label" 
+    .form-group
+      = f.label :starts_at, 'Start Date and Time', class: 'control-label'
+      #datetimepicker1.input-group.date{"data-target-input" => "nearest"}
+        = f.text_field(:event_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker1"})
+        .input-group-append{"data-target" => "#datetimepicker1", "data-toggle" => "datetimepicker"}
+          .input-group-text
+            Pick date
+            %i.fas.fa-calendar-plus
+    .field
+      = f.text_field :opponent, class: "col-md-3 control-label"
+    = f.select :event_type, options_for_select(Event.event_types.map { |key, value| [key.humanize, key] }), {prompt: "Choose one of them: ..."}, class: "form-control"
+    .actions
+      = link_to 'Back', events_path
+      = f.submit "Submit"
