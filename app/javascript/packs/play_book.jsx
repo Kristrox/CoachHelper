@@ -15,12 +15,16 @@ export default class PlayBook extends Component {
       isFull: false,
       isDrawing: true,
       isDrawingArrows: false,
-      dashed: false
+      dashed: false,
+      undo: false,
+      itemArray: [],
     };
 
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStopDrawing = this.handleStopDrawing.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
+    this.handleUndo = this.handleUndo.bind(this);
+    this.handleUpdateArrowsArray = this.handleUpdateArrowsArray.bind(this);
   }
 
   handleFullScreen() {
@@ -36,7 +40,21 @@ export default class PlayBook extends Component {
       isDrawingArrows: !previousState.isDrawingArrows,
       dashed: dashed
      }))
-    console.log(this.state.dashed)
+  }
+
+  handleUndo() {
+    this.setState({ undo: true });
+    const item = this.state.itemArray;
+    item.pop();
+    this.setState({
+      itemArray: item
+    });
+  }
+
+  handleUpdateArrowsArray(itemArray) {
+    this.setState({
+      itemArray: itemArray
+    });
   }
 
   render() {
@@ -44,8 +62,9 @@ export default class PlayBook extends Component {
       <div className="PlayBook">
         <Fullscreen enabled={ this.state.isFull } onChange={ isFull => this.setState({ isFull }) }>
           <div className="full-screenable-node d-flex flex-column">
-            <TopToolBar onHandleStopDrawing={ this.handleStopDrawing } onChangeToFullScreen={ this.handleFullScreen}  onHandleStartDrowingArrows={this.handleStartDrowingArrows} />
-            <DrawerField stopDrawing={ this.state.isDrawing } startDrawingArrows={ this.state.isDrawingArrows} startDrawingArrowsDashed={this.state.dashed}/>
+            <TopToolBar onHandleStopDrawing={ this.handleStopDrawing } onChangeToFullScreen={ this.handleFullScreen}  onHandleStartDrowingArrows={this.handleStartDrowingArrows} 
+            onhandleUndo={ this.handleUndo }/>
+            <DrawerField stopDrawing={ this.state.isDrawing } startDrawingArrows={ this.state.isDrawingArrows} startDrawingArrowsDashed={this.state.dashed} undo={ this.state.undo} onhandleUpdateArrowsArray={this.handleUpdateArrowsArray} itemArray={this.state.itemArray}/>
           </div>
         </Fullscreen>
       </div>

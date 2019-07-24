@@ -32,6 +32,10 @@ export default class TopToolBar extends Component {
       });
   }
 
+  handleUndo = (e) => {
+    this.props.onhandleUndo();
+  }
+
   render() {
     return (
       <div className="TopToolBar d-flex justify-content-end">
@@ -39,6 +43,7 @@ export default class TopToolBar extends Component {
         <button className="TopToolBar btn btn-success" onClick={ () => this.props.onChangeToFullScreen() }>Go Fullscreen</button>
         <button className="TopToolBar btn btn-success" onClick={ this.handleDrawArrow }>Arrows</button>
         <button className="TopToolBar btn btn-success" onClick={ this.handleDrawDashArrow }>Dashed Arrows</button>
+        <button className="TopToolBar btn btn-success" onClick={ this.handleUndo }>Undo</button>
       </div>
     );
   }

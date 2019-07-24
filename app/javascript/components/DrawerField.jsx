@@ -13,7 +13,8 @@ export default class DrawerField extends Component {
             arrowStartPos: { x: 0, y: 0 },
             arrowEndPos: { x: 0, y: 0 },
             countClick: 0,
-            itemArray: [],
+            fill: "red",
+            stroke: "red"
         };
     }
 
@@ -23,8 +24,12 @@ export default class DrawerField extends Component {
     }
 
     handleDrawingArrows = localPos => {
+        this.setState({
+            fill: "red",
+            stroke: "red"
+        });
 
-        const item = this.state.itemArray;
+        const item = this.props.itemArray;
         let dashed = [0, 0];
         this.setState({
             dashed: dashed
@@ -56,11 +61,17 @@ export default class DrawerField extends Component {
                 dashed: dashed
             });
 
+            this.props.onhandleUpdateArrowsArray(item)
+
             this.setState({
-                itemArray: item,
-            });    
+                arrowStartPos: { x: 0, y: 0  },
+                arrowEndPos: { x: 0, y: 0  },
+                fill: "transparent",
+                stroke: "transparent"
+            });
         }
     }
+
 
     handleClick = playerNumber => {
         this.setState({
@@ -109,13 +120,17 @@ export default class DrawerField extends Component {
                                 startPos={ this.state.arrowStartPos } 
                                 endPos={ this.state.arrowEndPos }
                                 dashed={ this.state.dashed }
+                                fill={ this.state.fill }
+                                stroke= {this.state.stroke }
                              />
-                              {this.state.itemArray.map((item, index) => {
+                              {this.props.itemArray.map((item, index) => {
                                 return (
                                     <CustomArrow key={index}
                                     startPos={ item.arrowStartPos } 
                                     endPos={ item.arrowEndPos }
                                     dashed={ item.dashed }
+                                    fill={ "red" }
+                                    stroke= { "red" }
                                     /> 
                                  );
                                 })}
