@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Stage, Layer, Text, Group } from "react-konva";
+import { Text, Group } from "react-konva";
 
 export default class DragAndDropOnField extends Component {
 
@@ -106,20 +106,28 @@ export default class DragAndDropOnField extends Component {
     enemiesOnField: [{ x: 180, y: 20, id: 0 }],
     playersOnField: [{ x: 100, y: 20, id: 0 }],
     playerNumber: 0,
-
     ballisDragging: false,
-    movableBallX: 50,
-    movableBallY: 20
   };
 
   render() {
     return (
       <>
-            <Text text="👚" x={180} y={20} fontSize={50} />
-            {this.renderEnemies()}
+            <Text
+            text="👚"
+            x={ 180 }
+            y={20}
+            fontSize={50} />
+            
+            { this.renderEnemies() }
 
-            <Text text="👕" x={100} y={20} fontSize={50} />
-            {this.renderPlayers(
+            <Text 
+            text="👕" 
+            x={ 100 }
+            y={ 20 }
+            fontSize={ 50 }
+           />
+           
+            { this.renderPlayers(
               this.state.players,
               parseInt(this.props.playerNumber),
               this.state.playersOnField
@@ -127,21 +135,17 @@ export default class DragAndDropOnField extends Component {
 
             <Text
               text="⚽"
-              fontSize={30}
-              x={this.state.movableBallX}
-              y={this.state.movableBallY}
+              fontSize={ 30 }
+              x={ this.props.ballPosition[0].ballX }
+              y={ this.props.ballPosition[0].ballY }
               draggable
               onDragStart={() => {
-                this.setState({
-                  ballisDragging: true
-                });
+                this.props.onhandleUpdateBallPosition(this.props.ballPosition);
               }}
               onDragEnd={e => {
-                this.setState({
-                  ballisDragging: false,
-                  ballX: e.target.x(),
-                  ballY: e.target.y()
-                });
+                const newPosition = { ballX: e.target.x(), ballY: e.target.y() }
+                const oldPosition = { ballX: this.props.ballPosition[0].ballX, ballY: this.props.ballPosition[0].ballY }
+                this.props.onhandleUpdateBallPosition([newPosition, oldPosition]);
               }}
             />
       </>

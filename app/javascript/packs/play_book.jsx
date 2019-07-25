@@ -12,19 +12,21 @@ export default class PlayBook extends Component {
     super(props);
 
     this.state = {
+      actionNumber: 0,
       isFull: false,
       isDrawing: true,
       isDrawingArrows: false,
       dashed: false,
-      undo: false,
       itemArray: [],
+      ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }]
     };
 
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStopDrawing = this.handleStopDrawing.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
-    this.handleUpdateArrowsArray = this.handleUpdateArrowsArray.bind(this);
+    this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(this);
+    this.handleUpdateBallPosition = this.handleUpdateBallPosition.bind(this);
   }
 
   handleFullScreen() {
@@ -32,39 +34,77 @@ export default class PlayBook extends Component {
   }
 
   handleStopDrawing() {
-    this.setState(previousState => ({ isDrawing: !previousState.isDrawing }))
+    this.setState(previousState => ({
+       isDrawing: !previousState.isDrawing 
+      }));
   }
 
   handleStartDrowingArrows(dashed) {
     this.setState(previousState => ({ 
       isDrawingArrows: !previousState.isDrawingArrows,
       dashed: dashed
-     }))
+     }));
   }
 
   handleUndo() {
-    this.setState({ undo: true });
-    const item = this.state.itemArray;
-    item.pop();
+    switch (this.state.actionNumber) {
+      case 1:
+        const item = this.state.itemArray;
+        item.pop();
+        this.setState({
+          itemArray: item,
+          actionNumber: 0
+        });
+      break;
+
+      case 2:
+        const ballPosition = this.state.ballPosition;
+        ballPosition.reverse();
+        this.setState({
+          ballPosition: ballPosition,
+          actionNumber: 0
+        });
+      break;
+    }
+  }
+
+  handleUpdateArrowsPosition(itemArray) {
     this.setState({
-      itemArray: item
+      itemArray: itemArray,
+      actionNumber: 1
     });
   }
 
-  handleUpdateArrowsArray(itemArray) {
+  handleUpdateBallPosition(ballPosition) {
     this.setState({
-      itemArray: itemArray
+      ballPosition: ballPosition,
+      actionNumber: 2
     });
   }
 
   render() {
     return (
       <div className="PlayBook">
-        <Fullscreen enabled={ this.state.isFull } onChange={ isFull => this.setState({ isFull }) }>
+        <Fullscreen
+          enabled={ this.state.isFull }
+          onChange={ isFull => this.setState({ isFull }) }
+        >
           <div className="full-screenable-node d-flex flex-column">
-            <TopToolBar onHandleStopDrawing={ this.handleStopDrawing } onChangeToFullScreen={ this.handleFullScreen}  onHandleStartDrowingArrows={this.handleStartDrowingArrows} 
-            onhandleUndo={ this.handleUndo }/>
-            <DrawerField stopDrawing={ this.state.isDrawing } startDrawingArrows={ this.state.isDrawingArrows} startDrawingArrowsDashed={this.state.dashed} undo={ this.state.undo} onhandleUpdateArrowsArray={this.handleUpdateArrowsArray} itemArray={this.state.itemArray}/>
+            <TopToolBar 
+              onHandleStopDrawing={ this.handleStopDrawing }
+              onChangeToFullScreen={ this.handleFullScreen}
+              onHandleStartDrowingArrows={ this.handleStartDrowingArrows } 
+              onhandleUndo={ this.handleUndo }
+            />
+            <DrawerField 
+              stopDrawing={ this.state.isDrawing }
+              startDrawingArrows={ this.state.isDrawingArrows }
+              startDrawingArrowsDashed={ this.state.dashed }
+              onHandleUpdateArrowsPosition={ this.handleUpdateArrowsPosition }
+              itemArray={ this.state.itemArray }
+              ballPosition={ this.state.ballPosition }
+              onhandleUpdateBallPosition={ this.handleUpdateBallPosition }
+            />
           </div>
         </Fullscreen>
       </div>

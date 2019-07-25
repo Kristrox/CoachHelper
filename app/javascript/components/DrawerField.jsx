@@ -61,7 +61,7 @@ export default class DrawerField extends Component {
                 dashed: dashed
             });
 
-            this.props.onhandleUpdateArrowsArray(item)
+            this.props.onHandleUpdateArrowsPosition(item)
 
             this.setState({
                 arrowStartPos: { x: 0, y: 0  },
@@ -104,6 +104,8 @@ export default class DrawerField extends Component {
                                 playerNumber={this.state.playerNumber}
                                 width ={ this.state.stageWidth } 
                                 height={ window.innerHeight } 
+                                ballPosition={ this.props.ballPosition }
+                                onhandleUpdateBallPosition={ this.props.onhandleUpdateBallPosition }
                                 />              
                             </Layer>
                             <Layer>
