@@ -92,13 +92,6 @@ export default class DrawerField extends Component {
           <div className="DrawAreaBg">
             <Stage width={this.state.stageWidth} height={window.innerHeight}>
               <Layer>
-                <Drag
-                  playerNumber={this.state.playerNumber}
-                  width={this.state.stageWidth}
-                  height={window.innerHeight}
-                />
-              </Layer>
-              <Layer>
                 <Drawing
                   width={this.state.stageWidth}
                   height={window.innerHeight}
@@ -123,6 +116,13 @@ export default class DrawerField extends Component {
                     />
                   );
                 })}
+              </Layer>
+              <Layer>
+                <Drag
+                  playerNumber={this.state.playerNumber}
+                  width={this.state.stageWidth}
+                  height={window.innerHeight}
+                />
               </Layer>
             </Stage>
           </div>
