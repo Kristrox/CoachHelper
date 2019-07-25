@@ -9,36 +9,26 @@
     .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo"}
       .card-body
         = bootstrap_form_for @event do |f|
-          .down
-            %td
-              -# .form-group
-              #datetimepicker4.input-group.date{"data-target-input" => "nearest"}
-                -# %input.form-control.datetimepicker-input{"data-target" => "#datetimepicker4", :type => "text"}/
-                =f.text_field(:event_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker4"})
-                .input-group-append{"data-target" => "#datetimepicker4", "data-toggle" => "datetimepicker"}
-                  .input-group-text
-                    Pick date
-                    %i.fa.fa-calendar
-                .field.event
-                  = f.text_field :opponent, class: "col-md-3 control-label"
-                .actions
-                  = f.submit "Submit"
-                  = link_to 'Back', events_path
-              :javascript
-                $(function () {
-                    $('#datetimepicker4').datetimepicker({
-                        format: 'L',
-                        format: 'YYYY-MM-DD'
-                    });
+          #datetimepicker4.input-group.date{"data-target-input" => "nearest"}
+            =f.text_field(:event_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker4"})
+            .input-group-append{"data-target" => "#datetimepicker4", "data-toggle" => "datetimepicker"}
+              .input-group-text
+                Pick date
+                %i.fa.fa-calendar
+          .field.event
+            = f.text_field :opponent, class: "col-md-3 control-label"
+          .actions
+            = f.submit "Submit"
+          :javascript
+            $(function () {
+                $('#datetimepicker4').datetimepicker({
+                    format: 'L',
+                    format: 'YYYY-MM-DD'
                 });
-            %td
-              
-            
-      -# = link_to 'New Event', new_event_path(), class: "btn btn-outline-primary"
+            });
   %table
     %tr.list
       %td.list Event Date
-      -# %td.list Time
       %td.list Opponent
       %td.list Rate your match
       %td.list
@@ -58,4 +48,4 @@
             |
             \#{link_to "Delete", event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
   %br
-  
+-# = link_to 'New Event', new_event_path(), class: "btn btn-outline-primary
