@@ -108,6 +108,7 @@ export default class DrawerField extends Component {
                                     onhandleUpdateBallPosition={ this.props.onhandleUpdateBallPosition }
                                     onHandleUpdateOldPlayersPosition={ this.props.onHandleUpdateOldPlayersPosition }
                                     onHandleUpdateEnemyPlayersPosition={ this.props.onHandleUpdateEnemyPlayersPosition }
+                                    onHandleUpdatePlayersPosition={ this.props.onHandleUpdatePlayersPosition}
                                     players={ this.props.players }
                                     enemyPlayers={ this.props.enemyPlayers }
                                 />              

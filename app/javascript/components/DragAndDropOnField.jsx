@@ -67,8 +67,17 @@ export default class DragAndDropOnField extends Component {
           draggable
           x={ player.x }
           y={ player.y }
+          onDragStart={e => {
+            this.props.onHandleUpdatePlayersPosition(this.props.players);
+          }}
           onDragEnd={ e => {
-            // this.props.onHandleUpdatePlayersPosition(this.props.enemyPlayers);
+            const x = this.props.players[player.id - 1].x;
+            const y = this.props.players[player.id - 1].y
+            const oldPosition = { playerX: x, playerY: y, playerId: player.id }
+            this.props.players[player.id - 1].x = e.target.x();
+            this.props.players[player.id - 1].y = e.target.y();
+            this.props.onHandleUpdatePlayersPosition(this.props.players);
+            this.props.onHandleUpdateOldPlayersPosition(oldPosition);
           }}
         >
           <Text 

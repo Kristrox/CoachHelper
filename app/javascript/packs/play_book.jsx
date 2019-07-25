@@ -31,6 +31,7 @@ export default class PlayBook extends Component {
     this.handleUpdateBallPosition = this.handleUpdateBallPosition.bind(this);
     this.handleUpdateEnemyPlayersPosition = this.handleUpdateEnemyPlayersPosition.bind(this);
     this.handleUpdateOldPlayersPosition = this.handleUpdateOldPlayersPosition.bind(this);
+    this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(this);
   }
 
   addPlayersToInitialList(playerNumber, team) {
@@ -76,6 +77,10 @@ export default class PlayBook extends Component {
   }
 
   handleUndo() {
+    const playersPosition = this.state.players;
+    const enemyPlayersPosition = this.state.enemyPlayers;
+    const playersOldPosition = this.state.oldPlayerPosition;
+
     switch (this.state.actionNumber) {
       case 1:
         const item = this.state.itemArray;
@@ -96,14 +101,21 @@ export default class PlayBook extends Component {
       break;
 
       case 3:
-        const playersPosition = this.state.enemyPlayers;
-        const playersOldPosition = this.state.oldPlayerPosition;
-        playersPosition[playersOldPosition.playerId - 1].x = playersOldPosition.playerX;
-        playersPosition[playersOldPosition.playerId - 1].y = playersOldPosition.playerY;
+        enemyPlayersPosition[playersOldPosition.playerId - 1].x = playersOldPosition.playerX;
+        enemyPlayersPosition[playersOldPosition.playerId - 1].y = playersOldPosition.playerY;
           this.setState({
-            players: playersPosition,
+            enemyPlayers: enemyPlayersPosition,
             actionNumber: 0
           });
+      break;
+
+      case 4:
+          playersPosition[playersOldPosition.playerId - 1].x = playersOldPosition.playerX;
+          playersPosition[playersOldPosition.playerId - 1].y = playersOldPosition.playerY;
+            this.setState({
+              players: playersPosition,
+              actionNumber: 0
+            });
       break;
     }
   }
@@ -129,9 +141,9 @@ export default class PlayBook extends Component {
     });
   }
 
-  handleUpdateOldPlayersPosition(playersPosition) {
+  handleUpdatePlayersPosition(playersPosition) {
     this.setState({
-      oldPlayerPosition: playersPosition,
+      players: playersPosition,
       actionNumber: 4
     });
   }
@@ -139,7 +151,6 @@ export default class PlayBook extends Component {
   handleUpdateOldPlayersPosition(playersPosition) {
     this.setState({
       oldPlayerPosition: playersPosition,
-      actionNumber: 3
     });
   }
 
@@ -168,6 +179,7 @@ export default class PlayBook extends Component {
               onhandleUpdateBallPosition={ this.handleUpdateBallPosition }
               onHandleUpdateOldPlayersPosition={ this.handleUpdateOldPlayersPosition }
               onHandleUpdateEnemyPlayersPosition={ this.handleUpdateEnemyPlayersPosition }
+              onHandleUpdatePlayersPosition={ this.handleUpdatePlayersPosition }
               players={ this.state.players }
               enemyPlayers={ this.state.enemyPlayers }
             />
