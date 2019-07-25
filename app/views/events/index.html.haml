@@ -19,6 +19,11 @@
                   .input-group-text
                     Pick date
                     %i.fa.fa-calendar
+                .field.event
+                  = f.text_field :opponent, class: "col-md-3 control-label"
+                .actions
+                  = f.submit "Submit"
+                  = link_to 'Back', events_path
               :javascript
                 $(function () {
                     $('#datetimepicker4').datetimepicker({
@@ -27,11 +32,8 @@
                     });
                 });
             %td
-              .field
-                = f.text_field :opponent, class: "col-md-3 control-label"
-            .actions
-              = link_to 'Back', events_path
-              = f.submit "Submit"
+              
+            
       -# = link_to 'New Event', new_event_path(), class: "btn btn-outline-primary"
   %table
     %tr.list

@@ -30,7 +30,7 @@ body {
 .col-md-3 {
   -webkit-box-flex: 0;
   flex: 0 0 25%;
-  max-width: 35%;
+  max-width: 100%;
   text-align: center;
   justify-content: center;
 }
@@ -39,6 +39,7 @@ body {
   justify-content: center;
 }
 
-form-control.col-md-3.control-label {
+.form-control.col-md-3.control-label {
   justify-content: center;
+  width: 100%;
 }

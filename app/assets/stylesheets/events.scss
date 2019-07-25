@@ -6,6 +6,25 @@
   text-align: center;
 }
 
+.field.event{
+  margin-left: 50px;
+  text-align: center;
+}
+
+.form.group{
+  margin-bottom: 0rem;
+}
+
+.actions{
+  margin-top: 1.2rem;
+  margin-left: 5%;
+}
+
+.card-body{
+  justify-content: center;
+  margin-left: 20%;
+}
+
 tr:hover {
   background-color: #ffa;
 }
@@ -96,9 +115,6 @@ a:hover::after {
   margin-top: 30px;
 }
 
-.form-control.datetimepicker-input{
-  
-}
 .down{
 width: 100%;
 }
