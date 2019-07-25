@@ -24,3 +24,44 @@
             |
             \#{link_to "Delete", player_path(player), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
   %br
+
+  %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+  %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+  %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", :rel => "stylesheet"}/
+  %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
+  %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+
+  %span#1one.fa.fa-star.checked{:onclick => "starmark(this)", :onmouseover => "starmark(this)", :style => "font-size:40px;cursor:pointer;"}
+  %span#2one.fa.fa-star{:onclick => "starmark(this)", :onmouseover => "starmark(this)", :style => "font-size:40px;cursor:pointer;"}
+  %span#3one.fa.fa-star{:onclick => "starmark(this)", :onmouseover => "starmark(this)", :style => "font-size:40px;cursor:pointer;"}
+  %span#4one.fa.fa-star{:onclick => "starmark(this)", :onmouseover => "starmark(this)", :style => "font-size:40px;cursor:pointer;"}
+  %span#5one.fa.fa-star{:onclick => "starmark(this)", :onmouseover => "starmark(this)", :style => "font-size:40px;cursor:pointer;"}
+  %br/
+  %textarea#comment.form-control{:placeholder => "Enter your review", :rows => "3", :style => "margin-top:5px;"}
+  %button.btn.btn-lg.btn-success{:onclick => "result()", :style => "margin-top:10px;margin-left:5px;", :type => "button"} Submit
+  :javascript
+    var count;
+    function starmark(item)
+    {
+    count=item.id[0];
+    sessionStorage.starRating = count;
+    var subid= item.id.substring(1);
+    for(var i=0;i<5;i++)
+    {
+    if(i<count)
+    {
+    document.getElementById((i+1)+subid).style.color="orange";
+    }
+    else
+    {
+    document.getElementById((i+1)+subid).style.color="black";
+    }
+    }
+    }
+    function result()
+    {
+    //Rating : Count
+    //Review : Comment(id)
+    alert("Rating : "+count+"\nReview : "+document.getElementById("comment").value);
+    }
+
