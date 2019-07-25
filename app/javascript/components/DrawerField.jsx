@@ -101,20 +101,24 @@ export default class DrawerField extends Component {
                         <Stage  width ={ this.state.stageWidth } height={ window.innerHeight}>
                             <Layer>
                                 <Drag 
-                                playerNumber={this.state.playerNumber}
-                                width ={ this.state.stageWidth } 
-                                height={ window.innerHeight } 
-                                ballPosition={ this.props.ballPosition }
-                                onhandleUpdateBallPosition={ this.props.onhandleUpdateBallPosition }
+                                    playerNumber={this.state.playerNumber}
+                                    width ={ this.state.stageWidth } 
+                                    height={ window.innerHeight } 
+                                    ballPosition={ this.props.ballPosition }
+                                    onhandleUpdateBallPosition={ this.props.onhandleUpdateBallPosition }
+                                    onHandleUpdateOldPlayersPosition={ this.props.onHandleUpdateOldPlayersPosition }
+                                    onHandleUpdateEnemyPlayersPosition={ this.props.onHandleUpdateEnemyPlayersPosition }
+                                    players={ this.props.players }
+                                    enemyPlayers={ this.props.enemyPlayers }
                                 />              
                             </Layer>
                             <Layer>
                                 <Drawing
-                                width ={ this.state.stageWidth } 
-                                height={ window.innerHeight } 
-                                stopDrawing={ this.props.stopDrawing } 
-                                startDrawingArrows={ this.props.startDrawingArrows }
-                                onHandleDrawingArrows={ this.handleDrawingArrows }
+                                    width ={ this.state.stageWidth } 
+                                    height={ window.innerHeight } 
+                                    stopDrawing={ this.props.stopDrawing } 
+                                    startDrawingArrows={ this.props.startDrawingArrows }
+                                    onHandleDrawingArrows={ this.handleDrawingArrows }
                                 />
                             </Layer>
                             <Layer>
