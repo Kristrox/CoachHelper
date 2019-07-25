@@ -46,7 +46,6 @@
                     %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{player.name}", "data-toggle" => "collapse"}
                       %tr
                         %td= player.name
-                        %td= player.surname
               .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{player.name}"}
                 .card-body
                   %tr
@@ -73,7 +72,11 @@
           - @players.each do |player|
             %table
               %tr
+                %td= player.number
                 %td= player.name
-                %td= player.surname                   
+                %td= player.surname
+                %td
+                  %button.btn.btn-outline-primary.btn-sm
+                    = link_to 'Edit', edit_player_path(player), :class => ".btn.btn-outline-primary.btn-sm"        
         .modal-footer
         
