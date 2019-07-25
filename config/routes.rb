@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :events do
+    member do
+      get 'edit_player'
+      put 'add_player'
+      patch 'add_player'
+    end
+  end
   resources :players do
     member do
       put 'update_player'

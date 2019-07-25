@@ -9,6 +9,7 @@
       %td
       %td
       %td
+      %td
     - @events.each do |event|
       %tr
         %td
@@ -18,11 +19,11 @@
         %td
           Tutaj bedzie taktyka i squad
         %td
-          %button.btn.btn-primary{"data-target" => "#editPlayersInMatch", "data-toggle" => "modal", :type => "button"}
-            Add players
-        %td
           %button.btn.btn-primary{"data-target" => "#editDataAfterMatchModal", "data-toggle" => "modal", :type => "button"}
             Check players
+        %td
+          %button.btn.btn-outline-primary.btn-sm
+            = link_to 'Edit', edit_player_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
         %td
           %button.btn.btn-outline-primary.btn-sm
             = link_to 'Edit', edit_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
@@ -61,22 +62,3 @@
           - @events.each do |post|
             %p= post.user.email       
         .modal-footer
-
-  #editPlayersInMatch.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-    .modal-dialog{:role => "document"}
-      .modal-content
-        .modal-header
-          %h4#myModalLabel.modal-title Edit players data after match
-          %button.close{"data-dismiss" => "modal", :type => "button"} x
-        .modal-body
-          - @players.each do |player|
-            %table
-              %tr
-                %td= player.number
-                %td= player.name
-                %td= player.surname
-                %td
-                  %button.btn.btn-outline-primary.btn-sm
-                    = link_to 'Edit', edit_player_path(player), :class => ".btn.btn-outline-primary.btn-sm"        
-        .modal-footer
-        

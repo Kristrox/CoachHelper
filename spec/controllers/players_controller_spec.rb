@@ -100,7 +100,7 @@ RSpec.describe PlayersController, type: :controller do
 
     context 'valid attributes' do
       subject { put :update, params: valid_attributes }
-      it { expect(subject).to redirect_to(players_url) }
+      it { expect(subject).to redirect_to(player_url) }
 
       it 'redirect with notice' do
         subject

@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+ 
   def index
     @players = Player.all.order(:number)
   end
@@ -13,7 +14,7 @@ class PlayersController < ApplicationController
     @player.yellow_cards = 0
     @player.user = current_user
     if @player.save
-      redirect_to '/players'
+      redirect_to players_path
     else
       render 'new'
     end

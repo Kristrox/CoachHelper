@@ -1,0 +1,23 @@
+.content
+  %h1 List of your Players
+  %table
+    %tr.list
+      %td Number
+      %td Name
+      %td Surname
+      %td Status
+      %td
+      %td
+    - @players.each do |player|
+      %tr
+        %td
+          = player.number
+        %td
+          = player.name.capitalize
+        %td
+          = player.surname.capitalize
+        %td
+          Git
+        %td
+          %button.btn.btn-outline-primary.btn-sm
+            = link_to 'Add', add_player_event_path({ id: @event.id, player_id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
