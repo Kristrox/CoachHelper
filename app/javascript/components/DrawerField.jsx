@@ -57,14 +57,19 @@ export default class DrawerField extends Component {
         countClick: 0
       });
 
-      item.push({
+      arrows.push({
         arrowStartPos: this.state.arrowStartPos,
         arrowEndPos: this.state.arrowEndPos,
         dashed: dashed
       });
 
+      this.props.onHandleUpdateArrowsPosition(arrows);
+
       this.setState({
-        itemArray: item
+        arrowStartPos: { x: 0, y: 0 },
+        arrowEndPos: { x: 0, y: 0 },
+        fill: "transparent",
+        stroke: "transparent"
       });
     }
   };
@@ -118,6 +123,21 @@ export default class DrawerField extends Component {
                   playerNumber={this.state.playerNumber}
                   width={this.state.stageWidth}
                   height={window.innerHeight}
+                  ballPosition={this.props.ballPosition}
+                  players={this.props.players}
+                  enemyPlayers={this.props.enemyPlayers}
+                  onHandleUpdateBallPosition={
+                    this.props.onHandleUpdateBallPosition
+                  }
+                  onHandleUpdateOldPlayersPosition={
+                    this.props.onHandleUpdateOldPlayersPosition
+                  }
+                  onHandleUpdateEnemyPlayersPosition={
+                    this.props.onHandleUpdateEnemyPlayersPosition
+                  }
+                  onHandleUpdatePlayersPosition={
+                    this.props.onHandleUpdatePlayersPosition
+                  }
                 />
               </Layer>
               <Layer>
@@ -134,14 +154,18 @@ export default class DrawerField extends Component {
                   startPos={this.state.arrowStartPos}
                   endPos={this.state.arrowEndPos}
                   dashed={this.state.dashed}
+                  fill={this.state.fill}
+                  stroke={this.state.stroke}
                 />
-                {this.state.itemArray.map((item, index) => {
+                {this.props.arrwosArray.map((arrows, index) => {
                   return (
                     <CustomArrow
                       key={index}
-                      startPos={item.arrowStartPos}
-                      endPos={item.arrowEndPos}
-                      dashed={item.dashed}
+                      startPos={arrows.arrowStartPos}
+                      endPos={arrows.arrowEndPos}
+                      dashed={arrows.dashed}
+                      fill={"red"}
+                      stroke={"red"}
                     />
                   );
                 })}

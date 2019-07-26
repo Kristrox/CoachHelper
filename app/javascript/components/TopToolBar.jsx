@@ -23,14 +23,14 @@ export default class TopToolBar extends Component {
     });
   };
 
-  handleDrawArrow = e => {
+  handleDrawArrow = () => {
     this.props.onHandleStartDrowingArrows(false);
     this.setState({
       drawingArrow: this.state.drawingArrow ? false : true
     });
   };
 
-  handleDrawDashArrow = e => {
+  handleDrawDashArrow = () => {
     this.props.onHandleStartDrowingArrows(true);
     this.setState({
       drawingArrow: this.state.drawingArrow ? false : true
@@ -47,18 +47,11 @@ export default class TopToolBar extends Component {
         >
           Save To Play Book
         </button>
-
         <button
           className="TopToolBar btn btn-success"
           onClick={this.handleStopDrawing}
         >
           {this.state.drawing ? "Stop drawing" : "Start drawing"}
-        </button>
-        <button
-          className="TopToolBar btn btn-success"
-          onClick={() => this.props.onChangeToFullScreen()}
-        >
-          Go Fullscreen
         </button>
         <button
           className="TopToolBar btn btn-success"
@@ -71,6 +64,18 @@ export default class TopToolBar extends Component {
           onClick={this.handleDrawDashArrow}
         >
           Dashed Arrows
+        </button>
+        <button
+          className="TopToolBar btn btn-success"
+          onClick={() => this.props.onHandleUndo()}
+        >
+          Undo
+        </button>
+        <button
+          className="TopToolBar btn btn-success"
+          onClick={() => this.props.onChangeToFullScreen()}
+        >
+          Go Fullscreen
         </button>
       </div>
     );
