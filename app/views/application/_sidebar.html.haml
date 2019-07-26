@@ -1,7 +1,8 @@
 
 -unless request.path.start_with?('/users')
   #sidebar
-    %h3 CoachHelper
+    %h3 Coach
+    %h4 Helper
     /%a.active{:href => "/team/index"}   
     - if request.path.start_with?("/events")
       =link_to "Team" , players_path,id: 'team', class: "a"
@@ -18,6 +19,6 @@
       -(1..100).each do |n|
         =link_to n , new_play_book_path, id: 'play_books', class: "a"
     - else 
-      =link_to "Team" , players_path,id: 'team', class: "a"
+      =link_to "Team" , players_path,id: 'team', class: "active a"
       =link_to "Calendar" , events_path, id: 'events', class: "a"
       =link_to "Play Books" , new_play_book_path, id: 'play_books', class: "a"

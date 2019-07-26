@@ -12,12 +12,12 @@
 }
 
 
-.input-group.date{
+h1{
+  font-size: 40px;
 }
 
-
 .input-group-text{
-  weight: 100px;
+  // weigth: 100px;
   // height: 10px;
   height: 40%;
   margin-top: 35px;
@@ -38,7 +38,7 @@
 }
 
 tr:hover {
-  background-color: #ffa;
+  background-color: lightgreen;
 }
 
 td.date, td.date1 {
