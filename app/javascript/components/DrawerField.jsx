@@ -21,8 +21,6 @@ export default class DrawerField extends Component {
       arrowStartPos: { x: 0, y: 0 },
       arrowEndPos: { x: 0, y: 0 },
       countClick: 0,
-      itemArray: [],
-      imgData: null
     };
   }
 
@@ -32,7 +30,13 @@ export default class DrawerField extends Component {
   }
 
   handleDrawingArrows = localPos => {
-    const item = this.state.itemArray;
+
+    this.setState({
+      fill: "red",
+      stroke: "red"
+    });
+
+    const arrows = this.props.arrwosArray;
     let dashed = [0, 0];
     this.setState({
       dashed: dashed
