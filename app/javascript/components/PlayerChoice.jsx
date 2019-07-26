@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from 'axios'
+import axios from "axios";
 
 export default class PlayerChoice extends Component {
   constructor(props) {
@@ -34,7 +34,6 @@ export default class PlayerChoice extends Component {
   };
 
   onChange = e => {
-    console.log(e.target.value)
     this.setState({
       playerNumber: e.target.value
     });
@@ -43,12 +42,13 @@ export default class PlayerChoice extends Component {
 
   render() {
     return (
-      <div className="PlayerNumberChoice" >
-        <select onChange={ this.onChange } >{ this.state.players.map(player => 
-        <option value={player.number} key={ player.id }>
-        { player.name + " " + player.surname + " " + player.number}
-        </option>
-        )}
+      <div className="PlayerNumberChoice">
+        <select onChange={this.onChange}>
+          {this.state.players.map(player => (
+            <option value={player.number} key={player.id}>
+              {player.name + " " + player.surname + " " + player.number}
+            </option>
+          ))}
         </select>
       </div>
     );
