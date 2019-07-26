@@ -1,52 +1,42 @@
 import React, { Component } from "react";
-import { Stage, Layer, Text, Group } from "react-konva";
+import { Text, Group } from "react-konva";
 
 export default class DragAndDropOnField extends Component {
-
-  addPlayersToinitialList(playerNumber, team) {
-    const ourPlayerX = 100;
-    const ourPlayerY = 20;
-    const enemyPlayerX = 180;
-    const enemyPlayerY = 20;
-
-    let playerList = [];
-    for (
-      let playerIterator = 1;
-      playerIterator <= playerNumber;
-      playerIterator++
-    ) {
-      if (team == "ourTeam") {
-        playerList.push({ x: ourPlayerX, y: ourPlayerY, id: playerIterator });
-      } else {
-        playerList.push({
-          x: enemyPlayerX,
-          y: enemyPlayerY,
-          id: playerIterator
-        });
-      }
-    }
-    return playerList;
-  }
+  state = {
+    enemiesOnField: [{ x: 180, y: 20, id: 0 }],
+    playersOnField: [{ x: 100, y: 20, id: 0 }],
+    playerNumber: 0,
+    ballisDragging: false
+  };
 
   renderEnemies = () => {
-    const listPlayers = this.state.enemyPlayers.map(player => (
+    const listPlayers = this.props.enemyPlayers.map(player => (
       <Group
         key={player.id}
         draggable
         x={player.x}
         y={player.y}
-        onDragEnd={this.handleDragEnd}
+        onDragStart={() => {
+          this.props.onHandleUpdateEnemyPlayersPosition(
+            this.props.enemyPlayers
+          );
+        }}
+        onDragEnd={e => {
+          const x = this.props.enemyPlayers[player.id - 1].x;
+          const y = this.props.enemyPlayers[player.id - 1].y;
+          const oldPosition = { playerX: x, playerY: y, playerId: player.id };
+          this.props.enemyPlayers[player.id - 1].x = e.target.x();
+          this.props.enemyPlayers[player.id - 1].y = e.target.y();
+          this.props.onHandleUpdateEnemyPlayersPosition(
+            this.props.enemyPlayers
+          );
+          this.props.onHandleUpdateOldPlayersPosition(oldPosition);
+        }}
       >
         <Text text="👚" fontSize={50} />
-        <Text
-          x={player.x - 168}
-          y={player.y - 10}
-          text={player.id}
-          fontSize={20}
-        />
+        <Text x={12} y={10} text={player.id} fontSize={20} />
       </Group>
     ));
-
     return listPlayers;
   };
 
@@ -55,7 +45,6 @@ export default class DragAndDropOnField extends Component {
   }
 
   renderPlayers = (allPlayers, playerNumber, playersOnField) => {
-
     let playerAlredyOnField = playersOnField.some(function(player) {
       return player.id === playerNumber;
     });
@@ -76,16 +65,24 @@ export default class DragAndDropOnField extends Component {
           draggable
           x={player.x}
           y={player.y}
-          onDragEnd={this.handleDragEnd}
+          onDragStart={e => {
+            this.props.onHandleUpdatePlayersPosition(this.props.players);
+          }}
+          onDragEnd={e => {
+            const x = this.props.players[player.id - 1].x;
+            const y = this.props.players[player.id - 1].y;
+            const oldPosition = { playerX: x, playerY: y, playerId: player.id };
+            this.props.players[player.id - 1].x = e.target.x();
+            this.props.players[player.id - 1].y = e.target.y();
+            this.props.onHandleUpdatePlayersPosition(this.props.players);
+            this.props.onHandleUpdateOldPlayersPosition(oldPosition);
+          }}
         >
-          <Text 
-            key={player.id + "a"} 
-            text="👕" 
-            fontSize={50} />
+          <Text key={player.id + "a"} text="👕" fontSize={50} />
           <Text
             key={player.id + "b"}
-            x={player.x - 87}
-            y={player.y - 14}
+            x={12}
+            y={10}
             text={player.id}
             fontSize={20}
           />
@@ -100,50 +97,39 @@ export default class DragAndDropOnField extends Component {
     });
   };
 
-  state = {
-    players: this.addPlayersToinitialList(99, "ourTeam"),
-    enemyPlayers: this.addPlayersToinitialList(18, "enemy"),
-    enemiesOnField: [{ x: 180, y: 20, id: 0 }],
-    playersOnField: [{ x: 100, y: 20, id: 0 }],
-    playerNumber: 0,
-
-    ballisDragging: false,
-    movableBallX: 50,
-    movableBallY: 20
-  };
-
   render() {
     return (
       <>
-            <Text text="👚" x={180} y={20} fontSize={50} />
-            {this.renderEnemies()}
+        <Text text="👚" x={180} y={20} fontSize={50} />
 
-            <Text text="👕" x={100} y={20} fontSize={50} />
-            {this.renderPlayers(
-              this.state.players,
-              parseInt(this.props.playerNumber),
-              this.state.playersOnField
-            )}
+        {this.renderEnemies()}
 
-            <Text
-              text="⚽"
-              fontSize={30}
-              x={this.state.movableBallX}
-              y={this.state.movableBallY}
-              draggable
-              onDragStart={() => {
-                this.setState({
-                  ballisDragging: true
-                });
-              }}
-              onDragEnd={e => {
-                this.setState({
-                  ballisDragging: false,
-                  ballX: e.target.x(),
-                  ballY: e.target.y()
-                });
-              }}
-            />
+        <Text text="👕" x={100} y={20} fontSize={50} />
+
+        {this.renderPlayers(
+          this.props.players,
+          parseInt(this.props.playerNumber),
+          this.state.playersOnField
+        )}
+
+        <Text
+          text="⚽"
+          fontSize={30}
+          x={this.props.ballPosition[0].ballX}
+          y={this.props.ballPosition[0].ballY}
+          draggable
+          onDragStart={() => {
+            this.props.onHandleUpdateBallPosition(this.props.ballPosition);
+          }}
+          onDragEnd={e => {
+            const newPosition = { ballX: e.target.x(), ballY: e.target.y() };
+            const oldPosition = {
+              ballX: this.props.ballPosition[0].ballX,
+              ballY: this.props.ballPosition[0].ballY
+            };
+            this.props.onHandleUpdateBallPosition([newPosition, oldPosition]);
+          }}
+        />
       </>
     );
   }
