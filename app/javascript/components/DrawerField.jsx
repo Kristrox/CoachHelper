@@ -119,28 +119,6 @@ export default class DrawerField extends Component {
                 <FootballFiledImage />
               </Layer>
               <Layer>
-                <Drag
-                  playerNumber={this.state.playerNumber}
-                  width={this.state.stageWidth}
-                  height={window.innerHeight}
-                  ballPosition={this.props.ballPosition}
-                  players={this.props.players}
-                  enemyPlayers={this.props.enemyPlayers}
-                  onHandleUpdateBallPosition={
-                    this.props.onHandleUpdateBallPosition
-                  }
-                  onHandleUpdateOldPlayersPosition={
-                    this.props.onHandleUpdateOldPlayersPosition
-                  }
-                  onHandleUpdateEnemyPlayersPosition={
-                    this.props.onHandleUpdateEnemyPlayersPosition
-                  }
-                  onHandleUpdatePlayersPosition={
-                    this.props.onHandleUpdatePlayersPosition
-                  }
-                />
-              </Layer>
-              <Layer>
                 <Drawing
                   width={this.state.stageWidth}
                   height={window.innerHeight}
@@ -169,6 +147,28 @@ export default class DrawerField extends Component {
                     />
                   );
                 })}
+              </Layer>
+              <Layer>
+                <Drag
+                  playerNumber={this.state.playerNumber}
+                  width={this.state.stageWidth}
+                  height={window.innerHeight}
+                  ballPosition={this.props.ballPosition}
+                  players={this.props.players}
+                  enemyPlayers={this.props.enemyPlayers}
+                  onHandleUpdateBallPosition={
+                    this.props.onHandleUpdateBallPosition
+                  }
+                  onHandleUpdateOldPlayersPosition={
+                    this.props.onHandleUpdateOldPlayersPosition
+                  }
+                  onHandleUpdateEnemyPlayersPosition={
+                    this.props.onHandleUpdateEnemyPlayersPosition
+                  }
+                  onHandleUpdatePlayersPosition={
+                    this.props.onHandleUpdatePlayersPosition
+                  }
+                />
               </Layer>
             </Stage>
             <button
