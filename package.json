@@ -27,7 +27,11 @@
     "use-image": "^1.0.4"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@fortawesome/fontawesome-free": "^5.9.0",
+=======
+    "prettier": "1.18.2",
+>>>>>>> 1e1ae1a7448355a00fa2da925d5c33954e77dbca
     "webpack-dev-server": "^3.7.2"
   }
 }
