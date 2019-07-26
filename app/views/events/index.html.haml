@@ -15,11 +15,11 @@
         %td
           = event.opponent.capitalize
         %td
+          %button.btn.btn-primary{"data-target" => "#event-modal-2-#{event.id}", "data-toggle" => "modal", :type => "button"}
+            Add players
+        %td
           %button.btn.btn-primary{"data-target" => "#event-modal-#{event.id}", "data-toggle" => "modal", :type => "button"}
             Check players
-        %td
-          %button.btn.btn-outline-primary.btn-sm
-            = link_to 'Add player', edit_player_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
         %td
           %button.btn.btn-outline-primary.btn-sm
             = link_to 'Edit', edit_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
@@ -58,3 +58,23 @@
                           %td=f.select :red_cards, [ 0, 1 ], :prompt => 'Select One'
                           = f.submit "Update"   
         .modal-footer
+
+- @events.each do |event|
+  .modal.fade{id: "event-modal-2-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %h4#myModalLabel.modal-title Edit players data after match
+          %button.close{"data-dismiss" => "modal", :type => "button"} x
+        .modal-body
+          - @players.each do |player|
+            %table.table.table-striped
+              %thead
+                %tr
+                  %td= player.number
+                  %td= player.name
+                  %td= player.surname
+                  %td
+                    %button.btn.btn-outline-primary.btn-sm
+                      = link_to 'Add', add_player_event_path({ id: event.id, player_id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
+                    .modal-footer
