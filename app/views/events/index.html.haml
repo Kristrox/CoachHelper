@@ -9,23 +9,25 @@
     .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo"}
       .card-body
         = bootstrap_form_for @event do |f|
-          #datetimepicker4.input-group.date{"data-target-input" => "nearest"}
-            =f.text_field(:event_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker4"})
-            .input-group-append{"data-target" => "#datetimepicker4", "data-toggle" => "datetimepicker"}
-              .input-group-text
-                Pick date
-                %i.fa.fa-calendar
-          .field.event
+          %tr
+            %td.create
+              #datetimepicker4.input-group.date{"data-target-input" => "nearest"}
+                =f.text_field(:event_date, class: "datetimepicker-input", data: {target:"#datetimepicker4"})
+                .input-group-append{"data-target" => "#datetimepicker4", "data-toggle" => "datetimepicker"}
+                  .input-group-text
+                    Pick date
+                    %i.fa.fa-calendar
             = f.text_field :opponent, class: "col-md-3 control-label"
-          .actions
-            = f.submit "Submit"
-          :javascript
-            $(function () {
-                $('#datetimepicker4').datetimepicker({
-                    format: 'L',
-                    format: 'YYYY-MM-DD'
+            %td.create
+              .actions
+                = f.submit "Submit"
+              :javascript
+                $(function () {
+                    $('#datetimepicker4').datetimepicker({
+                        format: 'L',
+                        format: 'YYYY-MM-DD'
+                    });
                 });
-            });
   %table
     %tr.list
       %td.list Event Date
@@ -38,7 +40,7 @@
           = event.event_date.to_date
         -# %td.date
         -#   = event.event_date.to_s(:time)
-        %td
+        %td.date1
           = event.opponent.titleize
         %td
         %td

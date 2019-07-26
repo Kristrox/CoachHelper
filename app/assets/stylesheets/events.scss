@@ -6,38 +6,58 @@
   text-align: center;
 }
 
-.field.event{
-  margin-left: 50px;
-  text-align: center;
-}
-
 .form.group{
   margin-bottom: 0rem;
+  width: 100px !important;
+}
+
+
+.input-group.date{
+}
+
+
+.input-group-text{
+  weight: 100px;
+  // height: 10px;
+  height: 40%;
+  margin-top: 35px;
 }
 
 .actions{
+
   margin-top: 1.2rem;
-  margin-left: 5%;
+  // margin-left: 5%;
 }
 
 .card-body{
   justify-content: center;
-  margin-left: 20%;
+  margin-left: 37%;
+  text-align: left;
+
+
 }
 
 tr:hover {
   background-color: #ffa;
 }
 
+td.date, td.date1 {
+  font-size: 23px;
+}
+
 td.date{
-  background-color: lightgoldenrodyellow;
-  
+  background-color: lightgreen;
+
+}
+td.date1{
+  background-color: #1daf3871;
+  color: white;
 }
 
 td.list{
   padding: 20px;
   font-weight: bold;
-  font-size: 19px;
+  font-size: 26px;
 }
 
 
@@ -56,9 +76,6 @@ th:hover::after {
   z-index: -1;
 }
 
-.field{
-  text-align: left;
-}
 table{
   overflow: hidden;
   width: 100%;
@@ -75,7 +92,7 @@ td {
 }
 
 tr{
-  background-color: lightgrey;
+  background-color: #1daf3871;
 }
 tr.list:nth-child(odd) {background-color:#4caf50; // #f2f2f2;
 }
@@ -109,11 +126,6 @@ a:hover::after {
   background-color: white;
 }
 
-
-.input-group-text{
-  height: 40px;
-  margin-top: 30px;
-}
 
 .down{
 width: 100%;

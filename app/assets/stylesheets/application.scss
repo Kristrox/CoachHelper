@@ -25,12 +25,13 @@
 body {
   // font-family: 'Lato', sans-serif;
   font-family: "Ubuntu", sans-serif;
+
 }
 
 .col-md-3 {
   -webkit-box-flex: 0;
   flex: 0 0 25%;
-  max-width: 100%;
+  // max-width: 100%;
   text-align: center;
   justify-content: center;
 }
@@ -41,5 +42,9 @@ body {
 
 .form-control.col-md-3.control-label {
   justify-content: center;
-  width: 100%;
+  width: 300px;
+}
+.form-control.col-md-3.control-label.player {
+  justify-content: center;
+  width: 30%
 }
