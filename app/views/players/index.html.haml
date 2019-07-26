@@ -9,9 +9,6 @@
       %td Status
       %td
     - @players.each do |player|
-      -# .player
-      -# %br
-      -# %table
       %tr
         %td
           = player.number
@@ -21,7 +18,6 @@
           = player.surname.capitalize
         %td
           Git
-          -#tutaj napierdzielac status gdy ma kontuzje lub czerwona kartke
         %td
           %button.btn.btn-outline-primary.btn-sm
             = link_to 'Edit', edit_player_path(player), :class => ".btn.btn-outline-primary.btn-sm"
