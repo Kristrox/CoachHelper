@@ -5,9 +5,8 @@
     %tr.list
       %td Event date
       %td Opponent
-      %td
-      %td
-      %td
+      %td Check players
+      %td Add player
       %td
     - @events.each do |event|
       %tr
@@ -16,7 +15,7 @@
         %td
           = event.opponent.capitalize
         %td
-          %button.btn.btn-primary{"data-target" => "#editDataAfterMatchModal", "data-toggle" => "modal", :type => "button"}
+          %button.btn.btn-primary{"data-target" => "#event-modal-#{event.id}", "data-toggle" => "modal", :type => "button"}
             Check players
         %td
           %button.btn.btn-outline-primary.btn-sm
@@ -28,7 +27,8 @@
             \#{link_to "Delete", event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
     %br
 
-  #editDataAfterMatchModal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+- @events.each do |event|
+  .modal.fade{id: "event-modal-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
       .modal-content
         .modal-header
@@ -37,13 +37,13 @@
         .modal-body
           
           #accordion
-            - @players.each do |player|
+            - event.players.each do |player|
               .card
                 #headingTwo.card-header
                   %h5.mb-0
                     %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{player.id}", "data-toggle" => "collapse"}
                       %tr
-                        %td= event.opponent.capitalize
+                        %td= player.number
                         %td= player.name
                         %td= player.surname
               .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{player.id}"}
