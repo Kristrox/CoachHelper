@@ -6,7 +6,7 @@ export default class DragAndDropOnField extends Component {
     enemiesOnField: [{ x: 180, y: 20, id: 0 }],
     playersOnField: [{ x: 100, y: 20, id: 0 }],
     playerNumber: 0,
-    ballisDragging: false,
+    ballisDragging: false
   };
 
   renderEnemies = () => {
@@ -16,26 +16,25 @@ export default class DragAndDropOnField extends Component {
         draggable
         x={player.x}
         y={player.y}
-        onDragStart={e => {
-          this.props.onHandleUpdateEnemyPlayersPosition(this.props.enemyPlayers);
+        onDragStart={() => {
+          this.props.onHandleUpdateEnemyPlayersPosition(
+            this.props.enemyPlayers
+          );
         }}
         onDragEnd={e => {
           const x = this.props.enemyPlayers[player.id - 1].x;
-          const y = this.props.enemyPlayers[player.id - 1].y
-          const oldPosition = { playerX: x, playerY: y, playerId: player.id }
+          const y = this.props.enemyPlayers[player.id - 1].y;
+          const oldPosition = { playerX: x, playerY: y, playerId: player.id };
           this.props.enemyPlayers[player.id - 1].x = e.target.x();
           this.props.enemyPlayers[player.id - 1].y = e.target.y();
-          this.props.onHandleUpdateEnemyPlayersPosition(this.props.enemyPlayers);
+          this.props.onHandleUpdateEnemyPlayersPosition(
+            this.props.enemyPlayers
+          );
           this.props.onHandleUpdateOldPlayersPosition(oldPosition);
         }}
       >
-      <Text text="👚" fontSize={50} />
-      <Text
-        x={12}
-        y={10}
-        text={player.id}
-        fontSize={20}
-        />
+        <Text text="👚" fontSize={50} />
+        <Text x={12} y={10} text={player.id} fontSize={20} />
       </Group>
     ));
     return listPlayers;
@@ -46,7 +45,6 @@ export default class DragAndDropOnField extends Component {
   }
 
   renderPlayers = (allPlayers, playerNumber, playersOnField) => {
-
     let playerAlredyOnField = playersOnField.some(function(player) {
       return player.id === playerNumber;
     });
@@ -65,31 +63,28 @@ export default class DragAndDropOnField extends Component {
         <Group
           key={player.id}
           draggable
-          x={ player.x }
-          y={ player.y }
+          x={player.x}
+          y={player.y}
           onDragStart={e => {
             this.props.onHandleUpdatePlayersPosition(this.props.players);
           }}
-          onDragEnd={ e => {
+          onDragEnd={e => {
             const x = this.props.players[player.id - 1].x;
-            const y = this.props.players[player.id - 1].y
-            const oldPosition = { playerX: x, playerY: y, playerId: player.id }
+            const y = this.props.players[player.id - 1].y;
+            const oldPosition = { playerX: x, playerY: y, playerId: player.id };
             this.props.players[player.id - 1].x = e.target.x();
             this.props.players[player.id - 1].y = e.target.y();
             this.props.onHandleUpdatePlayersPosition(this.props.players);
             this.props.onHandleUpdateOldPlayersPosition(oldPosition);
           }}
         >
-          <Text 
-            key={player.id + "a"} 
-            text="👕" 
-            fontSize={ 50 } />
+          <Text key={player.id + "a"} text="👕" fontSize={50} />
           <Text
             key={player.id + "b"}
-            x={ 12 }
-            y={ 10 }
-            text={ player.id }
-            fontSize={ 20 }
+            x={12}
+            y={10}
+            text={player.id}
+            fontSize={20}
           />
         </Group>
       ));
@@ -105,23 +100,13 @@ export default class DragAndDropOnField extends Component {
   render() {
     return (
       <>
-        <Text
-          text="👚"
-          x={ 180 }
-          y={ 20 }
-          fontSize={ 50 }
-        />
-        
-        { this.renderEnemies() }
+        <Text text="👚" x={180} y={20} fontSize={50} />
 
-        <Text 
-          text="👕" 
-          x={ 100 }
-          y={ 20 }
-          fontSize={ 50 }
-        />
-        
-        { this.renderPlayers(
+        {this.renderEnemies()}
+
+        <Text text="👕" x={100} y={20} fontSize={50} />
+
+        {this.renderPlayers(
           this.props.players,
           parseInt(this.props.playerNumber),
           this.state.playersOnField
@@ -129,17 +114,20 @@ export default class DragAndDropOnField extends Component {
 
         <Text
           text="⚽"
-          fontSize={ 30 }
-          x={ this.props.ballPosition[0].ballX }
-          y={ this.props.ballPosition[0].ballY }
+          fontSize={30}
+          x={this.props.ballPosition[0].ballX}
+          y={this.props.ballPosition[0].ballY}
           draggable
           onDragStart={() => {
-            this.props.onhandleUpdateBallPosition(this.props.ballPosition);
+            this.props.onHandleUpdateBallPosition(this.props.ballPosition);
           }}
           onDragEnd={e => {
-            const newPosition = { ballX: e.target.x(), ballY: e.target.y() }
-            const oldPosition = { ballX: this.props.ballPosition[0].ballX, ballY: this.props.ballPosition[0].ballY }
-            this.props.onhandleUpdateBallPosition([newPosition, oldPosition]);
+            const newPosition = { ballX: e.target.x(), ballY: e.target.y() };
+            const oldPosition = {
+              ballX: this.props.ballPosition[0].ballX,
+              ballY: this.props.ballPosition[0].ballY
+            };
+            this.props.onHandleUpdateBallPosition([newPosition, oldPosition]);
           }}
         />
       </>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Arrow } from "react-konva";
 
 export default function CustomArrow(props) {
@@ -9,9 +9,9 @@ export default function CustomArrow(props) {
       points={[startPos.x, startPos.y, endPos.x, endPos.y]}
       pointerLength={20}
       pointerWidth={20}
-      fill={ fill }
-      stroke={ stroke }
-      dash={ dashed }
+      fill={fill}
+      stroke={stroke}
+      dash={dashed}
       strokeWidth={4}
     />
   );

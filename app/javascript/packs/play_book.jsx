@@ -1,11 +1,11 @@
 // Run this example by adding <%= javascript_pack_tag 'hello_react' %> to the head of your layout file,
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Fullscreen from 'react-full-screen';
-import TopToolBar from '../components/TopToolBar';
-import DrawerField from '../components/DrawerField';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import Fullscreen from "react-full-screen";
+import TopToolBar from "../components/TopToolBar";
+import DrawerField from "../components/DrawerField";
 
 export default class PlayBook extends Component {
   constructor(props) {
@@ -17,10 +17,10 @@ export default class PlayBook extends Component {
       isDrawing: true,
       isDrawingArrows: false,
       dashed: false,
-      itemArray: [],
+      arrwosArray: [],
       ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
-      enemyPlayers: this.addPlayersToInitialList(18, "enemy"),
+      enemyPlayers: this.addPlayersToInitialList(18, "enemy")
     };
 
     this.handleFullScreen = this.handleFullScreen.bind(this);
@@ -65,15 +65,15 @@ export default class PlayBook extends Component {
 
   handleStopDrawing() {
     this.setState(previousState => ({
-       isDrawing: !previousState.isDrawing 
-      }));
+      isDrawing: !previousState.isDrawing
+    }));
   }
 
   handleStartDrowingArrows(dashed) {
-    this.setState(previousState => ({ 
+    this.setState(previousState => ({
       isDrawingArrows: !previousState.isDrawingArrows,
       dashed: dashed
-     }));
+    }));
   }
 
   handleUndo() {
@@ -83,13 +83,13 @@ export default class PlayBook extends Component {
 
     switch (this.state.actionNumber) {
       case 1:
-        const item = this.state.itemArray;
-        item.pop();
+        const arrows = this.state.arrwosArray;
+        arrows.pop();
         this.setState({
-          itemArray: item,
+          arrwosArray: arrows,
           actionNumber: 0
         });
-      break;
+        break;
 
       case 2:
         const ballPosition = this.state.ballPosition;
@@ -98,31 +98,35 @@ export default class PlayBook extends Component {
           ballPosition: ballPosition,
           actionNumber: 0
         });
-      break;
+        break;
 
       case 3:
-        enemyPlayersPosition[playersOldPosition.playerId - 1].x = playersOldPosition.playerX;
-        enemyPlayersPosition[playersOldPosition.playerId - 1].y = playersOldPosition.playerY;
-          this.setState({
-            enemyPlayers: enemyPlayersPosition,
-            actionNumber: 0
-          });
-      break;
+        enemyPlayersPosition[playersOldPosition.playerId - 1].x =
+          playersOldPosition.playerX;
+        enemyPlayersPosition[playersOldPosition.playerId - 1].y =
+          playersOldPosition.playerY;
+        this.setState({
+          enemyPlayers: enemyPlayersPosition,
+          actionNumber: 0
+        });
+        break;
 
       case 4:
-          playersPosition[playersOldPosition.playerId - 1].x = playersOldPosition.playerX;
-          playersPosition[playersOldPosition.playerId - 1].y = playersOldPosition.playerY;
-            this.setState({
-              players: playersPosition,
-              actionNumber: 0
-            });
-      break;
+        playersPosition[playersOldPosition.playerId - 1].x =
+          playersOldPosition.playerX;
+        playersPosition[playersOldPosition.playerId - 1].y =
+          playersOldPosition.playerY;
+        this.setState({
+          players: playersPosition,
+          actionNumber: 0
+        });
+        break;
     }
   }
 
-  handleUpdateArrowsPosition(itemArray) {
+  handleUpdateArrowsPosition(arrwosArray) {
     this.setState({
-      itemArray: itemArray,
+      arrwosArray: arrwosArray,
       actionNumber: 1
     });
   }
@@ -150,38 +154,37 @@ export default class PlayBook extends Component {
 
   handleUpdateOldPlayersPosition(playersPosition) {
     this.setState({
-      oldPlayerPosition: playersPosition,
+      oldPlayerPosition: playersPosition
     });
   }
-
 
   render() {
     return (
       <div className="PlayBook">
         <Fullscreen
-          enabled={ this.state.isFull }
-          onChange={ isFull => this.setState({ isFull }) }
+          enabled={this.state.isFull}
+          onChange={isFull => this.setState({ isFull })}
         >
           <div className="full-screenable-node d-flex flex-column">
-            <TopToolBar 
-              onHandleStopDrawing={ this.handleStopDrawing }
-              onChangeToFullScreen={ this.handleFullScreen}
-              onHandleStartDrowingArrows={ this.handleStartDrowingArrows } 
-              onhandleUndo={ this.handleUndo }
+            <TopToolBar
+              onHandleStopDrawing={this.handleStopDrawing}
+              onChangeToFullScreen={this.handleFullScreen}
+              onHandleStartDrowingArrows={this.handleStartDrowingArrows}
+              onHandleUndo={this.handleUndo}
             />
-            <DrawerField 
-              stopDrawing={ this.state.isDrawing }
-              startDrawingArrows={ this.state.isDrawingArrows }
-              startDrawingArrowsDashed={ this.state.dashed }
-              onHandleUpdateArrowsPosition={ this.handleUpdateArrowsPosition }
-              itemArray={ this.state.itemArray }
-              ballPosition={ this.state.ballPosition }
-              onhandleUpdateBallPosition={ this.handleUpdateBallPosition }
-              onHandleUpdateOldPlayersPosition={ this.handleUpdateOldPlayersPosition }
-              onHandleUpdateEnemyPlayersPosition={ this.handleUpdateEnemyPlayersPosition }
-              onHandleUpdatePlayersPosition={ this.handleUpdatePlayersPosition }
-              players={ this.state.players }
-              enemyPlayers={ this.state.enemyPlayers }
+            <DrawerField
+              stopDrawing={this.state.isDrawing}
+              startDrawingArrows={this.state.isDrawingArrows}
+              startDrawingArrowsDashed={this.state.dashed}
+              arrwosArray={this.state.arrwosArray}
+              players={this.state.players}
+              enemyPlayers={this.state.enemyPlayers}
+              ballPosition={this.state.ballPosition}
+              onHandleUpdateArrowsPosition={this.handleUpdateArrowsPosition}
+              onHandleUpdateBallPosition={this.handleUpdateBallPosition}
+              onHandleUpdateOldPlayersPosition={this.handleUpdateOldPlayersPosition}
+              onHandleUpdateEnemyPlayersPosition={this.handleUpdateEnemyPlayersPosition}
+              onHandleUpdatePlayersPosition={this.handleUpdatePlayersPosition}
             />
           </div>
         </Fullscreen>
