@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import Fullscreen from "react-full-screen";
 import TopToolBar from "../components/TopToolBar";
 import DrawerField from "../components/DrawerField";
+import axios from "axios";
 
 export default class PlayBook extends Component {
   constructor(props) {
@@ -17,6 +18,9 @@ export default class PlayBook extends Component {
       isDrawing: true,
       isDrawingArrows: false,
       dashed: false,
+      saved: false,
+      name: "",
+      imageData: [],
       arrwosArray: [],
       ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
@@ -26,12 +30,25 @@ export default class PlayBook extends Component {
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStopDrawing = this.handleStopDrawing.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
+    this.handleSave = this.handleSave.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
-    this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(this);
+    this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(
+      this
+    );
     this.handleUpdateBallPosition = this.handleUpdateBallPosition.bind(this);
-    this.handleUpdateEnemyPlayersPosition = this.handleUpdateEnemyPlayersPosition.bind(this);
-    this.handleUpdateOldPlayersPosition = this.handleUpdateOldPlayersPosition.bind(this);
-    this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(this);
+    this.handleUpdateEnemyPlayersPosition = this.handleUpdateEnemyPlayersPosition.bind(
+      this
+    );
+    this.handleUpdateOldPlayersPosition = this.handleUpdateOldPlayersPosition.bind(
+      this
+    );
+    this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(
+      this
+    );
+
+    //Zapis zagrywki
+    this.setImageData = this.setImageData.bind(this);
+    this.changeName = this.changeName.bind(this);
   }
 
   addPlayersToInitialList(playerNumber, team) {
@@ -59,14 +76,65 @@ export default class PlayBook extends Component {
     return playerList;
   }
 
+  //---------------------------
+  //Zapis zagrywki
+  //---------------------------
+  changeName(newName) {
+    this.setState({ name: newName });
+  }
+
+  setImageData(newImageData) {
+    this.setState({ imageData: newImageData });
+  }
+
+  handleSave() {
+    var canvas = document.createElement("canvas");
+    var context = canvas.getContext("2d");
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+    var radius = 70;
+
+    context.beginPath();
+    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    context.fillStyle = "green";
+    context.fill();
+    context.lineWidth = 5;
+    context.strokeStyle = "#003300";
+    context.stroke();
+
+    console.log("Save Image Started!");
+
+    const data = canvas.toDataURL();
+
+    axios
+      .post(
+        "/play_books.json",
+        { play_book: { name: this.state.name, data_uri: data } },
+        {
+          headers: {
+            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+              .content
+          }
+        }
+      )
+      .then(() => {
+        this.props.fetchPosts();
+      });
+
+    this.setState({
+      saved: true
+    });
+  }
+  //---------------------------
+  //Koniec zapisu zagrywki
+  //---------------------------
+
   handleFullScreen() {
     this.setState({ isFull: true });
   }
 
   handleStopDrawing() {
-    this.setState(previousState => ({
-      isDrawing: !previousState.isDrawing
-    }));
+    this.setState(previousState => ({ isDrawing: !previousState.isDrawing }));
   }
 
   handleStartDrowingArrows(dashed) {
@@ -170,6 +238,8 @@ export default class PlayBook extends Component {
               onHandleStopDrawing={this.handleStopDrawing}
               onChangeToFullScreen={this.handleFullScreen}
               onHandleStartDrowingArrows={this.handleStartDrowingArrows}
+              onHandleSave={this.handleSave}
+              onChangeName={this.changeName}
               onHandleUndo={this.handleUndo}
             />
             <DrawerField
@@ -182,8 +252,12 @@ export default class PlayBook extends Component {
               ballPosition={this.state.ballPosition}
               onHandleUpdateArrowsPosition={this.handleUpdateArrowsPosition}
               onHandleUpdateBallPosition={this.handleUpdateBallPosition}
-              onHandleUpdateOldPlayersPosition={this.handleUpdateOldPlayersPosition}
-              onHandleUpdateEnemyPlayersPosition={this.handleUpdateEnemyPlayersPosition}
+              onHandleUpdateOldPlayersPosition={
+                this.handleUpdateOldPlayersPosition
+              }
+              onHandleUpdateEnemyPlayersPosition={
+                this.handleUpdateEnemyPlayersPosition
+              }
               onHandleUpdatePlayersPosition={this.handleUpdatePlayersPosition}
             />
           </div>

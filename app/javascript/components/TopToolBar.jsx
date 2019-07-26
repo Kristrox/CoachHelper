@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import InputName from "../components/InputName";
 
 export default class TopToolBar extends Component {
   constructor(props) {
@@ -7,9 +8,15 @@ export default class TopToolBar extends Component {
       drawing: true,
       drawingArrow: false
     };
+    this.handleStopDrawing = this.handleStopDrawing.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
-  handleStopDrawing = () => {
+  handleSave = e => {
+    this.props.onHandleSave();
+  };
+
+  handleStopDrawing = e => {
     this.props.onHandleStopDrawing();
     this.setState({
       drawing: this.state.drawing ? false : true
@@ -33,6 +40,13 @@ export default class TopToolBar extends Component {
   render() {
     return (
       <div className="TopToolBar d-flex justify-content-end">
+        <InputName />
+        <button
+          className="TopToolBar btn btn-success"
+          onClick={this.handleSave}
+        >
+          Save To Play Book
+        </button>
         <button
           className="TopToolBar btn btn-success"
           onClick={this.handleStopDrawing}

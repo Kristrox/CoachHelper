@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { Stage, Layer } from "react-konva";
+import { Stage, Layer, Image } from "react-konva";
+import useImage from "use-image";
 import Drawing from "./Drawing";
 import Drag from "../components/DragAndDropOnField.jsx";
 import PlayerChoice from "./PlayerChoice";
 import CustomArrow from "./CustomArrow";
+import field from "./field.png";
+
+const FootballFiledImage = () => {
+  console.log(field);
+  const [image] = useImage(field);
+  return <Image image={image} />;
+};
 
 export default class DrawerField extends Component {
   constructor(props) {
@@ -13,6 +21,8 @@ export default class DrawerField extends Component {
       arrowStartPos: { x: 0, y: 0 },
       arrowEndPos: { x: 0, y: 0 },
       countClick: 0,
+      itemArray: [],
+      imgData: null
     };
   }
 
@@ -22,12 +32,7 @@ export default class DrawerField extends Component {
   }
 
   handleDrawingArrows = localPos => {
-    this.setState({
-      fill: "red",
-      stroke: "red"
-    });
-
-    const arrows = this.props.arrwosArray;
+    const item = this.state.itemArray;
     let dashed = [0, 0];
     this.setState({
       dashed: dashed
@@ -75,6 +80,10 @@ export default class DrawerField extends Component {
     });
   };
 
+  handleExportClick = () => {
+    console.log(this.stageRef.getStage().toDataURL());
+  };
+
   componentWillUnmount() {
     window.removeEventListener("resize", this.checkSize);
   }
@@ -98,8 +107,17 @@ export default class DrawerField extends Component {
             this.container = node;
           }}
         >
-          <div className="DrawAreaBg">
-            <Stage width={this.state.stageWidth} height={window.innerHeight}>
+          <div className="DrrawAreaBg">
+            <Stage
+              width={this.state.stageWidth}
+              height={window.innerHeight}
+              ref={node => {
+                this.stageRef = node;
+              }}
+            >
+              <Layer>
+                <FootballFiledImage />
+              </Layer>
               <Layer>
                 <Drag
                   playerNumber={this.state.playerNumber}
@@ -108,10 +126,18 @@ export default class DrawerField extends Component {
                   ballPosition={this.props.ballPosition}
                   players={this.props.players}
                   enemyPlayers={this.props.enemyPlayers}
-                  onHandleUpdateBallPosition={this.props.onHandleUpdateBallPosition}
-                  onHandleUpdateOldPlayersPosition={this.props.onHandleUpdateOldPlayersPosition}
-                  onHandleUpdateEnemyPlayersPosition={this.props.onHandleUpdateEnemyPlayersPosition}
-                  onHandleUpdatePlayersPosition={this.props.onHandleUpdatePlayersPosition}
+                  onHandleUpdateBallPosition={
+                    this.props.onHandleUpdateBallPosition
+                  }
+                  onHandleUpdateOldPlayersPosition={
+                    this.props.onHandleUpdateOldPlayersPosition
+                  }
+                  onHandleUpdateEnemyPlayersPosition={
+                    this.props.onHandleUpdateEnemyPlayersPosition
+                  }
+                  onHandleUpdatePlayersPosition={
+                    this.props.onHandleUpdatePlayersPosition
+                  }
                 />
               </Layer>
               <Layer>
@@ -145,6 +171,12 @@ export default class DrawerField extends Component {
                 })}
               </Layer>
             </Stage>
+            <button
+              style={{ position: "absolute", top: "0" }}
+              onClick={this.handleExportClick}
+            >
+              Export stage
+            </button>
           </div>
         </div>
       </>
