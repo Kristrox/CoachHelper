@@ -9,7 +9,6 @@
       %td
       %td
       %td
-      %td
     - @events.each do |event|
       %tr
         %td
@@ -17,13 +16,11 @@
         %td
           = event.opponent.capitalize
         %td
-          Tutaj bedzie taktyka i squad
-        %td
           %button.btn.btn-primary{"data-target" => "#editDataAfterMatchModal", "data-toggle" => "modal", :type => "button"}
             Check players
         %td
           %button.btn.btn-outline-primary.btn-sm
-            = link_to 'Edit', edit_player_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
+            = link_to 'Add player', edit_player_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
         %td
           %button.btn.btn-outline-primary.btn-sm
             = link_to 'Edit', edit_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
@@ -44,21 +41,20 @@
               .card
                 #headingTwo.card-header
                   %h5.mb-0
-                    %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{player.name}", "data-toggle" => "collapse"}
+                    %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{player.id}", "data-toggle" => "collapse"}
                       %tr
+                        %td= event.opponent.capitalize
                         %td= player.name
-              .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{player.name}"}
+                        %td= player.surname
+              .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{player.id}"}
                 .card-body
-                  %tr
-                    %td
-                      %h4 Yellow cards: #{player.yellow_cards}    Red cards: #{player.red_cards}
+                  %td
+                    %h4 Yellow cards: #{player.yellow_cards}    Red cards: #{player.red_cards}
                     %h5 Edit player data                                        
                     = bootstrap_form_for player do |f|
                       .field.align-middle  
                         %tr
                           %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
                           %td=f.select :red_cards, [ 0, 1 ], :prompt => 'Select One'
-                          = f.submit "Update"
-          - @events.each do |post|
-            %p= post.user.email       
+                          = f.submit "Update"   
         .modal-footer

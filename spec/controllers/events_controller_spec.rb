@@ -84,7 +84,7 @@ RSpec.describe EventsController, type: :controller do
 
     context 'valid attributes' do
       subject { put :update, params: valid_attributes }
-      it { expect(subject).to redirect_to(event_url) }
+      it { expect(subject).to redirect_to(events_url) }
 
       it 'redirect with notice' do
         subject
