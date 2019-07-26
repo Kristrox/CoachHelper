@@ -19,7 +19,7 @@ export default class PlayBook extends Component {
       dashed: false,
       saved: false,
       name: "",
-      imageData
+      imageData: []
     };
 
     this.handleFullScreen = this.handleFullScreen.bind(this);

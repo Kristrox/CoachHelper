@@ -22,7 +22,7 @@ export default class DrawerField extends Component {
       arrowEndPos: { x: 0, y: 0 },
       countClick: 0,
       itemArray: [],
-      imgData: 
+      imgData: null
     };
   }
 
