@@ -8,7 +8,6 @@ import CustomArrow from "./CustomArrow";
 import field from "./field.png";
 
 const FootballFiledImage = () => {
-  console.log(field);
   const [image] = useImage(field);
   return <Image image={image} />;
 };
@@ -151,6 +150,9 @@ export default class DrawerField extends Component {
                   stopDrawing={this.props.stopDrawing}
                   startDrawingArrows={this.props.startDrawingArrows}
                   onHandleDrawingArrows={this.handleDrawingArrows}
+                  onHandleUpdateOldCanvas={this.props.onHandleUpdateOldCanvas}
+                  canvas={this.props.canvas}
+                  context={this.props.context}
                 />
               </Layer>
               <Layer>

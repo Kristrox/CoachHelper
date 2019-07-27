@@ -1,22 +1,28 @@
 import React, { Component } from "react";
-import { Image } from "react-konva";
+import { Image as ImageKonva } from "react-konva";
 
 export default class Drawing extends Component {
   constructor(props) {
     super(props);
-    const canvas = document.createElement("canvas");
-    const canvasWidth = 800;
-    const canvasHeight = 600;
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
     this.state = {
       isDrawing: false,
-      canvas: canvas,
-      context: canvas.getContext("2d")
+      cPushArray: []
     };
   }
 
   handleMouseDown = ({ evt }) => {
+    // const canv = this.state.canvas.toDataURL();
+    // let item = this.state.cPushArray;
+    // item.push(canv)
+    // this.setState({
+    //   cPushArray: item
+    // })
+    // let canv = this.props.canvas.cloneNode(true)
+    // let con = this.props.context.cloneNode(true);
+    // console.log(con)
+    ingData
+    const canv = this.props.canvas.toDataURL();
+    this.props.onHandleUpdateOldCanvas(canv);
     this.setState({ isDrawing: true });
     const stage = this.image.parent.parent;
     this.lastPointerPosition = stage.getPointerPosition();
@@ -37,7 +43,8 @@ export default class Drawing extends Component {
   };
 
   handleMouseMove = () => {
-    const { context, isDrawing } = this.state;
+    const { isDrawing } = this.state;
+    const { context } = this.props;
 
     if (isDrawing) {
       context.strokeStyle = "red";
@@ -74,10 +81,16 @@ export default class Drawing extends Component {
   };
 
   render() {
-    const { canvas } = this.state;
+    // const canvasPic = new Image();
+    // const canv = this.state.canvas.toDataURL();
+    // canvasPic.src = canv;
+    const { canvas } = this.props;
+    // console.log(canvas)
+    // console.log(this.state.context.drawImage(canvasPic, 0, 0))
+    // canvas = this.state.context.drawImage(canvasPic, 0, 0);
 
     return (
-      <Image
+      <ImageKonva
         image={canvas}
         ref={node => (this.image = node)}
         width={this.props.width}
