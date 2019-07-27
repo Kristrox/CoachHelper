@@ -19,7 +19,7 @@ export default class DrawerField extends Component {
       arrowStartPos: { x: 0, y: 0 },
       arrowEndPos: { x: 0, y: 0 },
       countClick: 0,
-      lines: [],
+      lines: this.props.lines,
       isDrawing: false
     };
   }
@@ -48,12 +48,13 @@ export default class DrawerField extends Component {
     if (this.state.isDrawing) {
     const stage = this.stageRef.getStage();
     const point = stage.getPointerPosition();
-    const { lines } = this.state;
+    const lines = this.state.lines;
 
     let lastLine = lines[lines.length - 1];
     lastLine = lastLine.concat([point.x, point.y]);
 
     lines.splice(lines.length - 1, 1, lastLine);
+    this.state.lines.concat()
     this.setState({
       lines: lines.concat()
     });
@@ -62,6 +63,7 @@ export default class DrawerField extends Component {
 
   handleMouseUp = () => {
     this.setState({ isDrawing: false });
+    this.props.onHandleUpdateLines(this.state.lines);
   };
 
   componentDidMount() {

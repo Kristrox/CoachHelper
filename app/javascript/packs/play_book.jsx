@@ -11,16 +11,7 @@ import axios from "axios";
 export default class PlayBook extends Component {
   constructor(props) {
     super(props);
-
-    const canvas = document.createElement("canvas");
-    const canvasWidth = 800;
-    const canvasHeight = 600;
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-
     this.state = {
-      canvas: canvas,
-      context: canvas.getContext("2d"),
       actionNumber: 0,
       isFull: false,
       isDrawingArrows: false,
@@ -29,7 +20,7 @@ export default class PlayBook extends Component {
       name: "",
       imageData: [],
       arrwosArray: [],
-      oldCanvas: null,
+      lines: [],
       ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
       enemyPlayers: this.addPlayersToInitialList(18, "enemy")
@@ -44,7 +35,7 @@ export default class PlayBook extends Component {
     this.handleUpdateEnemyPlayersPosition = this.handleUpdateEnemyPlayersPosition.bind(this);
     this.handleUpdateOldPlayersPosition = this.handleUpdateOldPlayersPosition.bind(this);
     this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(this);
-    this.handleUpdateOldCanvas = this.handleUpdateOldCanvas.bind(this);
+    this.handleUpdateLines = this.handleUpdateLines.bind(this);
 
     //Zapis zagrywki
     this.setImageData = this.setImageData.bind(this);
@@ -186,20 +177,12 @@ export default class PlayBook extends Component {
         break;
 
       case 5:
-        // let canvasPic = new Image();
-        // canvasPic.onload = function() {
-        //   this.state.context.drawImage(canvasPic, 0, 0);
-        // }
-        // canvasPic.src = this.state.oldCanvas;
-        // canvasPic = this.state.context.drawImage(canvasPic, 0, 0);
-
-       console.log(this.state.oldCanvas)
-    // console.log(this.state.context.drawImage(canvasPic, 0, 0))
-    // canvas = this.state.context.drawImage(canvasPic, 0, 0)
+        const lines = this.state.lines;
+        lines.pop();
         this.setState({
-          canvas: this.state.oldCanvas,
-          context: this.state.oldCanvas.getContext("2d")
-        })
+          lines: lines,
+          actionNumber: 0
+        });
         break;
     }
   }
@@ -232,11 +215,11 @@ export default class PlayBook extends Component {
     });
   }
 
-  handleUpdateOldCanvas(oldCanvas) {
+  handleUpdateLines(lines) {
     this.setState({
-      oldCanvas: oldCanvas,
+      lines: lines,
       actionNumber: 5
-    });
+    })
   }
 
   handleUpdateOldPlayersPosition(playersPosition) {
@@ -265,16 +248,15 @@ export default class PlayBook extends Component {
               startDrawingArrowsDashed={this.state.dashed}
               arrwosArray={this.state.arrwosArray}
               players={this.state.players}
+              lines={this.state.lines}
               enemyPlayers={this.state.enemyPlayers}
               ballPosition={this.state.ballPosition}
-              canvas={this.state.canvas}
-              context={this.state.context}
               onHandleUpdateArrowsPosition={this.handleUpdateArrowsPosition}
               onHandleUpdateBallPosition={this.handleUpdateBallPosition}
               onHandleUpdateOldPlayersPosition={this.handleUpdateOldPlayersPosition}
               onHandleUpdateEnemyPlayersPosition={this.handleUpdateEnemyPlayersPosition}
               onHandleUpdatePlayersPosition={this.handleUpdatePlayersPosition}
-              onHandleUpdateOldCanvas={this.handleUpdateOldCanvas}
+              onHandleUpdateLines={this.handleUpdateLines}
             />
           </div>
         </Fullscreen>
