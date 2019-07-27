@@ -143,6 +143,7 @@ export default class PlayBook extends Component {
           arrwosArray: arrows,
           actionNumber: 0
         });
+        console.log(this.state.arrwosArray)
         break;
 
       case 2:
@@ -192,6 +193,7 @@ export default class PlayBook extends Component {
       arrwosArray: arrwosArray,
       actionNumber: 1
     });
+    console.log(this.state.actionNumber)
   }
 
   handleUpdateBallPosition(ballPosition) {

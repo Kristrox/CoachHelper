@@ -63,7 +63,9 @@ export default class DrawerField extends Component {
 
   handleMouseUp = () => {
     this.setState({ isDrawing: false });
-    this.props.onHandleUpdateLines(this.state.lines);
+    if (this.props.startDrawingArrows === false) {
+      this.props.onHandleUpdateLines(this.state.lines);
+    };
   };
 
   componentDidMount() {
