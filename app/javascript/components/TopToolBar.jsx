@@ -5,22 +5,13 @@ export default class TopToolBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      drawing: true,
       drawingArrow: false
     };
-    this.handleStopDrawing = this.handleStopDrawing.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
   handleSave = e => {
     this.props.onHandleSave();
-  };
-
-  handleStopDrawing = e => {
-    this.props.onHandleStopDrawing();
-    this.setState({
-      drawing: this.state.drawing ? false : true
-    });
   };
 
   handleDrawArrow = () => {
@@ -46,12 +37,6 @@ export default class TopToolBar extends Component {
           onClick={this.handleSave}
         >
           Save To Play Book
-        </button>
-        <button
-          className="TopToolBar btn btn-success"
-          onClick={this.handleStopDrawing}
-        >
-          {this.state.drawing ? "Stop drawing" : "Start drawing"}
         </button>
         <button
           className="TopToolBar btn btn-success"

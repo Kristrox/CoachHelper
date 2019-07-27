@@ -23,7 +23,6 @@ export default class PlayBook extends Component {
       context: canvas.getContext("2d"),
       actionNumber: 0,
       isFull: false,
-      isDrawing: true,
       isDrawingArrows: false,
       dashed: false,
       saved: false,
@@ -37,7 +36,6 @@ export default class PlayBook extends Component {
     };
 
     this.handleFullScreen = this.handleFullScreen.bind(this);
-    this.handleStopDrawing = this.handleStopDrawing.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
@@ -132,10 +130,6 @@ export default class PlayBook extends Component {
 
   handleFullScreen() {
     this.setState({ isFull: true });
-  }
-
-  handleStopDrawing() {
-    this.setState(previousState => ({ isDrawing: !previousState.isDrawing }));
   }
 
   handleStartDrowingArrows(dashed) {
@@ -260,7 +254,6 @@ export default class PlayBook extends Component {
         >
           <div className="full-screenable-node d-flex flex-column">
             <TopToolBar
-              onHandleStopDrawing={this.handleStopDrawing}
               onChangeToFullScreen={this.handleFullScreen}
               onHandleStartDrowingArrows={this.handleStartDrowingArrows}
               onHandleSave={this.handleSave}
@@ -268,7 +261,6 @@ export default class PlayBook extends Component {
               onHandleUndo={this.handleUndo}
             />
             <DrawerField
-              stopDrawing={this.state.isDrawing}
               startDrawingArrows={this.state.isDrawingArrows}
               startDrawingArrowsDashed={this.state.dashed}
               arrwosArray={this.state.arrwosArray}

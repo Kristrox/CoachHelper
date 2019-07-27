@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Stage, Layer, Image } from "react-konva";
+import { Stage, Layer, Image, Line } from "react-konva";
 import useImage from "use-image";
-import Drawing from "./Drawing";
 import Drag from "../components/DragAndDropOnField.jsx";
 import PlayerChoice from "./PlayerChoice";
 import CustomArrow from "./CustomArrow";
@@ -20,8 +19,50 @@ export default class DrawerField extends Component {
       arrowStartPos: { x: 0, y: 0 },
       arrowEndPos: { x: 0, y: 0 },
       countClick: 0,
+      lines: [],
+      isDrawing: false
     };
   }
+
+
+  handleMouseDown = () => {
+    this.setState({isDrawing: true})
+    this.setState({
+      lines: [...this.state.lines, []]
+    });
+
+    const stage = this.stageRef.getStage();
+    const point = stage.getPointerPosition();
+
+    if (this.props.startDrawingArrows === true) {
+        let localPos = {
+        x: point.x,
+        y: point.y
+      };
+      this.handleDrawingArrows(localPos);
+      this.setState({ isDrawing: false });
+    }
+  };
+
+  handleMouseMove = () => {
+    if (this.state.isDrawing) {
+    const stage = this.stageRef.getStage();
+    const point = stage.getPointerPosition();
+    const { lines } = this.state;
+
+    let lastLine = lines[lines.length - 1];
+    lastLine = lastLine.concat([point.x, point.y]);
+
+    lines.splice(lines.length - 1, 1, lastLine);
+    this.setState({
+      lines: lines.concat()
+    });
+    }
+  };
+
+  handleMouseUp = () => {
+    this.setState({ isDrawing: false });
+  };
 
   componentDidMount() {
     this.checkSize();
@@ -114,6 +155,10 @@ export default class DrawerField extends Component {
             <Stage
               width={this.state.stageWidth}
               height={window.innerHeight}
+              onContentMousedown={this.handleMouseDown}
+              onContentMousemove={this.handleMouseMove}
+              onContentMouseup={this.handleMouseUp}
+              listening={this.props.stopDrawing}
               ref={node => {
                 this.stageRef = node;
               }}
@@ -144,16 +189,9 @@ export default class DrawerField extends Component {
                 />
               </Layer>
               <Layer>
-                <Drawing
-                  width={this.state.stageWidth}
-                  height={window.innerHeight}
-                  stopDrawing={this.props.stopDrawing}
-                  startDrawingArrows={this.props.startDrawingArrows}
-                  onHandleDrawingArrows={this.handleDrawingArrows}
-                  onHandleUpdateOldCanvas={this.props.onHandleUpdateOldCanvas}
-                  canvas={this.props.canvas}
-                  context={this.props.context}
-                />
+                {this.state.lines.map((line, i) => (
+                  <Line key={i} points={line} stroke="red" strokeWidth={5}/>
+                ))}
               </Layer>
               <Layer>
                 <CustomArrow
