@@ -12,10 +12,16 @@ export default class TopToolBar extends Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
+  //---------------------------
+  //Zapis zagrywki
+  //---------------------------
   handleSave = e => {
     this.props.onHandleSave();
   };
 
+  //---------------------------
+  //Koniec zapisu zagrywki
+  //---------------------------
   handleStopDrawing = e => {
     this.props.onHandleStopDrawing();
     this.setState({
@@ -40,10 +46,13 @@ export default class TopToolBar extends Component {
   render() {
     return (
       <div className="TopToolBar d-flex justify-content-end">
-        <InputName />
+        <InputName
+          name={this.props.name}
+          onChangeName={this.props.onChangeName}
+        />
         <button
           className="TopToolBar btn btn-success"
-          onClick={this.handleSave}
+          onClick={this.props.onHandleSave}
         >
           Save To Play Book
         </button>

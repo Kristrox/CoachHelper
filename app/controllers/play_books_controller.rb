@@ -1,5 +1,7 @@
 class PlayBooksController < ApplicationController
-  def new; end
+  def new; 
+
+  end
 
   def create 
     @play_book = PlayBook.new({ name: play_book_params[:name] })
@@ -21,10 +23,16 @@ class PlayBooksController < ApplicationController
     end
     
   end
-
+  def show 
+    @play_book = PlayBook.find(play_book_permit_id[:id])
+  end
   private
 
   def play_book_params
-    params.require(:play_book).permit(:name, :data_uri)
+    params.require(:play_book).permit(:name, :data_uri, :id)
+  end
+
+  def play_book_permit_id
+    params.permit(:id)
   end
 end
