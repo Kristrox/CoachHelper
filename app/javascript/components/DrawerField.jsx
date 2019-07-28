@@ -150,15 +150,14 @@ export default class DrawerField extends Component {
       <>
         <PlayerChoice onClickChange={this.handleClick} />
         <div
-          className="DrawArea"
+          className="DrawArea d-flex justify-content-center"
           ref={node => {
             this.container = node;
           }}
         >
-          <div className="DrrawAreaBg">
             <Stage
-              width={this.state.stageWidth}
-              height={window.innerHeight}
+              width={907}
+              height={750}
               onContentMousedown={this.handleMouseDown}
               onContentMousemove={this.handleMouseMove}
               onContentMouseup={this.handleMouseUp}
@@ -232,7 +231,6 @@ export default class DrawerField extends Component {
             >
               Export stage
             </button>
-          </div>
         </div>
       </>
     );

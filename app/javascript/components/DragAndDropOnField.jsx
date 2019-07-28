@@ -47,7 +47,14 @@ export default class DragAndDropOnField extends Component {
         }}
       >
         <EnemyTshirt/>
-        <Text x={12} y={10} text={player.id} fontSize={20} />
+        <Text
+          x={player.id < 10 ? 23 : 17}
+          y={12}
+          text={player.id}
+          fontSize={20}
+          fill="white"
+          fontStyle="bold"
+        />
       </Group>
     ));
     return listPlayers;
@@ -94,10 +101,12 @@ export default class DragAndDropOnField extends Component {
           <TeamTshirt key={player.id + "a"} />
           <Text
             key={player.id + "b"}
-            x={12}
-            y={10}
+            x={player.id < 10 ? 23 : 17}
+            y={12}
             text={player.id}
             fontSize={20}
+            fill="white"
+            fontStyle="bold"
           />
         </Group>
       ));
