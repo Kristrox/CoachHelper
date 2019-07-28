@@ -15,7 +15,7 @@ export default class PlayBook extends Component {
       actionNumber: 0,
       isFull: false,
       isDrawingArrows: false,
-      dashed: false,
+      dashed: null,
       saved: false,
       name: "",
       imageData: [],
@@ -124,10 +124,16 @@ export default class PlayBook extends Component {
   }
 
   handleStartDrowingArrows(dashed) {
-    this.setState(previousState => ({
-      isDrawingArrows: !previousState.isDrawingArrows,
-      dashed: dashed
-    }));
+    if (this.state.dashed === dashed) {
+      this.setState(previousState => ({
+        isDrawingArrows: !previousState.isDrawingArrows,
+      }))
+    } else {
+      this.setState({
+        isDrawingArrows: true,
+        dashed: dashed
+      })
+    }
   }
 
   handleUndo() {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, Group, Image } from "react-konva";
-import tshirt from "./tshirt.png"
-import tshirto from "./tshirto.png"
+import tshirt from "./images/tshirt.png"
+import tshirto from "./images/tshirto.png"
 import useImage from "use-image";
 
 const EnemyTshirt = (props) => {
@@ -19,7 +19,6 @@ export default class DragAndDropOnField extends Component {
     enemiesOnField: [{ x: 180, y: 20, id: 0 }],
     playersOnField: [{ x: 100, y: 20, id: 0 }],
     playerNumber: 0,
-    ballisDragging: false
   };
 
   renderEnemies = () => {
@@ -30,9 +29,8 @@ export default class DragAndDropOnField extends Component {
         x={player.x}
         y={player.y}
         onDragStart={() => {
-          this.props.onHandleUpdateEnemyPlayersPosition(
-            this.props.enemyPlayers
-          );
+          this.props.onHandleUpdateEnemyPlayersPosition(this.props.enemyPlayers);
+          this.props.onHandleDraging(true);
         }}
         onDragEnd={e => {
           const x = this.props.enemyPlayers[player.id - 1].x;
@@ -44,6 +42,7 @@ export default class DragAndDropOnField extends Component {
             this.props.enemyPlayers
           );
           this.props.onHandleUpdateOldPlayersPosition(oldPosition);
+          this.props.onHandleDraging(false);
         }}
       >
         <EnemyTshirt/>
@@ -87,6 +86,7 @@ export default class DragAndDropOnField extends Component {
           y={player.y}
           onDragStart={e => {
             this.props.onHandleUpdatePlayersPosition(this.props.players);
+            this.props.onHandleDraging(true);
           }}
           onDragEnd={e => {
             const x = this.props.players[player.id - 1].x;
@@ -96,6 +96,7 @@ export default class DragAndDropOnField extends Component {
             this.props.players[player.id - 1].y = e.target.y();
             this.props.onHandleUpdatePlayersPosition(this.props.players);
             this.props.onHandleUpdateOldPlayersPosition(oldPosition);
+            this.props.onHandleDraging(false);
           }}
         >
           <TeamTshirt key={player.id + "a"} />
@@ -141,6 +142,7 @@ export default class DragAndDropOnField extends Component {
           draggable
           onDragStart={() => {
             this.props.onHandleUpdateBallPosition(this.props.ballPosition);
+            this.props.onHandleDraging(true);
           }}
           onDragEnd={e => {
             const newPosition = { ballX: e.target.x(), ballY: e.target.y() };
@@ -149,6 +151,7 @@ export default class DragAndDropOnField extends Component {
               ballY: this.props.ballPosition[0].ballY
             };
             this.props.onHandleUpdateBallPosition([newPosition, oldPosition]);
+            this.props.onHandleDraging(false);
           }}
         />
       </>

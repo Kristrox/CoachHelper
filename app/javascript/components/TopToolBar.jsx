@@ -4,28 +4,11 @@ import InputName from "../components/InputName";
 export default class TopToolBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      drawingArrow: false
-    };
     this.handleSave = this.handleSave.bind(this);
   }
 
   handleSave = e => {
     this.props.onHandleSave();
-  };
-
-  handleDrawArrow = () => {
-    this.props.onHandleStartDrowingArrows(false);
-    this.setState({
-      drawingArrow: this.state.drawingArrow ? false : true
-    });
-  };
-
-  handleDrawDashArrow = () => {
-    this.props.onHandleStartDrowingArrows(true);
-    this.setState({
-      drawingArrow: this.state.drawingArrow ? false : true
-    });
   };
 
   render() {
@@ -40,13 +23,13 @@ export default class TopToolBar extends Component {
         </button>
         <button
           className="TopToolBar btn btn-success"
-          onClick={this.handleDrawArrow}
+          onClick={() => this.props.onHandleStartDrowingArrows(false)}
         >
           Arrows
         </button>
         <button
           className="TopToolBar btn btn-success"
-          onClick={this.handleDrawDashArrow}
+          onClick={() =>  this.props.onHandleStartDrowingArrows(true)}
         >
           Dashed Arrows
         </button>

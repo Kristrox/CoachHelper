@@ -4,7 +4,7 @@ import useImage from "use-image";
 import Drag from "../components/DragAndDropOnField.jsx";
 import PlayerChoice from "./PlayerChoice";
 import CustomArrow from "./CustomArrow";
-import field from "./field.png";
+import field from "./images/field.png";
 
 const FootballFiledImage = () => {
   const [image] = useImage(field);
@@ -20,13 +20,18 @@ export default class DrawerField extends Component {
       arrowEndPos: { x: 0, y: 0 },
       countClick: 0,
       lines: this.props.lines,
-      isDrawing: false
+      isDrawing: false,
+      isDraging: false
     };
+  }
+
+  handleDraging = (isDraging) => {
+    this.setState({isDraging: isDraging})
   }
 
 
   handleMouseDown = () => {
-    this.setState({isDrawing: true})
+    this.setState({isDrawing: this.state.isDraging ? false : true})
     this.setState({
       lines: [...this.state.lines, []]
     });
@@ -177,18 +182,11 @@ export default class DrawerField extends Component {
                   ballPosition={this.props.ballPosition}
                   players={this.props.players}
                   enemyPlayers={this.props.enemyPlayers}
-                  onHandleUpdateBallPosition={
-                    this.props.onHandleUpdateBallPosition
-                  }
-                  onHandleUpdateOldPlayersPosition={
-                    this.props.onHandleUpdateOldPlayersPosition
-                  }
-                  onHandleUpdateEnemyPlayersPosition={
-                    this.props.onHandleUpdateEnemyPlayersPosition
-                  }
-                  onHandleUpdatePlayersPosition={
-                    this.props.onHandleUpdatePlayersPosition
-                  }
+                  onHandleUpdateBallPosition={this.props.onHandleUpdateBallPosition}
+                  onHandleUpdateOldPlayersPosition={this.props.onHandleUpdateOldPlayersPosition}
+                  onHandleUpdateEnemyPlayersPosition={this.props.onHandleUpdateEnemyPlayersPosition}
+                  onHandleUpdatePlayersPosition={this.props.onHandleUpdatePlayersPosition}
+                  onHandleDraging={this.handleDraging}
                 />
               </Layer>
               <Layer>
