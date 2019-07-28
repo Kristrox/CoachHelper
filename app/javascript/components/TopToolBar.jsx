@@ -5,6 +5,10 @@ export default class TopToolBar extends Component {
   constructor(props) {
     super(props);
     this.handleSave = this.handleSave.bind(this);
+    this.state = {
+      activeDashedArrows: false,
+      activeArrows: false
+    }
   }
 
   handleSave = e => {
@@ -12,6 +16,9 @@ export default class TopToolBar extends Component {
   };
 
   render() {
+    let dashedArrowsClass = this.state.activeDashedArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
+    let arrowsClass = this.state.activeArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
+
     return (
       <div className="TopToolBar d-flex justify-content-end">
         <InputName />
@@ -22,14 +29,26 @@ export default class TopToolBar extends Component {
           Save To Play Book
         </button>
         <button
-          className="TopToolBar btn btn-success"
-          onClick={() => this.props.onHandleStartDrowingArrows(false)}
+          className={arrowsClass}
+          onClick={() => {
+            this.props.onHandleStartDrowingArrows(false)
+            this.setState({
+              activeArrows: !this.state.activeArrows,
+              activeDashedArrows: false
+            })
+          }}
         >
           Arrows
         </button>
         <button
-          className="TopToolBar btn btn-success"
-          onClick={() =>  this.props.onHandleStartDrowingArrows(true)}
+          className={dashedArrowsClass}
+          onClick={() => {
+            this.props.onHandleStartDrowingArrows(true);
+            this.setState({
+              activeDashedArrows: !this.state.activeDashedArrows,
+              activeArrows: false
+            })
+          }}
         >
           Dashed Arrows
         </button>

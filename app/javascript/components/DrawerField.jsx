@@ -8,7 +8,13 @@ import field from "./images/field.png";
 
 const FootballFiledImage = () => {
   const [image] = useImage(field);
-  return <Image image={image} width={907} height={750}/>;
+  return(
+    <Image
+      image={image}
+      width={907}
+      height={750}
+    />
+  );
 };
 
 export default class DrawerField extends Component {
