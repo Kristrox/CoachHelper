@@ -1,5 +1,18 @@
 import React, { Component } from "react";
-import { Text, Group } from "react-konva";
+import { Text, Group, Image } from "react-konva";
+import tshirt from "./tshirt.png"
+import tshirto from "./tshirto.png"
+import useImage from "use-image";
+
+const EnemyTshirt = (props) => {
+  const [image] = useImage(tshirt)
+  return <Image image={image} width={60} height={50} x={props.x} y={props.y}/>
+}
+
+const TeamTshirt = (props) => {
+  const [image] = useImage(tshirto)
+  return <Image image={image} width={60} height={50} x={props.x} y={props.y}/>
+}
 
 export default class DragAndDropOnField extends Component {
   state = {
@@ -33,7 +46,7 @@ export default class DragAndDropOnField extends Component {
           this.props.onHandleUpdateOldPlayersPosition(oldPosition);
         }}
       >
-        <Text text="👚" fontSize={50} />
+        <EnemyTshirt/>
         <Text x={12} y={10} text={player.id} fontSize={20} />
       </Group>
     ));
@@ -78,7 +91,7 @@ export default class DragAndDropOnField extends Component {
             this.props.onHandleUpdateOldPlayersPosition(oldPosition);
           }}
         >
-          <Text key={player.id + "a"} text="👕" fontSize={50} />
+          <TeamTshirt key={player.id + "a"} />
           <Text
             key={player.id + "b"}
             x={12}
@@ -100,11 +113,10 @@ export default class DragAndDropOnField extends Component {
   render() {
     return (
       <>
-        <Text text="👚" x={180} y={20} fontSize={50} />
-
+        <EnemyTshirt x={180} y={20}/>
         {this.renderEnemies()}
 
-        <Text text="👕" x={100} y={20} fontSize={50} />
+        <TeamTshirt x={100} y={20}/>
 
         {this.renderPlayers(
           this.props.players,

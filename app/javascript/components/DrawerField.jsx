@@ -8,7 +8,7 @@ import field from "./field.png";
 
 const FootballFiledImage = () => {
   const [image] = useImage(field);
-  return <Image image={image} />;
+  return <Image image={image} width={907} height={750}/>;
 };
 
 export default class DrawerField extends Component {
@@ -194,7 +194,14 @@ export default class DrawerField extends Component {
               </Layer>
               <Layer>
                 {this.state.lines.map((line, i) => (
-                  <Line key={i} points={line} stroke="red" strokeWidth={5}/>
+                  <Line
+                    key={i}
+                    points={line}
+                    stroke="red"
+                    strokeWidth={5}
+                    lineCap="round"
+                    lineJoin="round"
+                  />
                 ))}
               </Layer>
               <Layer>
