@@ -20,17 +20,24 @@ export default class PlayBook extends Component {
       dashed: false,
       saved: false,
       name: "",
-      imageData: [],
+      imageData: "",
       arrwosArray: [],
       ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
       enemyPlayers: this.addPlayersToInitialList(18, "enemy")
     };
 
+    //---------------------------
+    //Zapis zagrywki
+    //---------------------------
+    this.fieldRef = React.createRef();
+    //---------------------------
+    //Koniec zapisu zagrywki
+    //---------------------------
+
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStopDrawing = this.handleStopDrawing.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
-    this.handleSave = this.handleSave.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
     this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(
       this
@@ -79,52 +86,35 @@ export default class PlayBook extends Component {
   //---------------------------
   //Zapis zagrywki
   //---------------------------
-  changeName(newName) {
+  changeName = newName => {
     this.setState({ name: newName });
-  }
+  };
 
-  setImageData(newImageData) {
-    this.setState({ imageData: newImageData });
-  }
+  setImageData() {}
 
-  handleSave() {
-    var canvas = document.createElement("canvas");
-    var context = canvas.getContext("2d");
-    var centerX = canvas.width / 2;
-    var centerY = canvas.height / 2;
-    var radius = 70;
+  handleSave = () => {
+    let image = this.fieldRef.current.getStage().toDataURL();
+    console.log(this.state.name);
+    console.log(image);
 
-    context.beginPath();
-    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = "green";
-    context.fill();
-    context.lineWidth = 5;
-    context.strokeStyle = "#003300";
-    context.stroke();
-
-    console.log("Save Image Started!");
-
-    const data = canvas.toDataURL();
-
-    axios
-      .post(
-        "/play_books.json",
-        { play_book: { name: this.state.name, data_uri: data } },
-        {
-          headers: {
-            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
-              .content
-          }
+    axios.post(
+      "/play_books.json",
+      { play_book: { name: this.state.name, data_uri: image } },
+      {
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+            .content
         }
-      )
-      .then(() => {
-        this.props.fetchPosts();
-      });
+      }
+    );
+    // .then(() => {
+    //   this.props.fetchPosts();
+    // });
 
     this.setState({
       saved: true
     });
-  }
+  };
   //---------------------------
   //Koniec zapisu zagrywki
   //---------------------------
@@ -241,6 +231,9 @@ export default class PlayBook extends Component {
               onHandleSave={this.handleSave}
               onChangeName={this.changeName}
               onHandleUndo={this.handleUndo}
+              navRef={this.navRef}
+              name={this.state.name}
+              onChangeName={this.changeName}
             />
             <DrawerField
               stopDrawing={this.state.isDrawing}
@@ -259,6 +252,8 @@ export default class PlayBook extends Component {
                 this.handleUpdateEnemyPlayersPosition
               }
               onHandleUpdatePlayersPosition={this.handleUpdatePlayersPosition}
+              onSetImageData={this.setImageData}
+              fieldRef={this.fieldRef}
             />
           </div>
         </Fullscreen>

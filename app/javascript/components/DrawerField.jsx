@@ -7,10 +7,10 @@ import PlayerChoice from "./PlayerChoice";
 import CustomArrow from "./CustomArrow";
 import field from "./field.png";
 
-const FootballFiledImage = () => {
+const FootballFiledImage = props => {
   console.log(field);
   const [image] = useImage(field);
-  return <Image image={image} />;
+  return <Image image={image} width={907} height={750} />;
 };
 
 export default class DrawerField extends Component {
@@ -74,14 +74,20 @@ export default class DrawerField extends Component {
     }
   };
 
+  setImageData(newImageData) {
+    this.props.onSetImageData(newImageData);
+  }
+
+  onChange() {
+    image => {
+      this.props.onSetImageData();
+    };
+  }
+
   handleClick = playerNumber => {
     this.setState({
       playerNumber: playerNumber
     });
-  };
-
-  handleExportClick = () => {
-    console.log(this.stageRef.getStage().toDataURL());
   };
 
   componentWillUnmount() {
@@ -108,37 +114,9 @@ export default class DrawerField extends Component {
           }}
         >
           <div className="DrrawAreaBg">
-            <Stage
-              width={this.state.stageWidth}
-              height={window.innerHeight}
-              ref={node => {
-                this.stageRef = node;
-              }}
-            >
+            <Stage width={907} height={750} ref={this.props.fieldRef}>
               <Layer>
-                <FootballFiledImage />
-              </Layer>
-              <Layer>
-                <Drag
-                  playerNumber={this.state.playerNumber}
-                  width={this.state.stageWidth}
-                  height={window.innerHeight}
-                  ballPosition={this.props.ballPosition}
-                  players={this.props.players}
-                  enemyPlayers={this.props.enemyPlayers}
-                  onHandleUpdateBallPosition={
-                    this.props.onHandleUpdateBallPosition
-                  }
-                  onHandleUpdateOldPlayersPosition={
-                    this.props.onHandleUpdateOldPlayersPosition
-                  }
-                  onHandleUpdateEnemyPlayersPosition={
-                    this.props.onHandleUpdateEnemyPlayersPosition
-                  }
-                  onHandleUpdatePlayersPosition={
-                    this.props.onHandleUpdatePlayersPosition
-                  }
-                />
+                <FootballFiledImage width={this.state.stageWidth} />
               </Layer>
               <Layer>
                 <Drawing
@@ -170,13 +148,29 @@ export default class DrawerField extends Component {
                   );
                 })}
               </Layer>
+              <Layer>
+                <Drag
+                  playerNumber={this.state.playerNumber}
+                  width={this.state.stageWidth}
+                  height={window.innerHeight}
+                  ballPosition={this.props.ballPosition}
+                  players={this.props.players}
+                  enemyPlayers={this.props.enemyPlayers}
+                  onHandleUpdateBallPosition={
+                    this.props.onHandleUpdateBallPosition
+                  }
+                  onHandleUpdateOldPlayersPosition={
+                    this.props.onHandleUpdateOldPlayersPosition
+                  }
+                  onHandleUpdateEnemyPlayersPosition={
+                    this.props.onHandleUpdateEnemyPlayersPosition
+                  }
+                  onHandleUpdatePlayersPosition={
+                    this.props.onHandleUpdatePlayersPosition
+                  }
+                />
+              </Layer>
             </Stage>
-            <button
-              style={{ position: "absolute", top: "0" }}
-              onClick={this.handleExportClick}
-            >
-              Export stage
-            </button>
           </div>
         </div>
       </>

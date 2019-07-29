@@ -42,3 +42,5 @@ yarn-debug.log*
 
 # Ignore OSX directory attributes
 **/.DS_Storecoverage
+.DS_Store
+.DS_Store?
