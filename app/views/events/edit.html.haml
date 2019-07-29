@@ -1,7 +1,7 @@
 .content
-  %h1 Edit Event data 
+  %h1.event Edit Event data 
   = bootstrap_form_for @event, url: {action: 'update'} do |f|
-    %table  
+    %tr  
       %tr
         .form-group
           #datetimepicker4.input-group.date{"data-target-input" => "nearest"}
@@ -21,7 +21,7 @@
       %tr
         .field
           = f.text_field :opponent, class: "col-md-3 control-label"
-      %tr 
+      %tr.rate
         Rate your match
         %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", :rel => "stylesheet"}/
         %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
@@ -36,7 +36,7 @@
         %span#5one.fa.fa-star{:onclick => "starmark(this)", :onmouseover => "starmark(this)", :style => "font-size:40px;cursor:pointer;"}
         %br/
         %textarea#comment.form-control{:placeholder => "Enter your review", :rows => "3", :style => "margin-top:5px;"}
-        %button.btn.btn-lg.btn-success{:onclick => "result()", :style => "margin-top:10px;margin-left:5px;", :type => "button"} Submit
+        %button.btn.btn-lg.btn-success{:onclick => "result()", :style => "margin-top:10px;margin-left:5px;", :type => "button"} Checked
         :javascript
           var count;
           function starmark(item)

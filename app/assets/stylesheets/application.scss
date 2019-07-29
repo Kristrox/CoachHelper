@@ -24,12 +24,23 @@ body {
   // font-family: 'Lato', sans-serif;
   //font-family: "Ubuntu", sans-serif;
   background-color: lightgray;
-  background-image: url(cloakroom.jpeg);
+  background-image: url(bc-image.jpeg);
+  background-size:cover;
 }
 .content, .table, .td, .tr {
   font-family: 'Graduate', cursive;
 }
 
+h1.player, h1.event{
+  font-size: 60px;
+  color: white;
+}
+
+
+btn.btn-outline-primary{
+  color: white;
+  background-color: white;
+}
 
 .col-md-3 {
   -webkit-box-flex: 0;
@@ -47,7 +58,12 @@ body {
   justify-content: center;
   width: 300px;
 }
+
 .form-control.col-md-3.control-label.player {
   justify-content: center;
   width: 30%
+}
+
+.field {
+  justify-content: center
 }
