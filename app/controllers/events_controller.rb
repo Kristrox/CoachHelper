@@ -7,6 +7,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all.order(:event_date)
+    @play_books = PlayBook.all
     @players = Player.where(user_id: current_user.id)
   end
 
@@ -21,7 +22,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_path, notice: 'Event was successfully updated.'
     else
-      redirect_to events_path, alert: 'Player has not been updated!'
+      redirect_to events_path, alert: 'Event has not been updated!'
     end
   end
 
@@ -41,12 +42,10 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to events_path, notice: 'Event was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @event.update(event_params)
+      redirect_to events_path, notice: 'Event was successfully updated.'
+    else
+      render :edit
     end
   end
 

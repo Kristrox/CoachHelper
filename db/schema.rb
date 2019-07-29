@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_072754) do
+ActiveRecord::Schema.define(version: 2019_07_26_144029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,15 @@ ActiveRecord::Schema.define(version: 2019_07_25_072754) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "play_book_id"
+    t.index ["play_book_id"], name: "index_events_on_play_book_id"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "events_play_books", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "play_book_id", null: false
+    t.index ["event_id", "play_book_id"], name: "index_events_play_books_on_event_id_and_play_book_id"
   end
 
   create_table "events_players", id: false, force: :cascade do |t|
@@ -95,6 +103,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_072754) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "play_books"
   add_foreign_key "events", "users"
   add_foreign_key "injuries", "players"
   add_foreign_key "players", "users"

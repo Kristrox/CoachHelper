@@ -1,7 +1,5 @@
 class Event < ApplicationRecord
   belongs_to :user
-  # has_many :players, through: :users
-
   # rubocop: disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :players
   # rubocop: enable Rails/HasAndBelongsToMany

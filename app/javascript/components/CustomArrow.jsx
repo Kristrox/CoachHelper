@@ -9,13 +9,8 @@ export default function CustomArrow(props) {
       points={[startPos.x, startPos.y, endPos.x, endPos.y]}
       pointerLength={20}
       pointerWidth={20}
-<<<<<<< HEAD
-      fill="red"
-      stroke="red"
-=======
       fill={fill}
       stroke={stroke}
->>>>>>> develop
       dash={dashed}
       strokeWidth={4}
     />

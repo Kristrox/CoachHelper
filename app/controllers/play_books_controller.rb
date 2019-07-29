@@ -1,7 +1,7 @@
 class PlayBooksController < ApplicationController
   def new; end
 
-  def create 
+  def create
     @play_book = PlayBook.new({ name: play_book_params[:name] })
     respond_to do |format|
       if @play_book.save
@@ -17,9 +17,8 @@ class PlayBooksController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @play_book.errors, status: :unprocessable_entity }
-      end  
+      end
     end
-    
   end
 
   private

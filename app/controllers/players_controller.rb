@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @players = Player.all.order(:number)
   end
@@ -26,13 +28,15 @@ class PlayersController < ApplicationController
   def destroy
     @player = Player.find(params[:id])
     @player.destroy
-    respond_to do |format|
-      format.html { redirect_to players_url, notice: 'Post was successfully destroyed.' }
-    end
+    redirect_to players_url, notice: 'Post was successfully destroyed.'
   end
 
   def update
     @player = Player.find(params[:id])
+    yellow = params[:player][:yellow_cards]
+    if yellow.to_i == 1
+      @player.update_attribute(:yellow_cards, @player.yellow_cards + 1)
+    end
     if @player.update(player_params)
       redirect_to events_path, notice: 'Player was successfully updated.'
     else
@@ -52,6 +56,6 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
+    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards)
   end
 end

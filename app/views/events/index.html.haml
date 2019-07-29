@@ -8,12 +8,16 @@
       %td Check players
       %td Add player
       %td
+      %td
     - @events.each do |event|
       %tr
         %td
           = event.event_date
         %td
           = event.opponent.capitalize
+        %td
+          %button.btn.btn-primary{"data-target" => "#event-modal-3-#{event.id}", "data-toggle" => "modal", :type => "button"}
+            Add play book
         %td
           %button.btn.btn-primary{"data-target" => "#event-modal-2-#{event.id}", "data-toggle" => "modal", :type => "button"}
             Add players
@@ -57,7 +61,6 @@
                           %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
                           %td=f.select :red_cards, [ 0, 1 ], :prompt => 'Select One'
                           = f.submit "Update"   
-        .modal-footer
 
 - @events.each do |event|
   .modal.fade{id: "event-modal-2-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
@@ -77,4 +80,21 @@
                   %td
                     %button.btn.btn-outline-primary.btn-sm
                       = link_to 'Add', add_player_event_path({ id: event.id, player_id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
-                    .modal-footer
+
+- @events.each do |event|
+  .modal.fade{id: "event-modal-3-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %h4#myModalLabel.modal-title Edit players data after match
+          %button.close{"data-dismiss" => "modal", :type => "button"} x
+        .modal-body
+          - @play_books.each do |player|
+            %table.table.table-striped
+              %thead
+                %tr
+                  %td= player.name
+                  %td
+                    %button.btn.btn-outline-primary.btn-sm
+                      = link_to 'Add', add_player_event_path({ id: event.id, player_id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
+                  
