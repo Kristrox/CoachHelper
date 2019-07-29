@@ -9,7 +9,7 @@
       %td Status
       %td
     - @players.each do |player|
-      %tr
+      %tr{:class => player.suspended ? 'suspended' : 'available'}
         %td
           = player.number
         %td
