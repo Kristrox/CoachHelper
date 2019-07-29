@@ -65,12 +65,12 @@ ActiveRecord::Schema.define(version: 2019_07_29_073619) do
     t.string "surname", null: false
     t.integer "number", null: false
     t.datetime "birth_date", null: false
-    t.integer "red_cards", default: 0, null: false
     t.integer "yellow_cards", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.integer "trained_in"
+    t.boolean "suspended", default: false, null: false
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
