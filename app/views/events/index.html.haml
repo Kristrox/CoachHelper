@@ -16,13 +16,13 @@
         %td
           = event.opponent.capitalize
         %td
-          %button.btn.btn-primary{"data-target" => "#event-modal-3-#{event.id}", "data-toggle" => "modal", :type => "button"}
+          %button.btn.btn-primary{"data-target" => "#event-modal-play-book-#{event.id}", "data-toggle" => "modal", :type => "button"}
             Add play book
         %td
-          %button.btn.btn-primary{"data-target" => "#event-modal-2-#{event.id}", "data-toggle" => "modal", :type => "button"}
+          %button.btn.btn-primary{"data-target" => "#event-modal-add-player-#{event.id}", "data-toggle" => "modal", :type => "button"}
             Add players
         %td
-          %button.btn.btn-primary{"data-target" => "#event-modal-#{event.id}", "data-toggle" => "modal", :type => "button"}
+          %button.btn.btn-primary{"data-target" => "#event-modal-edit-players-data-#{event.id}", "data-toggle" => "modal", :type => "button"}
             Check players
         %td
           %button.btn.btn-outline-primary.btn-sm
@@ -32,7 +32,7 @@
     %br
 
 - @events.each do |event|
-  .modal.fade{id: "event-modal-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal.fade{id: "event-modal-edit-players-data-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
       .modal-content
         .modal-header
@@ -63,7 +63,7 @@
                           = f.submit "Update"   
 
 - @events.each do |event|
-  .modal.fade{id: "event-modal-2-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal.fade{id: "event-modal-add-player-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
       .modal-content
         .modal-header
@@ -82,7 +82,7 @@
                       = link_to 'Add', add_player_event_path({ id: event.id, player_id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
 
 - @events.each do |event|
-  .modal.fade{id: "event-modal-3-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal.fade{id: "event-modal-play-book-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
       .modal-content
         .modal-header
