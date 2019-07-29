@@ -9,7 +9,7 @@ class PlayersController < ApplicationController
 
   def create
     @player = Player.new(player_params)
-    @player.red_cards = 0
+    @player.suspended = false
     @player.yellow_cards = 0
     @player.user = current_user
     if @player.save
