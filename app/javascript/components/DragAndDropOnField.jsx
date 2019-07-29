@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Text, Group, Image } from "react-konva";
-import tshirt from "./images/tshirt.png"
-import tshirto from "./images/tshirto.png"
+import enemyTShirtImage from "./images/tshirt.png"
+import ourTeamTShirtImage from "./images/tshirto.png"
 import useImage from "use-image";
 
 const EnemyTshirt = (props) => {
-  const [image] = useImage(tshirt)
+  const [image] = useImage(enemyTShirtImage)
   return <Image image={image} width={60} height={50} x={props.x} y={props.y}/>
 }
 
 const TeamTshirt = (props) => {
-  const [image] = useImage(tshirto)
+  const [image] = useImage(ourTeamTShirtImage)
   return <Image image={image} width={60} height={50} x={props.x} y={props.y}/>
 }
 

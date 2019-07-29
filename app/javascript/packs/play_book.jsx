@@ -12,13 +12,13 @@ export default class PlayBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      actionNumber: 0,
+      actionName: "",
       isFull: false,
       isDrawingArrows: false,
       dashed: null,
       saved: false,
       name: "",
-      imageData: [],
+      imageData: "",
       arrwosArray: [],
       lines: [],
       ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
@@ -26,9 +26,16 @@ export default class PlayBook extends Component {
       enemyPlayers: this.addPlayersToInitialList(18, "enemy")
     };
 
+    //---------------------------
+    //Zapis zagrywki
+    //---------------------------
+    this.fieldRef = React.createRef();
+    //---------------------------
+    //Koniec zapisu zagrywki
+    //---------------------------
+
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
-    this.handleSave = this.handleSave.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
     this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(this);
     this.handleUpdateBallPosition = this.handleUpdateBallPosition.bind(this);
@@ -70,51 +77,35 @@ export default class PlayBook extends Component {
   //---------------------------
   //Zapis zagrywki
   //---------------------------
-  changeName(newName) {
+  changeName = newName => {
     this.setState({ name: newName });
-  }
+  };
 
-  setImageData(newImageData) {
-    this.setState({ imageData: newImageData });
-  }
+  setImageData() {}
 
-  handleSave() {
-    var canvas = document.createElement("canvas");
-    var context = canvas.getContext("2d");
-    var centerX = canvas.width / 2;
-    var centerY = canvas.height / 2;
-    var radius = 70;
+  handleSave = () => {
+    let image = this.fieldRef.current.getStage().toDataURL();
+    console.log(this.state.name);
+    console.log(image);
 
-    context.beginPath();
-    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = "green";
-    context.fill();
-    context.lineWidth = 5;
-    context.strokeStyle = "#003300";
-    context.stroke();
-
-
-    const data = canvas.toDataURL();
-
-    axios
-      .post(
-        "/play_books.json",
-        { play_book: { name: this.state.name, data_uri: data } },
-        {
-          headers: {
-            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
-              .content
-          }
+    axios.post(
+      "/play_books.json",
+      { play_book: { name: this.state.name, data_uri: image } },
+      {
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+            .content
         }
-      )
-      .then(() => {
-        this.props.fetchPosts();
-      });
+      }
+    );
+    // .then(() => {
+    //   this.props.fetchPosts();
+    // });
 
     this.setState({
       saved: true
     });
-  }
+  };
   //---------------------------
   //Koniec zapisu zagrywki
   //---------------------------
@@ -141,54 +132,53 @@ export default class PlayBook extends Component {
     const enemyPlayersPosition = this.state.enemyPlayers;
     const playersOldPosition = this.state.oldPlayerPosition;
 
-    switch (this.state.actionNumber) {
-      case 1:
+    switch (this.state.actionName) {
+      case "updateArrow":
         const arrows = this.state.arrwosArray;
         arrows.pop();
         this.setState({
           arrwosArray: arrows,
-          actionNumber: 0
+          actionName: ""
         });
-        console.log(this.state.arrwosArray)
         break;
 
-      case 2:
+      case "updateBall":
         const ballPosition = this.state.ballPosition;
         ballPosition.reverse();
         this.setState({
           ballPosition: ballPosition,
-          actionNumber: 0
+          actionName: ""
         });
         break;
 
-      case 3:
+      case "updateEnemyPlayer":
         enemyPlayersPosition[playersOldPosition.playerId - 1].x =
           playersOldPosition.playerX;
         enemyPlayersPosition[playersOldPosition.playerId - 1].y =
           playersOldPosition.playerY;
         this.setState({
           enemyPlayers: enemyPlayersPosition,
-          actionNumber: 0
+          actionName: ""
         });
         break;
 
-      case 4:
+      case "updatePlayer":
         playersPosition[playersOldPosition.playerId - 1].x =
           playersOldPosition.playerX;
         playersPosition[playersOldPosition.playerId - 1].y =
           playersOldPosition.playerY;
         this.setState({
           players: playersPosition,
-          actionNumber: 0
+          actionName: ""
         });
         break;
 
-      case 5:
+      case "updateLine":
         const lines = this.state.lines;
         lines.pop();
         this.setState({
           lines: lines,
-          actionNumber: 0
+          actionName: ""
         });
         break;
     }
@@ -197,7 +187,7 @@ export default class PlayBook extends Component {
   handleUpdateArrowsPosition(arrwosArray) {
     this.setState({
       arrwosArray: arrwosArray,
-      actionNumber: 1
+      actionName: "updateArrow"
     });
     console.log(this.state.actionNumber)
   }
@@ -205,28 +195,28 @@ export default class PlayBook extends Component {
   handleUpdateBallPosition(ballPosition) {
     this.setState({
       ballPosition: ballPosition,
-      actionNumber: 2
+      actionName: "updateBall"
     });
   }
 
   handleUpdateEnemyPlayersPosition(playersPosition) {
     this.setState({
       enemyPlayers: playersPosition,
-      actionNumber: 3
+      actionName: "updateEnemyPlayer"
     });
   }
 
   handleUpdatePlayersPosition(playersPosition) {
     this.setState({
       players: playersPosition,
-      actionNumber: 4
+      actionName: "updatePlayer"
     });
   }
 
   handleUpdateLines(lines) {
     this.setState({
       lines: lines,
-      actionNumber: 5
+      actionName: "updateLine"
     })
   }
 
@@ -250,6 +240,9 @@ export default class PlayBook extends Component {
               onHandleSave={this.handleSave}
               onChangeName={this.changeName}
               onHandleUndo={this.handleUndo}
+              navRef={this.navRef}
+              name={this.state.name}
+              onChangeName={this.changeName}
             />
             <DrawerField
               startDrawingArrows={this.state.isDrawingArrows}
@@ -265,6 +258,8 @@ export default class PlayBook extends Component {
               onHandleUpdateEnemyPlayersPosition={this.handleUpdateEnemyPlayersPosition}
               onHandleUpdatePlayersPosition={this.handleUpdatePlayersPosition}
               onHandleUpdateLines={this.handleUpdateLines}
+              onSetImageData={this.setImageData}
+              fieldRef={this.fieldRef}
             />
           </div>
         </Fullscreen>

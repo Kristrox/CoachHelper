@@ -11,20 +11,26 @@ export default class TopToolBar extends Component {
     }
   }
 
+  //---------------------------
+  //Zapis zagrywki
+  //---------------------------
   handleSave = e => {
     this.props.onHandleSave();
   };
 
   render() {
-    let dashedArrowsClass = this.state.activeDashedArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
-    let arrowsClass = this.state.activeArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
+    const dashedArrowsClass = this.state.activeDashedArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
+    const arrowsClass = this.state.activeArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
 
     return (
       <div className="TopToolBar d-flex justify-content-end">
-        <InputName />
+        <InputName
+          name={this.props.name}
+          onChangeName={this.props.onChangeName}
+        />
         <button
           className="TopToolBar btn btn-success"
-          onClick={this.handleSave}
+          onClick={this.props.onHandleSave}
         >
           Save To Play Book
         </button>
