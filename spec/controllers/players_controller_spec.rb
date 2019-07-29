@@ -97,6 +97,7 @@ RSpec.describe PlayersController, type: :controller do
     let(:player) { create(:player, user_id: user.id) }
     let(:valid_attributes) { {id: player.id, player: attributes_for(:player) } }
     let(:invalid_attributes) { {id: player.id, player: attributes_for(:player, name: nil) } }
+    let(:set_suspended) { {id: player.id, player: attributes_for(:player, yellow_cards: 3) } }
 
     context 'valid attributes' do
       subject { put :update, params: valid_attributes }
@@ -118,6 +119,17 @@ RSpec.describe PlayersController, type: :controller do
       it { expect(subject).to render_template(:edit) }
       it { expect { subject }.not_to change(player, :name) }
       it { expect { subject }.not_to change(player, :surname) }
+    end
+
+    context 'set suspended' do
+      subject {put :update, params: set_suspended }
+      it { expect(subject).to redirect_to(players_url) }
+      it 'XD' do
+        # byebug
+        subject
+        # byebug
+        expect(player.reload.suspended).to eq(true)
+      end
     end
   end
 

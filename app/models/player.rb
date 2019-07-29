@@ -8,4 +8,11 @@ class Player < ApplicationRecord
   validates :number, numericality: { less_than_or_equal_to: 99, greater_than_or_equal_to: 0, only_inteager: true }
   # validate :expiration_date_cannot_be_in_the_past, on: :update
   validates :number, uniqueness: true
+
+  # def self.set_suspended(player, update_params)
+  #   if update_params == 3
+  #     player.update(suspended: true)
+  #   end
+  # end
 end
+

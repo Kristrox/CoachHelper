@@ -34,8 +34,15 @@ class PlayersController < ApplicationController
 
   def update
     @player = Player.find(params[:id])
+    # Player.set_suspended(@player, params[:yellow_cards])
+    # if params[:yellow_cards] == 3
+    #   @player.update(suspended: true)
+    # end
     respond_to do |format|
       if @player.update(player_params)
+        if @player.yellow_cards == 3
+          @player.update(suspended: true)
+        end
         format.html { redirect_to players_url, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -48,6 +55,6 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
+    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :yellow_cards)
   end
 end
