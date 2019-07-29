@@ -9,10 +9,10 @@ class Player < ApplicationRecord
   # validate :expiration_date_cannot_be_in_the_past, on: :update
   validates :number, uniqueness: true
 
-  # def self.set_suspended(player, update_params)
-  #   if update_params == 3
-  #     player.update(suspended: true)
-  #   end
-  # end
-end
+  def suspend!
+    return if yellow_cards != 4
 
+    self.suspended = true
+    self.yellow_cards = 0
+  end
+end
