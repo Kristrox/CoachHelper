@@ -9,7 +9,6 @@ class PlayBooksController < ApplicationController
         data = play_book_params[:data_uri]
         id = @play_book.id
         image_data = Base64.decode64(data['data:image/png;base64,'.length..-1])
-        # {Rails.root}/public/uploads/#{id}.png"
         File.open(Rails.root.join('public', 'uploads', "#{id}.png"), 'wb') do |f|
           f.write image_data
         end
@@ -23,16 +22,12 @@ class PlayBooksController < ApplicationController
   end
 
   def show
-    @play_book = PlayBook.find(play_book_permit_id[:id])
+    @play_book = PlayBook.find(params[:id])
   end
 
   private
 
   def play_book_params
-    params.require(:play_book).permit(:name, :data_uri, :id)
-  end
-
-  def play_book_permit_id
-    params.permit(:id)
+    params.require(:play_book).permit(:name, :data_uri)
   end
 end
