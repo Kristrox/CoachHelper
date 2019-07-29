@@ -89,12 +89,11 @@
           %h4#myModalLabel.modal-title Edit players data after match
           %button.close{"data-dismiss" => "modal", :type => "button"} x
         .modal-body
-          - @play_books.each do |player|
+          - @play_books.each do |play_book|
             %table.table.table-striped
               %thead
                 %tr
-                  %td= player.name
+                  %td= play_book.name
                   %td
                     %button.btn.btn-outline-primary.btn-sm
-                      = link_to 'Add', add_player_event_path({ id: event.id, player_id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
-                  
+                    
