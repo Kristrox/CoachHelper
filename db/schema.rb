@@ -43,8 +43,6 @@ ActiveRecord::Schema.define(version: 2019_07_26_144029) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "play_book_id"
-    t.index ["play_book_id"], name: "index_events_on_play_book_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -103,7 +101,6 @@ ActiveRecord::Schema.define(version: 2019_07_26_144029) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "events", "play_books"
   add_foreign_key "events", "users"
   add_foreign_key "injuries", "players"
   add_foreign_key "players", "users"

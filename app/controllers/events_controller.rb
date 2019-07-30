@@ -15,6 +15,16 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def add_play_book
+    @event = Event.find(params[:id])
+    @play_book = PlayBook.find(params[:play_book_id])
+    if @event.play_books << @play_book
+      redirect_to events_path, notice: 'Event was successfully updated.'
+    else
+      redirect_to events_path, alert: 'Event has not been updated!'
+    end
+  end
+
   def add_player
     @event = Event.find(params[:id])
     @player = Player.find(params[:player_id])

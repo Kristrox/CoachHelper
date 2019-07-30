@@ -9,27 +9,39 @@
       %td Add player
       %td
       %td
+  #accordion
     - @events.each do |event|
-      %tr
-        %td
-          = event.event_date
-        %td
-          = event.opponent.capitalize
-        %td
-          %button.btn.btn-primary{"data-target" => "#event-modal-play-book-#{event.id}", "data-toggle" => "modal", :type => "button"}
-            Add play book
-        %td
-          %button.btn.btn-primary{"data-target" => "#event-modal-add-player-#{event.id}", "data-toggle" => "modal", :type => "button"}
-            Add players
-        %td
-          %button.btn.btn-primary{"data-target" => "#event-modal-edit-players-data-#{event.id}", "data-toggle" => "modal", :type => "button"}
-            Check players
-        %td
-          %button.btn.btn-outline-primary.btn-sm
-            = link_to 'Edit', edit_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
-            |
-            \#{link_to "Delete", event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
-    %br
+      .card
+        #headingTwo.card-header
+          %h5.mb-0
+            %tr  
+              %td
+                = event.event_date
+              %td
+                = event.opponent.capitalize
+              %td
+                %button.btn.btn-primary{"data-target" => "#event-modal-play-book-#{event.id}", "data-toggle" => "modal", :type => "button"}
+                  Add play book
+              %td
+                %button.btn.btn-primary{"data-target" => "#event-modal-add-player-#{event.id}", "data-toggle" => "modal", :type => "button"}
+                  Add players
+              %td
+                %button.btn.btn-primary{"data-target" => "#event-modal-edit-players-data-#{event.id}", "data-toggle" => "modal", :type => "button"}
+                  Check players
+              %td
+                %button.btn.btn-primary.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
+                  Play books
+              %td
+                %button.btn.btn-outline-primary.btn-sm
+                  = link_to 'Edit', edit_event_path(event), :class => ".btn.btn-outline-primary.btn-sm"
+                  |
+                  \#{link_to "Delete", event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, :class => ".btn.btn-outline-primary.btn-sm"}
+      .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
+        .card-body
+          %td
+            - @play_books.each do |play_book|
+              %p= play_book.name
+
 
 - @events.each do |event|
   .modal.fade{id: "event-modal-edit-players-data-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
@@ -96,4 +108,5 @@
                   %td= play_book.name
                   %td
                     %button.btn.btn-outline-primary.btn-sm
+                      = link_to 'Add', add_play_book_event_path({ id: event.id, play_book_id: play_book.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
                     

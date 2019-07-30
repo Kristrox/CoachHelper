@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       get 'edit_player'
       put 'add_player'
       patch 'add_player'
+      put 'add_play_book'
+      patch 'add_play_book'
     end
   end
   resources :players do
