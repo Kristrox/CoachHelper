@@ -1,6 +1,5 @@
 class PlayBooksController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     @play_book = PlayBook.new(name: play_book_params[:name])
