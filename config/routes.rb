@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
-  resources :events
+  resources :events do
+      resources :players, module: :events, only: [:update] do
+        member do
+          patch :assign
+        end
+      end
+      resources :play_books, module: :events, only: [:update]
+  end
   resources :players
-  resources :calendar, only: [:index,:show]
+  resources :calendar
   resources :play_books, only: [:show,:new,:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users, :controllers => { registrations: 'registrations' }
   root to: "home#index"
+
+
   
 
   namespace :api do
