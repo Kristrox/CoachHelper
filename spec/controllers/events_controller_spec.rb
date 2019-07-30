@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
 
+  let(:user) { create(:user) }
+  before { sign_in user }
+
   describe 'GET #index' do
 
     subject { get :index }
@@ -14,8 +17,8 @@ RSpec.describe EventsController, type: :controller do
 
     context 'events' do
 
-      let!(:event1) { create(:event) }
-      let!(:event2) { create(:event) }
+      let!(:event1) { create(:event, user_id: user.id) }
+      let!(:event2) { create(:event, user_id: user.id) }
 
       it 'returns all events' do
         subject
@@ -25,7 +28,7 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    let(:event) { create(:event) }
+    let(:event) { create(:event, user_id: user.id) }
     before { get :edit, params: {id: event.id } }
 
     describe 'successful response' do
@@ -58,8 +61,8 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:valid_attributes) { { event: attributes_for(:event) } }
-    let(:invalid_attributes) { { event: attributes_for(:event, opponent: "") } }
+    let(:valid_attributes) { { event: attributes_for(:event, user_id: user.id) } }
+    let(:invalid_attributes) { { event: attributes_for(:event, user_id: user.id, opponent: "") } }
 
     context 'valid attributes' do
       subject { post :create, params: valid_attributes }
@@ -75,9 +78,9 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let(:event) { create(:event) }
-    let(:valid_attributes) { {id: event.id, event: attributes_for(:event) } }
-    let(:invalid_attributes) { {id: event.id, event: attributes_for(:event, opponent: nil) } }
+    let(:event) { create(:event, user_id: user.id) }
+    let(:valid_attributes) { {id: event.id, event: attributes_for(:event, user_id: user.id) } }
+    let(:invalid_attributes) { {id: event.id, event: attributes_for(:event, user_id: user.id, opponent: nil) } }
 
     context 'valid attributes' do
       subject { put :update, params: valid_attributes }
@@ -102,7 +105,7 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let(:event) { create(:event) }
+    let(:event) { create(:event, user_id: user.id) }
     subject{ delete :destroy, params: {id: event.id } }
     it { expect(subject).to redirect_to(events_url) }
 

@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @players = Player.all.order(:number)
   end
@@ -13,7 +15,7 @@ class PlayersController < ApplicationController
     @player.yellow_cards = 0
     @player.user = current_user
     if @player.save
-      redirect_to '/players'
+      redirect_to players_path
     else
       render 'new'
     end
@@ -26,28 +28,21 @@ class PlayersController < ApplicationController
   def destroy
     @player = Player.find(params[:id])
     @player.destroy
-    respond_to do |format|
-      format.html { redirect_to players_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to players_url, notice: 'Post was successfully destroyed.'
   end
 
   def update
     @player = Player.find(params[:id])
-    respond_to do |format|
-      if @player.update(player_params)
-        format.html { redirect_to players_url, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
-      end
+    if @player.update(player_params)
+      redirect_to players_path, notice: 'Player was successfully updated.'
+    else
+      redirect_to players_path, alert: 'Player has not been updated!'
     end
   end
 
   private
 
   def player_params
-    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
+    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards)
   end
 end
