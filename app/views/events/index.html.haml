@@ -93,13 +93,13 @@
                 .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{player.id}"}
                   .card-body
                     %td
-                      %h4 Yellow cards: #{player.yellow_cards}    Red cards: #{player.red_cards}
+                      %h4 Yellow cards: #{player.yellow_cards}
                       %h5 Edit player data                                        
                       = bootstrap_form_for player, url: event_player_path(event.id, player.id ) do |f|
                         .field.align-middle  
                           %tr
                             %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
-                            %td=f.select :red_cards, [ 0, 1 ], :prompt => 'Select One'
+                            %td=f.select :suspended, [ false, true ], :prompt => 'Select One'
                             = f.submit "Update"   
 
   - @events.each do |event|
