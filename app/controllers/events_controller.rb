@@ -15,27 +15,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  def add_play_book
-    @event = Event.find(params[:id])
-    @play_book = PlayBook.find(params[:play_book_id])
-    if @event.play_books << @play_book
-      redirect_to events_path, notice: 'Event was successfully updated.'
-    else
-      redirect_to events_path, alert: 'Event has not been updated!'
-    end
-  end
-
-  def add_player
-    @event = Event.find(params[:id])
-    @player = Player.find(params[:player_id])
-    @event.players << @player
-    if @event.save
-      redirect_to events_path, notice: 'Event was successfully updated.'
-    else
-      redirect_to events_path, alert: 'Event has not been updated!'
-    end
-  end
-
   def edit_player
     @event = Event.find(params[:id])
     @players = Player.all.order(:number)
@@ -66,10 +45,6 @@ class EventsController < ApplicationController
   end
 
   private
-
-  def set_event
-    @event = Event.find(params[:id])
-  end
 
   def event_params
     params.require(:event).permit(:opponent, :event_date)

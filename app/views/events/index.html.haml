@@ -67,7 +67,7 @@
                   %td
                     %h4 Yellow cards: #{player.yellow_cards}    Red cards: #{player.red_cards}
                     %h5 Edit player data                                        
-                    = bootstrap_form_for player do |f|
+                    = bootstrap_form_for player, url: event_player_path(event.id, player.id ) do |f|
                       .field.align-middle  
                         %tr
                           %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
@@ -91,7 +91,7 @@
                   %td= player.surname
                   %td
                     %button.btn.btn-outline-primary.btn-sm
-                      = link_to 'Add', add_player_event_path({ id: event.id, player_id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
+                      = link_to 'Add', assign_event_player_path({ event_id: event.id, id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
 
 - @events.each do |event|
   .modal.fade{id: "event-modal-play-book-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
@@ -108,5 +108,5 @@
                   %td= play_book.name
                   %td
                     %button.btn.btn-outline-primary.btn-sm
-                      = link_to 'Add', add_play_book_event_path({ id: event.id, play_book_id: play_book.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
+                      = link_to 'Add', event_play_book_path({event_id: event.id, id: play_book.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
                     

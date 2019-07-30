@@ -33,19 +33,6 @@ class PlayersController < ApplicationController
 
   def update
     @player = Player.find(params[:id])
-    yellow = params[:player][:yellow_cards]
-    # rubocop: disable Rails/SkipsModelValidations
-    @player.update_attribute(:yellow_cards, @player.yellow_cards + 1) if yellow.to_i == 1
-    # rubocop: enable Rails/SkipsModelValidations
-    if @player.update(player_params)
-      redirect_to events_path, notice: 'Player was successfully updated.'
-    else
-      redirect_to events_path, alert: 'Player has not been updated!'
-    end
-  end
-
-  def update_player
-    @player = Player.find(params[:id])
     if @player.update(player_params)
       redirect_to players_path, notice: 'Player was successfully updated.'
     else
