@@ -115,7 +115,7 @@ RSpec.describe PlayersController, type: :controller do
 
     context 'invalid attributes' do
       subject { put :update, params: invalid_attributes }
-      it { expect(subject).to render_template(:edit) }
+      it { expect(subject).to redirect_to(players_path) } 
       it { expect { subject }.not_to change(player, :name) }
       it { expect { subject }.not_to change(player, :surname) }
     end

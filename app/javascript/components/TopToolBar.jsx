@@ -1,53 +1,60 @@
 import React, { Component } from "react";
+import InputName from "../components/InputName";
 
 export default class TopToolBar extends Component {
   constructor(props) {
     super(props);
+    this.handleSave = this.handleSave.bind(this);
     this.state = {
-      drawing: true,
-      drawingArrow: false
-    };
+      activeDashedArrows: false,
+      activeArrows: false
+    }
   }
 
-  handleStopDrawing = () => {
-    this.props.onHandleStopDrawing();
-    this.setState({
-      drawing: this.state.drawing ? false : true
-    });
-  };
-
-  handleDrawArrow = () => {
-    this.props.onHandleStartDrowingArrows(false);
-    this.setState({
-      drawingArrow: this.state.drawingArrow ? false : true
-    });
-  };
-
-  handleDrawDashArrow = () => {
-    this.props.onHandleStartDrowingArrows(true);
-    this.setState({
-      drawingArrow: this.state.drawingArrow ? false : true
-    });
+  //---------------------------
+  //Zapis zagrywki
+  //---------------------------
+  handleSave = e => {
+    this.props.onHandleSave();
   };
 
   render() {
+    const dashedArrowsClass = this.state.activeDashedArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
+    const arrowsClass = this.state.activeArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
+
     return (
       <div className="TopToolBar d-flex justify-content-end">
+        <InputName
+          name={this.props.name}
+          onChangeName={this.props.onChangeName}
+        />
         <button
           className="TopToolBar btn btn-success"
-          onClick={this.handleStopDrawing}
+          onClick={this.props.onHandleSave}
         >
-          {this.state.drawing ? "Stop drawing" : "Start drawing"}
+          Save To Play Book
         </button>
         <button
-          className="TopToolBar btn btn-success"
-          onClick={this.handleDrawArrow}
+          className={arrowsClass}
+          onClick={() => {
+            this.props.onHandleStartDrowingArrows(false)
+            this.setState({
+              activeArrows: !this.state.activeArrows,
+              activeDashedArrows: false
+            })
+          }}
         >
           Arrows
         </button>
         <button
-          className="TopToolBar btn btn-success"
-          onClick={this.handleDrawDashArrow}
+          className={dashedArrowsClass}
+          onClick={() => {
+            this.props.onHandleStartDrowingArrows(true);
+            this.setState({
+              activeDashedArrows: !this.state.activeDashedArrows,
+              activeArrows: false
+            })
+          }}
         >
           Dashed Arrows
         </button>

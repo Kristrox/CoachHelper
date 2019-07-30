@@ -6,32 +6,46 @@ import ReactDOM from "react-dom";
 import Fullscreen from "react-full-screen";
 import TopToolBar from "../components/TopToolBar";
 import DrawerField from "../components/DrawerField";
+import axios from "axios";
 
 export default class PlayBook extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      actionNumber: 0,
+      actionName: "",
       isFull: false,
-      isDrawing: true,
       isDrawingArrows: false,
-      dashed: false,
+      dashed: null,
+      saved: false,
+      name: "",
+      imageData: "",
       arrwosArray: [],
+      lines: [],
       ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
       enemyPlayers: this.addPlayersToInitialList(18, "enemy")
     };
 
+    this.fieldRef = React.createRef();
     this.handleFullScreen = this.handleFullScreen.bind(this);
-    this.handleStopDrawing = this.handleStopDrawing.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
-    this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(this);
+    this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(
+      this
+    );
     this.handleUpdateBallPosition = this.handleUpdateBallPosition.bind(this);
-    this.handleUpdateEnemyPlayersPosition = this.handleUpdateEnemyPlayersPosition.bind(this);
-    this.handleUpdateOldPlayersPosition = this.handleUpdateOldPlayersPosition.bind(this);
-    this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(this);
+    this.handleUpdateEnemyPlayersPosition = this.handleUpdateEnemyPlayersPosition.bind(
+      this
+    );
+    this.handleUpdateOldPlayersPosition = this.handleUpdateOldPlayersPosition.bind(
+      this
+    );
+    this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(
+      this
+    );
+    this.handleUpdateLines = this.handleUpdateLines.bind(this);
+    this.setImageData = this.setImageData.bind(this);
+    this.changeName = this.changeName.bind(this);
   }
 
   addPlayersToInitialList(playerNumber, team) {
@@ -59,21 +73,48 @@ export default class PlayBook extends Component {
     return playerList;
   }
 
+  changeName = newName => {
+    this.setState({ name: newName });
+  };
+
+  setImageData() {}
+
+  handleSave = () => {
+    let image = this.fieldRef.current.getStage().toDataURL();
+    console.log(this.state.name);
+    console.log(image);
+
+    axios.post(
+      "/play_books.json",
+      { play_book: { name: this.state.name, data_uri: image } },
+      {
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+            .content
+        }
+      }
+    );
+
+    this.setState({
+      saved: true
+    });
+  };
+
   handleFullScreen() {
     this.setState({ isFull: true });
   }
 
-  handleStopDrawing() {
-    this.setState(previousState => ({
-      isDrawing: !previousState.isDrawing
-    }));
-  }
-
   handleStartDrowingArrows(dashed) {
-    this.setState(previousState => ({
-      isDrawingArrows: !previousState.isDrawingArrows,
-      dashed: dashed
-    }));
+    if (this.state.dashed === dashed) {
+      this.setState(previousState => ({
+        isDrawingArrows: !previousState.isDrawingArrows
+      }));
+    } else {
+      this.setState({
+        isDrawingArrows: true,
+        dashed: dashed
+      });
+    }
   }
 
   handleUndo() {
@@ -81,44 +122,53 @@ export default class PlayBook extends Component {
     const enemyPlayersPosition = this.state.enemyPlayers;
     const playersOldPosition = this.state.oldPlayerPosition;
 
-    switch (this.state.actionNumber) {
-      case 1:
+    switch (this.state.actionName) {
+      case "updateArrow":
         const arrows = this.state.arrwosArray;
         arrows.pop();
         this.setState({
           arrwosArray: arrows,
-          actionNumber: 0
+          actionName: ""
         });
         break;
 
-      case 2:
+      case "updateBall":
         const ballPosition = this.state.ballPosition;
         ballPosition.reverse();
         this.setState({
           ballPosition: ballPosition,
-          actionNumber: 0
+          actionName: ""
         });
         break;
 
-      case 3:
+      case "updateEnemyPlayer":
         enemyPlayersPosition[playersOldPosition.playerId - 1].x =
           playersOldPosition.playerX;
         enemyPlayersPosition[playersOldPosition.playerId - 1].y =
           playersOldPosition.playerY;
         this.setState({
           enemyPlayers: enemyPlayersPosition,
-          actionNumber: 0
+          actionName: ""
         });
         break;
 
-      case 4:
+      case "updatePlayer":
         playersPosition[playersOldPosition.playerId - 1].x =
           playersOldPosition.playerX;
         playersPosition[playersOldPosition.playerId - 1].y =
           playersOldPosition.playerY;
         this.setState({
           players: playersPosition,
-          actionNumber: 0
+          actionName: ""
+        });
+        break;
+
+      case "updateLine":
+        const lines = this.state.lines;
+        lines.pop();
+        this.setState({
+          lines: lines,
+          actionName: ""
         });
         break;
     }
@@ -127,28 +177,36 @@ export default class PlayBook extends Component {
   handleUpdateArrowsPosition(arrwosArray) {
     this.setState({
       arrwosArray: arrwosArray,
-      actionNumber: 1
+      actionName: "updateArrow"
     });
+    console.log(this.state.actionNumber);
   }
 
   handleUpdateBallPosition(ballPosition) {
     this.setState({
       ballPosition: ballPosition,
-      actionNumber: 2
+      actionName: "updateBall"
     });
   }
 
   handleUpdateEnemyPlayersPosition(playersPosition) {
     this.setState({
       enemyPlayers: playersPosition,
-      actionNumber: 3
+      actionName: "updateEnemyPlayer"
     });
   }
 
   handleUpdatePlayersPosition(playersPosition) {
     this.setState({
       players: playersPosition,
-      actionNumber: 4
+      actionName: "updatePlayer"
+    });
+  }
+
+  handleUpdateLines(lines) {
+    this.setState({
+      lines: lines,
+      actionName: "updateLine"
     });
   }
 
@@ -167,24 +225,35 @@ export default class PlayBook extends Component {
         >
           <div className="full-screenable-node d-flex flex-column">
             <TopToolBar
-              onHandleStopDrawing={this.handleStopDrawing}
               onChangeToFullScreen={this.handleFullScreen}
               onHandleStartDrowingArrows={this.handleStartDrowingArrows}
+              onHandleSave={this.handleSave}
+              onChangeName={this.changeName}
               onHandleUndo={this.handleUndo}
+              navRef={this.navRef}
+              name={this.state.name}
+              onChangeName={this.changeName}
             />
             <DrawerField
-              stopDrawing={this.state.isDrawing}
               startDrawingArrows={this.state.isDrawingArrows}
               startDrawingArrowsDashed={this.state.dashed}
               arrwosArray={this.state.arrwosArray}
               players={this.state.players}
+              lines={this.state.lines}
               enemyPlayers={this.state.enemyPlayers}
               ballPosition={this.state.ballPosition}
               onHandleUpdateArrowsPosition={this.handleUpdateArrowsPosition}
               onHandleUpdateBallPosition={this.handleUpdateBallPosition}
-              onHandleUpdateOldPlayersPosition={this.handleUpdateOldPlayersPosition}
-              onHandleUpdateEnemyPlayersPosition={this.handleUpdateEnemyPlayersPosition}
+              onHandleUpdateOldPlayersPosition={
+                this.handleUpdateOldPlayersPosition
+              }
+              onHandleUpdateEnemyPlayersPosition={
+                this.handleUpdateEnemyPlayersPosition
+              }
               onHandleUpdatePlayersPosition={this.handleUpdatePlayersPosition}
+              onHandleUpdateLines={this.handleUpdateLines}
+              onSetImageData={this.setImageData}
+              fieldRef={this.fieldRef}
             />
           </div>
         </Fullscreen>
