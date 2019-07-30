@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all.order(:event_date)
+    @events = Event.where(user_id: current_user.id).order(:event_date)
   end
 
   def new
@@ -13,6 +13,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    @event.user = current_user
     if @event.save
       redirect_to '/events'
     else
