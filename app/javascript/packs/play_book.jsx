@@ -27,6 +27,7 @@ export default class PlayBook extends Component {
       enemyPlayers: this.addPlayersToInitialList(18, "enemy")
     };
 
+    this.fieldRef = React.createRef();
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStopDrawing = this.handleStopDrawing.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
@@ -45,8 +46,7 @@ export default class PlayBook extends Component {
     this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(
       this
     );
-
-    //Zapis zagrywki
+    this.handleUpdateLines = this.handleUpdateLines.bind(this);
     this.setImageData = this.setImageData.bind(this);
     this.changeName = this.changeName.bind(this);
   }
@@ -76,10 +76,7 @@ export default class PlayBook extends Component {
     return playerList;
   }
 
-  //---------------------------
-  //Zapis zagrywki
-  //---------------------------
-  changeName(newName) {
+  changeName = newName => {
     this.setState({ name: newName });
   }
 
@@ -116,18 +113,13 @@ export default class PlayBook extends Component {
               .content
           }
         }
-      )
-      .then(() => {
-        this.props.fetchPosts();
-      });
+      }
+    );
 
     this.setState({
       saved: true
     });
-  }
-  //---------------------------
-  //Koniec zapisu zagrywki
-  //---------------------------
+  };
 
   handleFullScreen() {
     this.setState({ isFull: true });
@@ -138,10 +130,16 @@ export default class PlayBook extends Component {
   }
 
   handleStartDrowingArrows(dashed) {
-    this.setState(previousState => ({
-      isDrawingArrows: !previousState.isDrawingArrows,
-      dashed: dashed
-    }));
+    if (this.state.dashed === dashed) {
+      this.setState(previousState => ({
+        isDrawingArrows: !previousState.isDrawingArrows
+      }));
+    } else {
+      this.setState({
+        isDrawingArrows: true,
+        dashed: dashed
+      });
+    }
   }
 
   handleUndo() {
@@ -197,6 +195,7 @@ export default class PlayBook extends Component {
       arrwosArray: arrwosArray,
       actionNumber: 1
     });
+    console.log(this.state.actionNumber);
   }
 
   handleUpdateBallPosition(ballPosition) {
@@ -217,6 +216,13 @@ export default class PlayBook extends Component {
     this.setState({
       players: playersPosition,
       actionNumber: 4
+    });
+  }
+
+  handleUpdateLines(lines) {
+    this.setState({
+      lines: lines,
+      actionName: "updateLine"
     });
   }
 
