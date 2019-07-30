@@ -10,8 +10,6 @@ RSpec.describe Event, type: :model do
     describe 'validations' do
         it { is_expected.to validate_presence_of(:opponent) }
         it { is_expected.to validate_presence_of(:event_date) }
-        it { is_expected.to validate_presence_of(:event_type) }
-        it { should define_enum_for(:event_type) }
     end
 
     describe 'relations' do

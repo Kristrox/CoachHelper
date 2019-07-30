@@ -6,12 +6,15 @@
   position: fixed;
   height: 100%;
   overflow: auto;
+  // background-color: grey;
+  background:rgba(22, 19, 19, 0.5);
+  color: white;
 }
 
 /* Sidebar links */
 #sidebar a {
   display: block;
-  color: black;
+  color: white;
   padding: 16px;
   text-decoration: none;
 }
@@ -32,6 +35,20 @@
   padding-top: 25px;
   padding-bottom: 25px;
   text-align: center;
+  font-size: 60px;
+  border-right: 10px;
+  border-left: 10px;
+  border-color: white;
+}
+#sidebar h4 {
+  height: 75px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: center;
+  font-size: 50px;
+  border-right: 10px;
+  border-left: 10px;
+  border-color: white;
 }
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {

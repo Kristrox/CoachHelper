@@ -26,25 +26,24 @@ export default class PlayBook extends Component {
       enemyPlayers: this.addPlayersToInitialList(18, "enemy")
     };
 
-    //---------------------------
-    //Zapis zagrywki
-    //---------------------------
     this.fieldRef = React.createRef();
-    //---------------------------
-    //Koniec zapisu zagrywki
-    //---------------------------
-
     this.handleFullScreen = this.handleFullScreen.bind(this);
     this.handleStartDrowingArrows = this.handleStartDrowingArrows.bind(this);
     this.handleUndo = this.handleUndo.bind(this);
-    this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(this);
+    this.handleUpdateArrowsPosition = this.handleUpdateArrowsPosition.bind(
+      this
+    );
     this.handleUpdateBallPosition = this.handleUpdateBallPosition.bind(this);
-    this.handleUpdateEnemyPlayersPosition = this.handleUpdateEnemyPlayersPosition.bind(this);
-    this.handleUpdateOldPlayersPosition = this.handleUpdateOldPlayersPosition.bind(this);
-    this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(this);
+    this.handleUpdateEnemyPlayersPosition = this.handleUpdateEnemyPlayersPosition.bind(
+      this
+    );
+    this.handleUpdateOldPlayersPosition = this.handleUpdateOldPlayersPosition.bind(
+      this
+    );
+    this.handleUpdatePlayersPosition = this.handleUpdatePlayersPosition.bind(
+      this
+    );
     this.handleUpdateLines = this.handleUpdateLines.bind(this);
-
-    //Zapis zagrywki
     this.setImageData = this.setImageData.bind(this);
     this.changeName = this.changeName.bind(this);
   }
@@ -74,9 +73,6 @@ export default class PlayBook extends Component {
     return playerList;
   }
 
-  //---------------------------
-  //Zapis zagrywki
-  //---------------------------
   changeName = newName => {
     this.setState({ name: newName });
   };
@@ -98,17 +94,11 @@ export default class PlayBook extends Component {
         }
       }
     );
-    // .then(() => {
-    //   this.props.fetchPosts();
-    // });
 
     this.setState({
       saved: true
     });
   };
-  //---------------------------
-  //Koniec zapisu zagrywki
-  //---------------------------
 
   handleFullScreen() {
     this.setState({ isFull: true });
@@ -117,13 +107,13 @@ export default class PlayBook extends Component {
   handleStartDrowingArrows(dashed) {
     if (this.state.dashed === dashed) {
       this.setState(previousState => ({
-        isDrawingArrows: !previousState.isDrawingArrows,
-      }))
+        isDrawingArrows: !previousState.isDrawingArrows
+      }));
     } else {
       this.setState({
         isDrawingArrows: true,
         dashed: dashed
-      })
+      });
     }
   }
 
@@ -189,7 +179,7 @@ export default class PlayBook extends Component {
       arrwosArray: arrwosArray,
       actionName: "updateArrow"
     });
-    console.log(this.state.actionNumber)
+    console.log(this.state.actionNumber);
   }
 
   handleUpdateBallPosition(ballPosition) {
@@ -217,7 +207,7 @@ export default class PlayBook extends Component {
     this.setState({
       lines: lines,
       actionName: "updateLine"
-    })
+    });
   }
 
   handleUpdateOldPlayersPosition(playersPosition) {
@@ -254,8 +244,12 @@ export default class PlayBook extends Component {
               ballPosition={this.state.ballPosition}
               onHandleUpdateArrowsPosition={this.handleUpdateArrowsPosition}
               onHandleUpdateBallPosition={this.handleUpdateBallPosition}
-              onHandleUpdateOldPlayersPosition={this.handleUpdateOldPlayersPosition}
-              onHandleUpdateEnemyPlayersPosition={this.handleUpdateEnemyPlayersPosition}
+              onHandleUpdateOldPlayersPosition={
+                this.handleUpdateOldPlayersPosition
+              }
+              onHandleUpdateEnemyPlayersPosition={
+                this.handleUpdateEnemyPlayersPosition
+              }
               onHandleUpdatePlayersPosition={this.handleUpdatePlayersPosition}
               onHandleUpdateLines={this.handleUpdateLines}
               onSetImageData={this.setImageData}
