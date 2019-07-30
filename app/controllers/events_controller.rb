@@ -1,12 +1,9 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
 
-  def new
-    @event = Event.new
-  end
-
   def index
     @events = Event.all.order(:event_date)
+    @event = Event.new
     @play_books = PlayBook.all
     @players = Player.where(user_id: current_user.id)
   end

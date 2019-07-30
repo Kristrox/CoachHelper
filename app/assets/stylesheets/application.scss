@@ -15,14 +15,87 @@
  */
 @import "bootstrap";
 @import "tempusdominus-bootstrap-4.css";
+@import url('https://fonts.googleapis.com/css?family=Graduate&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700&display=swap&subset=latin-ext");
-// @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap&subset=latin-ext');
 
-.background-whole {
-  background-color: red;
-}
 
 body {
-  // font-family: 'Lato', sans-serif;
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Graduate', cursive;
+  background-color: lightgray;
+  background-image: url(bc-image.jpeg);
+  background-size:cover;
+}
+.content, .table, .td, .tr {
+  font-family: 'Graduate', cursive;
+}
+
+.btn-link {
+  font-size: 30px;
+}
+
+card-event{
+  background-color:rgba(255,255,255,0.5);
+}
+
+.card-header {
+  background:rgba(255,255,255,0.5) !important;
+  height: 100px;
+  justify-content: center;
+  // margin-bottom: 30px;
+}
+
+button.btn.btn-link.collapsed{
+  color: black;
+  margin-bottom: 20px;
+
+//   width: 70%;
+//   height: 60px;
+//   margin: 0px;
+}
+
+h5.mb-0{
+  height:60px;
+  margin-bottom: 10px;
+//   // background-color: rgba(100, 100, 100, 0.5);
+}
+
+.content{
+  font-family: 'Graduate', cursive;
+}
+
+h1.player, h1.event{
+  font-size: 60px;
+  color: white;
+}
+
+
+btn.btn-outline-primary{
+  color: white;
+  background-color: white;
+}
+
+.col-md-3 {
+  -webkit-box-flex: 0;
+  flex: 0 0 25%;
+  // max-width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+.new_player{
+  justify-content: center;
+}
+
+.form-control.col-md-3.control-label {
+  justify-content: center;
+  width: 300px;
+}
+
+.form-control.col-md-3.control-label.player {
+  justify-content: center;
+  width: 30%
+}
+
+.field {
+  justify-content: center
 }
