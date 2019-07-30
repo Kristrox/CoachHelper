@@ -20,18 +20,4 @@ RSpec.describe Player, type: :model do
         it { is_expected.to have_many(:injuries) }
         it { is_expected.to belong_to(:user) } 
     end
-
-    describe '#suspend' do
-        let(:user) { create(:user) }
-
-        let!(:player1) { create(:player, user_id: user.id, yellow_cards: 4) }
-        let!(:player2) { create(:player, user_id: user.id, yellow_cards: 2) }
-    
-        it 'should delete old author with .delete_old_authors method' do
-            expect { player1.suspend! }.to change(player1, :yellow_cards).from(4).to(0)
-            expect(player1.suspended).to be true
-            expect { player2.suspend! }.to_not change(player2, :yellow_cards)
-            expect(player2.suspended).to be false
-        end
-    end
 end

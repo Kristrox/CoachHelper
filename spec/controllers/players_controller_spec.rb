@@ -94,11 +94,12 @@ RSpec.describe PlayersController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let(:player) { create(:player, user_id: user.id) }
+    let(:player) { create(:player, user_id: user.id, yellow_cards: 3) }
+    let(:player2) { create(:player, user_id: user.id, yellow_cards: 1) }
     let(:valid_attributes) { {id: player.id, player: attributes_for(:player) } }
     let(:invalid_attributes) { {id: player.id, player: attributes_for(:player, name: nil) } }
-    let(:set_suspended) { {id: player.id, player: attributes_for(:player, yellow_cards: 4) } }
-    let(:dont_set_suspended) { {id: player.id, player: attributes_for(:player, yellow_cards: 3) } }
+    let(:set_suspended) { {id: player.id, player: attributes_for(:player, yellow_cards: 1) } }
+    let(:dont_set_suspended) { {id: player2.id, player: attributes_for(:player, yellow_cards: 1) } }
 
     context 'valid attributes' do
       subject { put :update, params: valid_attributes }
@@ -135,10 +136,10 @@ RSpec.describe PlayersController, type: :controller do
     context 'dont set suspended' do
       subject {put :update, params: dont_set_suspended }
       it { expect(subject).to redirect_to(players_url) }
-      it 'set suspended to false and dont change yellow_cards' do
+      it 'set suspended to false and set yellow_cards to 1' do
         subject
-        expect(player.reload.suspended).to eq(false)
-        expect(player.reload.yellow_cards).to eq(3)
+        expect(player2.reload.suspended).to eq(false)
+        expect(player2.reload.yellow_cards).to eq(2)
       end
     end
   end

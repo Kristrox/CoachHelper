@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.where(user_id: current_user.id).order(:event_date)
+    @events = current_user.events
   end
 
   def new
@@ -12,23 +12,12 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    @event.user = current_user
+    @event = current_user.events.build(event_params)
     if @event.save
       redirect_to '/events'
     else
       render 'new'
     end
-
-    # respond_to do |format|
-    #   if @event.save
-    #     format.html { redirect_to @event, notice: 'Event was successfully created.' }
-    #     format.json { render :show, status: :created, location: @event }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @event.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def update
