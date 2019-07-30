@@ -103,15 +103,13 @@ export default class PlayBook extends Component {
 
     const data = canvas.toDataURL();
 
-    axios
-      .post(
-        "/play_books.json",
-        { play_book: { name: this.state.name, data_uri: data } },
-        {
-          headers: {
-            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
-              .content
-          }
+    axios.post(
+      "/play_books.json",
+      { play_book: { name: this.state.name, data_uri: data } },
+      {
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
+            .content
         }
       }
     );

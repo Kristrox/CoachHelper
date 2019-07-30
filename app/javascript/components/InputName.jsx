@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputName = () => {
+const InputName = (props) => {
   return (
     <div className="form-group">
       <label htmlFor="formGroupExampleInput">Name</label>
