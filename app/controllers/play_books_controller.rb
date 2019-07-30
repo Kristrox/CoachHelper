@@ -19,7 +19,8 @@ class PlayBooksController < ApplicationController
         format.json { render json: @play_book.errors, status: :unprocessable_entity }
       end
     end
-
+  end
+  
   def show
     @play_book = PlayBook.find(params[:id])
   end
