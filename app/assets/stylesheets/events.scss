@@ -35,6 +35,8 @@ h1.event{
 .input-group-text{
   height: 40%;
   margin-top: 35px;
+  margin-left: 10px;
+  border-radius: 25%;
 }
 
 .actions{
@@ -126,11 +128,17 @@ tr.list{
 }
 
 button.btn.btn-outline-primary.btn-sm{
+  font-size: 20px;
   color: white;
   background-color: rgb(245, 70, 70);
   font-weight: bold;
   border-color: red;
 }
+
+button.btn.btn-outline-primary.btn-sm:link{
+  color: white;
+}
+
 button.btn.btn-outline-primary.btn-sm:hover{
   background-color: yellow;
   border-color: yellow;
