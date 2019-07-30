@@ -75,10 +75,13 @@
                   %td.date1.ls
                     %button.btn.btn-primary.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
                       Play books
+                  %td.date1.ls
+                    %button.btn.btn-primary{"data-target" => "#event-modal-edit-players-data-#{event.id}", "data-toggle" => "modal", :type => "button"}
+                      Check players
         .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
           .card-body
             - event.play_books.each do |play_book|
-              %td= play_book.name
+              %p= play_book.name
 
 
   - @events.each do |event|
@@ -121,15 +124,16 @@
             %button.close{"data-dismiss" => "modal", :type => "button"} x
           .modal-body
             - @players.each do |player|
-              %table.table.table-striped
-                %thead
-                  %tr
-                    %td= player.number
-                    %td= player.name
-                    %td= player.surname
-                    %td
-                      %button.btn.btn-outline-primary.btn-sm
-                        = link_to 'Add', assign_event_player_path({ event_id: event.id, id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
+              - if player.suspended == false
+                %table.table.table-striped
+                  %thead
+                    %tr
+                      %td= player.number
+                      %td= player.name
+                      %td= player.surname
+                      %td
+                        %button.btn.btn-outline-primary.btn-sm
+                          = link_to 'Add', assign_event_player_path({ event_id: event.id, id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
 
   - @events.each do |event|
     .modal.fade{id: "event-modal-play-book-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}

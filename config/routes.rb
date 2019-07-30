@@ -3,6 +3,7 @@ Rails.application.routes.draw do
       resources :players, module: :events, only: [:update] do
         member do
           patch :assign
+          patch :close
         end
       end
       resources :play_books, module: :events, only: [:update]
