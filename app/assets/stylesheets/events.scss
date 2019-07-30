@@ -6,19 +6,86 @@
   text-align: center;
 }
 
-tr:hover {
-  background-color: #ffa;
+.content2nd{
+  background-color: grey;
+  background:rgba(255,255,255,0.5);
+  border-radius: 15px;
+  margin-top: 2%;
 }
 
-td.date {
-  background-color: lightgoldenrodyellow;
+.form.group{
+  margin-bottom: 0rem;
+  width: 50% !important;
+}
+
+tr.rate{
+  color: white;
+}
+
+h1.event{
+  font-size: 40px;
+  color: white;
+}
+
+%td.create{
+  color: white;
+  font-size: 30px;
+}
+
+.input-group-text{
+  height: 40%;
+  margin-top: 35px;
+  margin-left: 10px;
+  border-radius: 25%;
+}
+
+.actions{
+
+  margin-top: 1.2rem;
+  // margin-left: 5%;
+}
+
+.card-body{
+  justify-content: center;
+  margin-left: 37%;
+  text-align: left;
+
+
+}
+
+tr:hover {
+  background-color: lightgreen;
+}
+
+td.date, td.date1 {
+  font-size: 23px;
+}
+
+td.date{
+  background-color: lightgreen;
+
+}
+td.date1{
+  background-color: #1daf3871;
+  color: white;
+}
+
+td.date2{
+  background-color: greenyellow;
+// td.date {
+//   background-color: lightgoldenrodyellow;
 }
 
 td.list {
   padding: 20px;
   font-weight: bold;
-  font-size: 19px;
+  font-size: 26px;
 }
+
+td.date.ls, td.date1.ls{
+  margin: 30px;
+}
+
 
 td,
 th {
@@ -51,9 +118,11 @@ p.content {
 
 td {
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
 }
 
+// tr{
+//   background-color: #1daf3871;
 tr {
   background-color: lightgrey;
 }
@@ -72,22 +141,53 @@ tr.list {
   margin-top: 10px;
 }
 
-button.btn.btn-outline-primary.btn-sm {
+button.btn.btn-outline-primary.btn-sm{
+  font-size: 20px;
   color: white;
-  background-color: rgb(184, 230, 184);
+  background-color: rgb(245, 70, 70);
+  // background-color: rgb(184, 230, 184);
   font-weight: bold;
+  border-color: red;
 }
-button.btn.btn-outline-primary.btn-sm:hover {
+
+button.btn.btn-outline-primary.btn-sm:link{
+  color: white;
+}
+
+button.btn.btn-outline-primary.btn-sm:hover{
+  background-color: yellow;
+  border-color: yellow;
+  color:black;
+}
+
+button.btn.btn-outline-primary.btn-sm:hover:active{
+  background-color: lightgreen;
+  color:white;
+}
+
+
+button.btn.btn-outline-primary.btn-sm:hover::after{
+  color:red;
   background-color: white;
 }
 
-button.btn.btn-outline-primary.btn-sm:hover::after {
-  color: red;
-  background-color: white;
+a:hover{
+  color: yellow;
 }
+
 a:hover::after {
   color: #fff;
   background-color: white;
+}
+
+
+.down{
+width: 100%;
+}
+
+.downhalf{
+width: 45%;
+text-align: center;
 }
 
 .input-group-text {
