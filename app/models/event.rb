@@ -1,4 +1,8 @@
 class Event < ApplicationRecord
-  enum event_type: %i[league_match championship_match training exhibition]
-  validates :opponent, :event_date, :event_type, presence: true
+  belongs_to :user
+  # rubocop: disable Rails/HasAndBelongsToMany
+  has_and_belongs_to_many :players
+  has_and_belongs_to_many :play_books
+  # rubocop: enable Rails/HasAndBelongsToMany
+  validates :opponent, :event_date, presence: true
 end

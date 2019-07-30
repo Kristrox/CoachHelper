@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_072754) do
+ActiveRecord::Schema.define(version: 2019_07_29_073619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,20 @@ ActiveRecord::Schema.define(version: 2019_07_25_072754) do
     t.integer "event_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "events_play_books", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "play_book_id", null: false
+    t.index ["event_id", "play_book_id"], name: "index_events_play_books_on_event_id_and_play_book_id"
+  end
+
+  create_table "events_players", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "player_id", null: false
+    t.index ["event_id", "player_id"], name: "index_events_players_on_event_id_and_player_id"
   end
 
   create_table "injuries", force: :cascade do |t|
@@ -57,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_072754) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_play_books_on_name", unique: true
   end
 
   create_table "players", force: :cascade do |t|
@@ -64,12 +79,12 @@ ActiveRecord::Schema.define(version: 2019_07_25_072754) do
     t.string "surname", null: false
     t.integer "number", null: false
     t.datetime "birth_date", null: false
-    t.integer "red_cards", default: 0, null: false
     t.integer "yellow_cards", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.integer "trained_in"
+    t.boolean "suspended", default: false, null: false
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
@@ -87,6 +102,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_072754) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "users"
   add_foreign_key "injuries", "players"
   add_foreign_key "players", "users"
 end

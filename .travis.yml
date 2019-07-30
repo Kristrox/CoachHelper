@@ -15,7 +15,7 @@ jobs:
         - bundle exec rake db:test:prepare
         - bundle exec rake
         - bundle exec rspec spec
-        - bundle exec brakeman --quiet
+        - bundle exec brakeman -x FileAccess --quiet
         - bundle exec rubocop
 stages:
   - build

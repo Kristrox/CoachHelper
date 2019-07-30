@@ -1,6 +1,8 @@
 class PlayersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @players = Player.all.order(:number)
+    @players = current_user.players
   end
 
   def new
@@ -8,12 +10,9 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(player_params)
-    @player.red_cards = 0
-    @player.yellow_cards = 0
-    @player.user = current_user
+    @player = current_user.players.build(player_params)
     if @player.save
-      redirect_to '/players'
+      redirect_to players_path
     else
       render 'new'
     end
@@ -26,28 +25,27 @@ class PlayersController < ApplicationController
   def destroy
     @player = Player.find(params[:id])
     @player.destroy
-    respond_to do |format|
-      format.html { redirect_to players_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to players_url, notice: 'Post was successfully destroyed.'
   end
 
   def update
     @player = Player.find(params[:id])
-    respond_to do |format|
-      if @player.update(player_params)
-        format.html { redirect_to players_url, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
-      end
+    update_params = player_params
+    if update_params[:yellow_cards] && update_params[:yellow_cards] == '1'
+      update_params[:yellow_cards] = @player.yellow_cards
+      update_params = Player.suspend(update_params)
+    end
+
+    if @player.update(update_params)
+      redirect_to players_path, notice: 'Player was successfully updated.'
+    else
+      redirect_to players_path, alert: 'Player has not been updated!'
     end
   end
 
   private
 
   def player_params
-    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :red_cards, :yellow_cards)
+    params.require(:player).permit(:name, :surname, :number, :birth_date, :trained_in, :yellow_cards, :suspended)
   end
 end

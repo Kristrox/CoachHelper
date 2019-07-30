@@ -1,61 +1,49 @@
 class EventsController < ApplicationController
-  def index
-    @events = Event.all.order(:event_date)
-  end
+  before_action :authenticate_user!
 
-  def new
+  def index
+    @events = current_user.events.order(:event_date)
     @event = Event.new
+    @play_books = PlayBook.all
+    @players = Player.where(user_id: current_user.id)
   end
 
   def edit
     @event = Event.find(params[:id])
   end
 
+  def edit_player
+    @event = Event.find(params[:id])
+    @players = Player.all.order(:number)
+  end
+
   def create
-    @event = Event.new(event_params)
+    @event = current_user.events.build(event_params)
     if @event.save
-      redirect_to '/events'
+      redirect_to events_path
     else
       render 'new'
     end
-
-    # respond_to do |format|
-    #   if @event.save
-    #     format.html { redirect_to @event, notice: 'Event was successfully created.' }
-    #     format.json { render :show, status: :created, location: @event }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @event.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def update
     @event = Event.find(params[:id])
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.update(event_params)
+      redirect_to events_path, notice: 'Event was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to events_url, notice: 'Event was successfully destroyed.'
   end
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:opponent, :event_date, :event_type)
+    params.require(:event).permit(:opponent, :event_date)
   end
 end
