@@ -1,19 +1,13 @@
 Rails.application.routes.draw do
   resources :events do
-    member do
-      get 'edit_player'
-      put 'add_player'
-      patch 'add_player'
-      put 'add_play_book'
-      patch 'add_play_book'
-    end
+      resources :players, module: :events, only: [:update] do
+        member do
+          patch :assign
+        end
+      end
+      resources :play_books, module: :events, only: [:update]
   end
-  resources :players do
-    member do
-      put 'update_player'
-      patch 'update_player'
-    end
-  end
+  resources :players
   resources :calendar
   resources :play_books, only: [:show,:new,:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
