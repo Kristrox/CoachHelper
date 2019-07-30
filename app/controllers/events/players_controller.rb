@@ -11,12 +11,15 @@ class Events::PlayersController < ApplicationController
   end
 
   def update
+    @event = Event.find(params[:id])
     @player = Player.find(params[:id])
+
     update_params = player_params
     if update_params[:yellow_cards] && update_params[:yellow_cards] == '1'
       update_params[:yellow_cards] = @player.yellow_cards
       update_params = Player.suspend(update_params)
     end
+    @event.closed_match = "true"
     if @player.update(update_params)
       redirect_to events_path, notice: 'Player was successfully updated.'
     else
@@ -28,5 +31,8 @@ class Events::PlayersController < ApplicationController
 
   def player_params
     params.require(:player).permit(:yellow_cards, :suspended)
+  end
+  def event_params
+    params.require(:event).permit(:closed_match)
   end
 end
