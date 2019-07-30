@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   def index
-    @players = Player.all.order(:number)
+    @players = Player.where(user_id: current_user.id).order(:number)
   end
 
   def new
