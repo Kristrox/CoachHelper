@@ -20,7 +20,7 @@ class PlayBooksController < ApplicationController
       end
     end
   end
-  
+
   def show
     @play_book = PlayBook.find(params[:id])
   end
