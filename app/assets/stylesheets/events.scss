@@ -33,8 +33,6 @@ h1.event{
 }
 
 .input-group-text{
-  // weigth: 100px;
-  // height: 10px;
   height: 40%;
   margin-top: 35px;
 }
@@ -42,7 +40,6 @@ h1.event{
 .actions{
 
   margin-top: 1.2rem;
-  // margin-left: 5%;
 }
 
 .card-body{
@@ -131,11 +128,12 @@ tr.list{
 button.btn.btn-outline-primary.btn-sm{
   color: white;
   background-color: rgb(245, 70, 70);
-  // background-color: rgb(184, 230, 184);
   font-weight: bold;
+  border-color: red;
 }
 button.btn.btn-outline-primary.btn-sm:hover{
   background-color: yellow;
+  border-color: yellow;
   color:black;
 }
 
@@ -154,9 +152,6 @@ a:hover{
   color: yellow;
 }
 
-// a {
-//   color:pink;
-// }
 
 a:hover::after {
   color: #fff;

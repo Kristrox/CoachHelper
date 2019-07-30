@@ -1,24 +1,12 @@
 import React, { Component } from "react";
-import { Text, Group, Image } from "react-konva";
-import enemyTShirtImage from "./images/tshirt.png"
-import ourTeamTShirtImage from "./images/tshirto.png"
-import useImage from "use-image";
-
-const EnemyTshirt = (props) => {
-  const [image] = useImage(enemyTShirtImage)
-  return <Image image={image} width={60} height={50} x={props.x} y={props.y}/>
-}
-
-const TeamTshirt = (props) => {
-  const [image] = useImage(ourTeamTShirtImage)
-  return <Image image={image} width={60} height={50} x={props.x} y={props.y}/>
-}
+import { Text, Group } from "react-konva";
 
 export default class DragAndDropOnField extends Component {
   state = {
     enemiesOnField: [{ x: 180, y: 20, id: 0 }],
     playersOnField: [{ x: 100, y: 20, id: 0 }],
     playerNumber: 0,
+    ballisDragging: false
   };
 
   renderEnemies = () => {
@@ -29,8 +17,9 @@ export default class DragAndDropOnField extends Component {
         x={player.x}
         y={player.y}
         onDragStart={() => {
-          this.props.onHandleUpdateEnemyPlayersPosition(this.props.enemyPlayers);
-          this.props.onHandleDraging(true);
+          this.props.onHandleUpdateEnemyPlayersPosition(
+            this.props.enemyPlayers
+          );
         }}
         onDragEnd={e => {
           const x = this.props.enemyPlayers[player.id - 1].x;
@@ -42,18 +31,10 @@ export default class DragAndDropOnField extends Component {
             this.props.enemyPlayers
           );
           this.props.onHandleUpdateOldPlayersPosition(oldPosition);
-          this.props.onHandleDraging(false);
         }}
       >
-        <EnemyTshirt/>
-        <Text
-          x={player.id < 10 ? 23 : 17}
-          y={12}
-          text={player.id}
-          fontSize={20}
-          fill="white"
-          fontStyle="bold"
-        />
+        <Text text="👚" fontSize={50} />
+        <Text x={12} y={10} text={player.id} fontSize={20} />
       </Group>
     ));
     return listPlayers;
@@ -86,7 +67,6 @@ export default class DragAndDropOnField extends Component {
           y={player.y}
           onDragStart={e => {
             this.props.onHandleUpdatePlayersPosition(this.props.players);
-            this.props.onHandleDraging(true);
           }}
           onDragEnd={e => {
             const x = this.props.players[player.id - 1].x;
@@ -96,18 +76,15 @@ export default class DragAndDropOnField extends Component {
             this.props.players[player.id - 1].y = e.target.y();
             this.props.onHandleUpdatePlayersPosition(this.props.players);
             this.props.onHandleUpdateOldPlayersPosition(oldPosition);
-            this.props.onHandleDraging(false);
           }}
         >
-          <TeamTshirt key={player.id + "a"} />
+          <Text key={player.id + "a"} text="👕" fontSize={50} />
           <Text
             key={player.id + "b"}
-            x={player.id < 10 ? 23 : 17}
-            y={12}
+            x={12}
+            y={10}
             text={player.id}
             fontSize={20}
-            fill="white"
-            fontStyle="bold"
           />
         </Group>
       ));
@@ -123,10 +100,11 @@ export default class DragAndDropOnField extends Component {
   render() {
     return (
       <>
-        <EnemyTshirt x={180} y={20}/>
+        <Text text="👚" x={180} y={20} fontSize={50} />
+
         {this.renderEnemies()}
 
-        <TeamTshirt x={100} y={20}/>
+        <Text text="👕" x={100} y={20} fontSize={50} />
 
         {this.renderPlayers(
           this.props.players,
@@ -142,7 +120,6 @@ export default class DragAndDropOnField extends Component {
           draggable
           onDragStart={() => {
             this.props.onHandleUpdateBallPosition(this.props.ballPosition);
-            this.props.onHandleDraging(true);
           }}
           onDragEnd={e => {
             const newPosition = { ballX: e.target.x(), ballY: e.target.y() };
@@ -151,7 +128,6 @@ export default class DragAndDropOnField extends Component {
               ballY: this.props.ballPosition[0].ballY
             };
             this.props.onHandleUpdateBallPosition([newPosition, oldPosition]);
-            this.props.onHandleDraging(false);
           }}
         />
       </>
