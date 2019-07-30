@@ -21,13 +21,45 @@
 
 body {
   font-family: 'Graduate', cursive;
-  // font-family: 'Lato', sans-serif;
-  //font-family: "Ubuntu", sans-serif;
   background-color: lightgray;
   background-image: url(bc-image.jpeg);
   background-size:cover;
 }
 .content, .table, .td, .tr {
+  font-family: 'Graduate', cursive;
+}
+
+.btn-link {
+  font-size: 30px;
+}
+
+card-event{
+  background-color:rgba(255,255,255,0.5);
+}
+
+.card-header {
+  background:rgba(255,255,255,0.5) !important;
+  height: 100px;
+  justify-content: center;
+  // margin-bottom: 30px;
+}
+
+button.btn.btn-link.collapsed{
+  color: black;
+  margin-bottom: 20px;
+
+//   width: 70%;
+//   height: 60px;
+//   margin: 0px;
+}
+
+h5.mb-0{
+  height:60px;
+  margin-bottom: 10px;
+//   // background-color: rgba(100, 100, 100, 0.5);
+}
+
+.content{
   font-family: 'Graduate', cursive;
 }
 

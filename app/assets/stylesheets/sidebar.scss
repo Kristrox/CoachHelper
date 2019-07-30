@@ -6,13 +6,15 @@
   position: fixed;
   height: 100%;
   overflow: auto;
-  background-color: grey;
+  // background-color: grey;
+  background:rgba(22, 19, 19, 0.5);
+  color: white;
 }
 
 /* Sidebar links */
 #sidebar a {
   display: block;
-  color: black;
+  color: white;
   padding: 16px;
   text-decoration: none;
 }
