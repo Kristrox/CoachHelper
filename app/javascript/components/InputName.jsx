@@ -1,5 +1,4 @@
 import React from "react";
-import { mapContextToProps } from "react-context-toolbox";
 
 const InputName = props => {
   return (
@@ -8,7 +7,6 @@ const InputName = props => {
       <input
         type="text"
         className="form-control"
-        id="formGroupExampleInput"
         value={props.name}
         onChange={e => props.onChangeName(e.target.value)}
       />
@@ -17,4 +15,3 @@ const InputName = props => {
 };
 
 export default InputName;
-//onChange = {e => this.PaymentResponse.}
