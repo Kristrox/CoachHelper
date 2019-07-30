@@ -18,6 +18,7 @@ RSpec.describe Player, type: :model do
 
     describe 'relations' do
         it { is_expected.to have_many(:injuries) }
+        it { is_expected.to belong_to(:user) } 
     end
 
     describe '#suspend' do
