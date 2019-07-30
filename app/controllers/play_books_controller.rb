@@ -9,7 +9,7 @@ class PlayBooksController < ApplicationController
         data = play_book_params[:data_uri]
         id = @play_book.id
         image_data = Base64.decode64(data['data:image/png;base64,'.length..-1])
-        File.open(Rails.root.join("/public/uploads/#{id}.png"), 'wb') do |f|
+        File.open(Rails.root.join('public', 'uploads', "#{id}.png"), 'wb') do |f|
           f.write image_data
         end
         format.html { redirect_to @play_book, notice: 'PlayBook was successfully created.' }
@@ -19,6 +19,9 @@ class PlayBooksController < ApplicationController
         format.json { render json: @play_book.errors, status: :unprocessable_entity }
       end
     end
+
+  def show
+    @play_book = PlayBook.find(params[:id])
   end
 
   private
