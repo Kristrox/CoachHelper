@@ -11,7 +11,7 @@
         %td.list Status
         %td.list
       - @players.each do |player|
-        %tr{:class => player.suspended ? 'suspended' : 'available'}
+        %tr{:class => player.suspended || player.injury != "" ? 'suspended' : 'available'}
           %td.date
             = player.number
           %td.date1

@@ -8,6 +8,15 @@ class EventsController < ApplicationController
     @players = Player.where(user_id: current_user.id)
   end
 
+  def import
+    if params[:file]
+      Event.importcsv(params[:file], current_user.id)
+      redirect_to events_path, notice: 'Event was successfully updated.'
+    else
+      redirect_to events_path, notice: 'File was not specified'
+    end
+  end
+
   def edit
     @event = Event.find(params[:id])
   end
