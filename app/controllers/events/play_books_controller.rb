@@ -9,7 +9,7 @@ class Events::PlayBooksController < ApplicationController
     end
   end
 
-  def play_book_params
-    params.require(:play_book).permit(:name, :data_uri)
-  end
+  # def play_book_params
+  #   params.require(:play_book).permit(:name, :data_uri)
+  # end
 end
