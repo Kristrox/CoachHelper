@@ -43,6 +43,22 @@ RSpec.describe EventsController, type: :controller do
     end
   end
 
+  describe 'GET #edit' do
+    let(:event) { create(:event, user_id: user.id) }
+    before { get :edit, params: {id: event.id } }
+
+    describe 'successful response' do
+      it { expect(response).to be_successful }
+      it { expect(response).to render_template }
+    end
+
+    context 'event' do
+      it 'returns one event by given id' do
+        expect(assigns(:event)).to eq(event)
+      end
+    end
+  end
+
   describe 'POST #create' do
     let(:valid_attributes) { { event: attributes_for(:event, user_id: user.id) } }
     let(:invalid_attributes) { { event: attributes_for(:event, user_id: user.id, opponent: "") } }
