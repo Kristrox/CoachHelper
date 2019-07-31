@@ -97,36 +97,12 @@
             %h4#myModalLabel.modal-title Edit players data after match
             %button.close{"data-dismiss" => "modal", :type => "button"} x
           .modal-body
+            = render :partial => "modal", locals: { event: event }
 
-            #accordion
-              - event.players.each do |player|
-                .card
-                  #headingTwo.card-header
-                    %h5.mb-0
-                      %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{player.id}", "data-toggle" => "collapse"}
-                        %tr
-                          %td= player.number
-                          %td= player.name
-                          %td= player.surname
-                .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{player.id}"}
-                  .card-body
-                    %td
-                      %h4 Yellow cards: #{player.yellow_cards}
-                      %h5 Edit player data                                        
-                      = bootstrap_form_for player, url: event_player_path(event.id, player.id ) do |f|
-                        .field.align-middle  
-                          %tr
-                            %td
-                              Injury: 
-                              .field
-                                = f.text_field :injury
-                            %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
-                            %td=f.select :suspended, [ false, true ], :prompt => 'Select One'
-                            = f.submit "Update" 
           .modal-footer
             = form_for event, url: close_event_path(event.id) do |f|
               = f.hidden_field :event_id, :value => event.id
-              = f.submit "Close event" 
+              = f.submit "Close event"
 
 
   - @events.each do |event|
