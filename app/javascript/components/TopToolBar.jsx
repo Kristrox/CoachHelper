@@ -8,19 +8,20 @@ export default class TopToolBar extends Component {
     this.state = {
       activeDashedArrows: false,
       activeArrows: false
-    }
+    };
   }
 
-  //---------------------------
-  //Zapis zagrywki
-  //---------------------------
   handleSave = e => {
     this.props.onHandleSave();
   };
 
   render() {
-    const dashedArrowsClass = this.state.activeDashedArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
-    const arrowsClass = this.state.activeArrows ? "TopToolBar btn btn-danger" : "TopToolBar btn btn-success";
+    const dashedArrowsClass = this.state.activeDashedArrows
+      ? "TopToolBar btn btn-danger"
+      : "TopToolBar btn btn-success";
+    const arrowsClass = this.state.activeArrows
+      ? "TopToolBar btn btn-danger"
+      : "TopToolBar btn btn-success";
 
     return (
       <div className="TopToolBar d-flex justify-content-end">
@@ -37,11 +38,11 @@ export default class TopToolBar extends Component {
         <button
           className={arrowsClass}
           onClick={() => {
-            this.props.onHandleStartDrowingArrows(false)
+            this.props.onHandleStartDrowingArrows(false);
             this.setState({
               activeArrows: !this.state.activeArrows,
               activeDashedArrows: false
-            })
+            });
           }}
         >
           Arrows
@@ -53,7 +54,7 @@ export default class TopToolBar extends Component {
             this.setState({
               activeDashedArrows: !this.state.activeDashedArrows,
               activeArrows: false
-            })
+            });
           }}
         >
           Dashed Arrows

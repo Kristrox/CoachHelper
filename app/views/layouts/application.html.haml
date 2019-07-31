@@ -9,9 +9,11 @@
     = javascript_include_tag 'application'
     = render partial: 'sidebar', style: "font-size: 40"
     %body
-    - if notice
-      %p.alert.alert-success= notice
-    - if alert
-      %p.alert.alert-danger= alert 
+      .content
+        .content2nd
+        - if notice
+          %p.alert.alert-success= notice
+        - if alert
+          %p.alert.alert-danger= alert 
     = yield
 

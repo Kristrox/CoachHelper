@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
   resources :events do
+      member do
+        patch :close
+      end
       resources :players, module: :events, only: [:update] do
         member do
           patch :assign
         end
       end
       resources :play_books, module: :events, only: [:update]
+      collection { post :import }
   end
+
   resources :players
   resources :calendar
   resources :play_books, only: [:show,:new,:create]

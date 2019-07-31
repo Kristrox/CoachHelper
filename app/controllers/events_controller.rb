@@ -1,14 +1,20 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
 
-  def new
-    @event = Event.new
-  end
-
   def index
-    @events = Event.all.order(:event_date)
+    @events = current_user.events.order(:event_date)
+    @event = Event.new
     @play_books = PlayBook.all
     @players = Player.where(user_id: current_user.id)
+  end
+
+  def import
+    if params[:file]
+      Event.importcsv(params[:file], current_user.id)
+      redirect_to events_path, notice: 'Event was successfully updated.'
+    else
+      redirect_to events_path, notice: 'File was not specified'
+    end
   end
 
   def edit
@@ -42,6 +48,16 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
     redirect_to events_url, notice: 'Event was successfully destroyed.'
+  end
+
+  def close
+    event = Event.find(params[:id])
+    Player.remove_players_suspension_after_match(event.players, current_user.id)
+    if event.update(closed_match: true)
+      redirect_to events_path, notice: 'Player was successfully updated.'
+    else
+      redirect_to events_path, alert: 'Player has not been updated!'
+    end
   end
 
   private

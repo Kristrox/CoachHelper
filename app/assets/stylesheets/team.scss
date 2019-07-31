@@ -61,3 +61,48 @@ tr.list{
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
+.suspended {
+  background-color: #ff1a1a;
+}
+
+.available {
+  background-color: lightgrey;
+}
+
+h1.event.play{
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 100px;
+  font-size: 60px;
+}
+
+.btn-outline-primary.playerbutton:hover{
+  color:black;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.btn-outline-primary.playerbutton{
+  color:black;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 60px;
+  width: 200px;
+  max-width: 70%;
+  min-width: 50px; 
+}
+
+.przycisk{
+  color:black;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+.przycisk:hover{
+  color:black;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
