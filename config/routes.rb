@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resources :events do
+      member do
+        patch :close
+      end
       resources :players, module: :events, only: [:update] do
         member do
           patch :assign

@@ -112,12 +112,17 @@
                         .field.align-middle  
                           %tr
                             %td
-                              7injury: 
+                              Injury: 
                               .field
                                 = f.text_field :injury
                             %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
                             %td=f.select :suspended, [ false, true ], :prompt => 'Select One'
                             = f.submit "Update" 
+          .modal-footer
+            = form_for event, url: close_event_path(event.id) do |f|
+              = f.hidden_field :event_id, :value => event.id
+              = f.submit "Close" 
+
 
   - @events.each do |event|
     .modal.fade{id: "event-modal-add-player-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
