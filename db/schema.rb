@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_073619) do
+ActiveRecord::Schema.define(version: 2019_07_31_120854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_073619) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.boolean "closed_match", default: false, null: false
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -58,20 +59,13 @@ ActiveRecord::Schema.define(version: 2019_07_29_073619) do
     t.index ["event_id", "player_id"], name: "index_events_players_on_event_id_and_player_id"
   end
 
-  create_table "injuries", force: :cascade do |t|
-    t.bigint "player_id"
-    t.text "description", default: "", null: false
-    t.datetime "final_date", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["player_id"], name: "index_injuries_on_player_id"
-  end
-
   create_table "play_books", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["name"], name: "index_play_books_on_name", unique: true
+    t.index ["user_id"], name: "index_play_books_on_user_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -85,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_073619) do
     t.bigint "user_id"
     t.integer "trained_in"
     t.boolean "suspended", default: false, null: false
+    t.text "injury", default: "", null: false
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
@@ -103,6 +98,6 @@ ActiveRecord::Schema.define(version: 2019_07_29_073619) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "events", "users"
-  add_foreign_key "injuries", "players"
+  add_foreign_key "play_books", "users"
   add_foreign_key "players", "users"
 end
