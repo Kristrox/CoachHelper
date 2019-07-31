@@ -38,7 +38,7 @@ class Events::PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:yellow_cards, :suspended)
+    params.require(:player).permit(:yellow_cards, :suspended, :injury)
   end
 
   def event_params

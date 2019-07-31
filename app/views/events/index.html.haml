@@ -112,7 +112,9 @@
                         .field.align-middle  
                           %tr
                             %td
-                              = f.text_field :surname, class: "col-md-3 control-label"
+                              7injury: 
+                              .field
+                                = f.text_field :injury
                             %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
                             %td=f.select :suspended, [ false, true ], :prompt => 'Select One'
                             = f.submit "Update" 
@@ -126,7 +128,7 @@
             %button.close{"data-dismiss" => "modal", :type => "button"} x
           .modal-body
             - @players.each do |player|
-              - if player.suspended == false
+              - if player.suspended == false && player.injury == nil
                 %table.table.table-striped
                   %thead
                     %tr
