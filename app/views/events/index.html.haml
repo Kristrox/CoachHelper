@@ -111,6 +111,8 @@
                       = bootstrap_form_for player, url: event_player_path(event.id, player.id ) do |f|
                         .field.align-middle  
                           %tr
+                            %td
+                              = f.text_field :surname, class: "col-md-3 control-label"
                             %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
                             %td=f.select :suspended, [ false, true ], :prompt => 'Select One'
                             = f.submit "Update"   
