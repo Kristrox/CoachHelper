@@ -115,7 +115,7 @@
                               = f.text_field :surname, class: "col-md-3 control-label"
                             %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
                             %td=f.select :suspended, [ false, true ], :prompt => 'Select One'
-                            = f.submit "Update"   
+                            = f.submit "Update" 
 
   - @events.each do |event|
     .modal.fade{id: "event-modal-add-player-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
