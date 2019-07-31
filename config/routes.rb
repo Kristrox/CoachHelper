@@ -7,7 +7,9 @@ Rails.application.routes.draw do
         end
       end
       resources :play_books, module: :events, only: [:update]
+      collection { post :import }
   end
+
   resources :players
   resources :calendar
   resources :play_books, only: [:show,:new,:create]

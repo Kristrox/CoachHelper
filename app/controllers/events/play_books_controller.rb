@@ -8,8 +8,4 @@ class Events::PlayBooksController < ApplicationController
       redirect_to events_path, alert: 'Event has not been updated!'
     end
   end
-
-  # def play_book_params
-  #   params.require(:play_book).permit(:name, :data_uri)
-  # end
 end
