@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_31_073827) do
+ActiveRecord::Schema.define(version: 2019_07_31_112944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2019_07_31_073827) do
     t.bigint "user_id"
     t.integer "trained_in"
     t.boolean "suspended", default: false, null: false
-    t.text "injury"
+    t.text "injury", default: "", null: false
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 

@@ -135,7 +135,7 @@
             %button.close{"data-dismiss" => "modal", :type => "button"} x
           .modal-body
             - @players.each do |player|
-              - if player.suspended == false && player.injury == nil
+              - if player.suspended == false && player.injury == ""
                 %table.table.table-striped
                   %thead
                     %tr
