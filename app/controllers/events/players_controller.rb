@@ -2,7 +2,8 @@ class Events::PlayersController < ApplicationController
   def assign
     @event = Event.find(params[:event_id])
     @player = Player.find(params[:id])
-    if @event.players << @player
+    if !@event.players.include?(@player)
+      @event.players << @player
       redirect_to events_path, notice: 'Event was successfully updated.'
     else
       redirect_to events_path, alert: 'Event has not been updated!'

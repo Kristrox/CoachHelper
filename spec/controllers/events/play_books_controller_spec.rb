@@ -26,20 +26,5 @@ RSpec.describe Events::PlayBooksController, type: :controller do
         expect(event.play_books.count).to eq(1)
       end
     end
-
-    context 'invalid attributes' do
-      subject { put :update, params: invalid_attributes }
-      it { expect(subject).to redirect_to(events_path) }
-
-      it 'redirect with notice' do
-        subject
-        expect(flash[:notice]).to be_present
-      end
-
-      it 'updates list of play books that belongs to event' do
-        subject
-        expect(event.play_books.count).to eq(1)
-      end
-    end
   end
 end
