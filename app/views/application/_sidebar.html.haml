@@ -16,7 +16,7 @@
       =link_to "Team" , players_path,id: 'team', class: "a"
       =link_to "Calendar" , events_path, id: 'events', class: "a"
       =link_to "Play Books" , new_play_book_path, id: 'play_books', class: "active a"
-      -PlayBook.all.each do |n|
+      -current_user.play_books.each do |n|
         =link_to "#{n.id }) #{n.name}", play_book_path(id: n.id), id: 'play_books', class: "a"
     - else 
       =link_to "Team" , players_path,id: 'team', class: "active a"
