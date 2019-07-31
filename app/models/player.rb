@@ -20,4 +20,14 @@ class Player < ApplicationRecord
     params[:suspended] = true
     params
   end
+
+  def self.remove_players_suspension_after_match(players, user_id)
+    if players.nil? { nil }
+    else
+      Player.all.find_each do |player|
+        if player.user_id == user_id && !players.include?(player) { Player.update(player.id, suspended: false) }
+        end
+      end
+    end
+  end
 end

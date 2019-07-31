@@ -1,7 +1,8 @@
 .content
   .content2nd
     %h1.player List of your Players  
-    = link_to 'New Player', new_player_path(), class: "btn btn-outline-primary"
+    %h1.event.play
+      = link_to 'Create New Player', new_player_path(), class: "przycisk"
     %table
       %tr.list
         %td.list Number
@@ -10,7 +11,7 @@
         %td.list Injury
         %td.list
       - @players.each do |player|
-        %tr{:class => player.suspended ? 'suspended' : 'available'}
+        %tr{:class => player.suspended || player.injury != "" ? 'suspended' : 'available'}
           %td.date
             = player.number
           %td.date1

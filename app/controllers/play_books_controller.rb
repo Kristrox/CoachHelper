@@ -2,7 +2,7 @@ class PlayBooksController < ApplicationController
   def new; end
 
   def create
-    @play_book = PlayBook.new(name: play_book_params[:name])
+    @play_book = PlayBook.new(name: play_book_params[:name], user_id: current_user.id)
     respond_to do |format|
       if @play_book.save
         require 'base64'
