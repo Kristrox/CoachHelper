@@ -19,3 +19,8 @@
 // If you require timezone data (see moment-timezone-rails for additional file options)
 //= require moment-timezone-with-data
 //= require tempusdominus-bootstrap-4
+
+
+$(document).ready(function () {
+    $("alert.alert-success").fadeOut(3000);
+})
