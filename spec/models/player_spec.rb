@@ -17,7 +17,6 @@ RSpec.describe Player, type: :model do
     end
 
     describe 'relations' do
-        it { is_expected.to have_many(:injuries) }
         it { is_expected.to belong_to(:user) } 
     end
 end

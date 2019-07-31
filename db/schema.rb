@@ -59,15 +59,6 @@ ActiveRecord::Schema.define(version: 2019_07_30_191813) do
     t.index ["event_id", "player_id"], name: "index_events_players_on_event_id_and_player_id"
   end
 
-  create_table "injuries", force: :cascade do |t|
-    t.bigint "player_id"
-    t.text "description", default: "", null: false
-    t.datetime "final_date", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["player_id"], name: "index_injuries_on_player_id"
-  end
-
   create_table "play_books", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -86,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_191813) do
     t.bigint "user_id"
     t.integer "trained_in"
     t.boolean "suspended", default: false, null: false
+    t.text "injury"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
@@ -104,6 +96,5 @@ ActiveRecord::Schema.define(version: 2019_07_30_191813) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "events", "users"
-  add_foreign_key "injuries", "players"
   add_foreign_key "players", "users"
 end
