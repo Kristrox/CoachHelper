@@ -17,10 +17,11 @@ class Events::PlayersController < ApplicationController
       update_params[:yellow_cards] = @player.yellow_cards
       update_params = Player.suspend(update_params)
     end
+    @event = Event.find(params[:event_id])
     if @player.update(update_params)
-      redirect_to events_path, notice: 'Player was successfully updated.'
+      render "events/update_modal"
     else
-      redirect_to events_path, alert: 'Player has not been updated!'
+      render "events/error"
     end
   end
 
