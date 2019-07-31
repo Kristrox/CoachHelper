@@ -80,10 +80,15 @@
                       Check players
         .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
           .card-body
-            - event.play_books.each do |play_book|
-              %p= play_book.name
-
-
+            %table.table.table-striped
+              %thead
+              - event.play_books.each do |play_book|
+                %tr
+                  %td
+                    = play_book.name
+                  %td 
+                    %button.btn.btn-outline-primary.btn-sm
+                      = link_to 'Show', play_book_path({id: play_book.id }), class: ".btn.btn-outline-primary.btn-sm"
   - @events.each do |event|
     .modal.fade{id: "event-modal-edit-players-data-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
       .modal-dialog{:role => "document"}
