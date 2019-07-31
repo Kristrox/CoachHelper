@@ -7,10 +7,25 @@
 }
 
 .content2nd{
-  background-color: grey;
+  // background-color:s grey;
   background:rgba(255,255,255,0.5);
   border-radius: 15px;
   margin-top: 2%;
+}
+
+.content2nd.play_books{
+  padding-bottom: 15px;
+}
+
+.content2nd.play_books.show{
+  padding-bottom: 30px;
+}
+
+.content2nd.play_books.new{
+  background:rgba(255,255,255,0.5);
+  background-size: contain;
+  padding-bottom: 11%;
+  // padding-bottom: 100px;
 }
 
 .form.group{
@@ -144,10 +159,10 @@ tr.list {
 button.btn.btn-outline-primary.btn-sm{
   font-size: 20px;
   color: white;
-  background-color: rgb(245, 70, 70);
+  background-color: orange;
   // background-color: rgb(184, 230, 184);
   font-weight: bold;
-  border-color: red;
+  border-color: orange;
 }
 
 button.btn.btn-outline-primary.btn-sm:link{
