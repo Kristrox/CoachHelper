@@ -22,15 +22,12 @@ class Player < ApplicationRecord
   end
 
   def self.remove_players_suspension_after_match(players)
-    if(players.nil?)
-      return nil
+    if players.nil? { nil }
     else
-      players.all.each do |player|
-        if(player.suspended)
-          player.suspended = false;
-        end   
+      players.all.find_each do |player|
+        player.suspended = false
       end
-      return players
+
     end
   end
 end
