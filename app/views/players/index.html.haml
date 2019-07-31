@@ -7,7 +7,7 @@
         %td.list Number
         %td.list Name
         %td.list Surname
-        %td.list Status
+        %td.list Injury
         %td.list
       - @players.each do |player|
         %tr{:class => player.suspended ? 'suspended' : 'available'}
@@ -18,7 +18,7 @@
           %td.date1
             = player.surname.capitalize
           %td.date1
-            Git
+            = player.injury
           %td
             %button.btn.btn-outline-primary.btn-sm
               = link_to 'Edit', edit_player_path(player), :class => ".btn.btn-outline-primary.btn-sm"

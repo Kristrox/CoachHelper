@@ -91,7 +91,6 @@
           .modal-body
             = render :partial => "modal", locals: { event: event }
 
-
           .modal-footer
             = form_for event, url: close_event_path(event.id) do |f|
               = f.hidden_field :event_id, :value => event.id
@@ -107,7 +106,7 @@
             %button.close{"data-dismiss" => "modal", :type => "button"} x
           .modal-body
             - @players.each do |player|
-              - if player.suspended == false && player.injury == nil
+              - if player.suspended == false 
                 %table.table.table-striped
                   %thead
                     %tr

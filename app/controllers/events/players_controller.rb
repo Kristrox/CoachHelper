@@ -19,9 +19,9 @@ class Events::PlayersController < ApplicationController
     end
     @event = Event.find(params[:event_id])
     if @player.update(update_params)
-      render "events/update_modal"
+      render 'events/update_modal'
     else
-      render "events/error"
+      render 'events/error'
     end
   end
 
