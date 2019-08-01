@@ -4,8 +4,8 @@ class EventsController < ApplicationController
   def index
     @events = current_user.events.order(:event_date)
     @event = Event.new
-    @play_books = PlayBook.all
-    @players = Player.where(user_id: current_user.id)
+    @play_books = current_user.play_books.all
+    @players =  current_user.players.all
   end
 
   def import
