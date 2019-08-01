@@ -28,9 +28,16 @@ body {
   font-family: 'Graduate', cursive;
 }
 
-// .full-screenable-node.d-flex.flex-column{ 
-//   background-color: rgba(100, 100, 100, 0.5)
-// }
+footer{
+  margin-left: 10px;
+  color: white;
+}
+
+.content2nd.footer{
+  margin-left: 315px;
+  position: absolute;
+  bottom: 0%;
+}
 
 h1.event.start.margin{
   margin-left: 300px;
@@ -64,10 +71,17 @@ card-event{
 button.btn.btn-link.collapsed{
   color: black;
   margin-bottom: 20px;
+}
 
-//   width: 70%;
-//   height: 60px;
-//   margin: 0px;
+.btn.btn-link.collapsed.przycisk{
+  color:black;
+  padding: 10px;
+  background-color: greenyellow;
+  border-color: yellow;
+  border-radius: 10px;
+  border-width: 2px;
+  font-size: 30px;
+  margin-bottom: 0px;
 }
 
 h5.mb-0{
