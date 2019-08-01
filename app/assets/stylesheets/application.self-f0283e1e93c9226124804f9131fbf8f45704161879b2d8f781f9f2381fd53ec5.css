@@ -2395,6 +2395,7 @@ textarea.form-control {
 /* line 170, ../.rvm/gems/ruby-2.6.3@intern2019/gems/bootstrap-4.3.1/assets/stylesheets/bootstrap/_forms.scss */
 .form-group {
   margin-bottom: 1rem;
+  margin-right: 10px;
 }
 
 /* line 174, ../.rvm/gems/ruby-2.6.3@intern2019/gems/bootstrap-4.3.1/assets/stylesheets/bootstrap/_forms.scss */

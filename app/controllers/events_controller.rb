@@ -21,11 +21,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  def edit_player
-    @event = Event.find(params[:id])
-    @players = Player.all.order(:number)
-  end
-
   def create
     @event = current_user.events.build(event_params)
     if @event.save

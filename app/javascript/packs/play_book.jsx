@@ -81,8 +81,6 @@ export default class PlayBook extends Component {
 
   handleSave = () => {
     let image = this.fieldRef.current.getStage().toDataURL();
-    console.log(this.state.name);
-    console.log(image);
 
     axios.post(
       "/play_books.json",
@@ -179,7 +177,6 @@ export default class PlayBook extends Component {
       arrwosArray: arrwosArray,
       actionName: "updateArrow"
     });
-    console.log(this.state.actionNumber);
   }
 
   handleUpdateBallPosition(ballPosition) {
