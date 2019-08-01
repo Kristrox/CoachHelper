@@ -23,6 +23,6 @@
         });
       .field
         = f.select :trained_in, options_for_select(Player.trained_ins.map { |key, value| [key.humanize, key] }), {prompt: "Choose one of them: ..."}, class: "form-control"
-      .actions
-        = link_to 'Back', players_path
+      .actions.new
         = f.submit "Submit"
+        = link_to 'Back', players_path

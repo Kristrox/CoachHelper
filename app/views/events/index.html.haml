@@ -8,7 +8,7 @@
             %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo", "data-toggle" => "collapse"}
               Create New Event
       .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo"}
-        .card-body
+        .card-body.event
           = bootstrap_form_for @event do |f|
             %tr
               %td.create
@@ -34,10 +34,10 @@
             = submit_tag 'Import CSV'
     %table
       %tr.list
-        %td.list Event date
-        %td.list Opponent
-        %td.list Close event
-        %td.list Add player
+        %td.list
+        %td.list
+        %td.list
+        %td.list
         %td.list
         %td.list
     #accordion

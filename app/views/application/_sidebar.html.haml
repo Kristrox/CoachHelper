@@ -3,6 +3,8 @@
   #sidebar
     %h3 Coach
     %h4 Helper
+    %br 
+    %br
     /%a.active{:href => "/team/index"}   
     - if request.path.start_with?("/events")
       =link_to "Team" , players_path, id: 'team', class: "a"
