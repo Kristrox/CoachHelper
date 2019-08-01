@@ -10,17 +10,16 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
-//= require jquery
 //= require bootstrap-sprockets
 //= require moment
 // If you require timezone data (see moment-timezone-rails for additional file options)
 //= require moment-timezone-with-data
 //= require tempusdominus-bootstrap-4
 
-
-$(document).ready(function () {
-    $("alert.alert-success").fadeOut(3000);
-})
+$(document).ready(function() {
+  $("alert.alert-success").fadeOut(3000);
+});
