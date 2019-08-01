@@ -94,15 +94,19 @@
   
   .przycisk{
     color:black;
-    background-color: transparent;
-    border-color: transparent;
+    padding: 10px;
+    background-color: greenyellow;
+    border-color: yellow;
+    border-radius: 25px;
+    border-width: 2px;
     font-size: 30px;
     margin-bottom: 0px;
   }
+
   .przycisk:hover{
     color:black;
-    background-color: transparent;
-    border-color: transparent;
+    background-color: rgb(153, 205, 50);
+    border-color: yellow;
     font-size: 30px;
     margin-bottom: 0px;
   }
