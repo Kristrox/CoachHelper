@@ -76,9 +76,9 @@
                   %td.date1.ls
                     = event.opponent.titleize
                   %td.date1.ls
-                    %button.btn.btn-primary.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
+                    %button.btn.btn-primary.collapsed.active{"data-target-cent-id" => event.id, "aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
                       Play books
-        .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
+        .cent.collapse{"data-cent-id" => event.id, "aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
           .card-body
             %table.table.table-striped
               %thead
