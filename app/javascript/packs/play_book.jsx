@@ -81,8 +81,6 @@ export default class PlayBook extends Component {
 
   handleSave = () => {
     let image = this.fieldRef.current.getStage().toDataURL();
-    console.log(this.state.name);
-    console.log(image);
 
     axios.post(
       "/play_books.json",
@@ -98,10 +96,13 @@ export default class PlayBook extends Component {
     this.setState({
       saved: true
     });
+    window.location.reload();
   };
 
   handleFullScreen() {
-    this.setState({ isFull: true });
+    this.state.isFull
+      ? this.setState({ isFull: false })
+      : this.setState({ isFull: true });
   }
 
   handleStartDrowingArrows(dashed) {
@@ -179,7 +180,6 @@ export default class PlayBook extends Component {
       arrwosArray: arrwosArray,
       actionName: "updateArrow"
     });
-    console.log(this.state.actionNumber);
   }
 
   handleUpdateBallPosition(ballPosition) {

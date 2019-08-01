@@ -44,6 +44,16 @@ export default class DragAndDropOnField extends Component {
           this.props.onHandleUpdateOldPlayersPosition(oldPosition);
           this.props.onHandleDraging(false);
         }}
+        dragBoundFunc={ pos => {
+          let newY = pos.y < 0 ? 0 : pos.y;
+          let newX = pos.x < 0 ? 0 : pos.x;
+          newY = newY > 710 ? 710 : newY;
+          newX = newX > 855 ? 855 : newX;
+          return {
+            x: newX,
+            y: newY
+          };
+        }}
       >
         <EnemyTshirt/>
         <Text
@@ -97,6 +107,16 @@ export default class DragAndDropOnField extends Component {
             this.props.onHandleUpdatePlayersPosition(this.props.players);
             this.props.onHandleUpdateOldPlayersPosition(oldPosition);
             this.props.onHandleDraging(false);
+          }}
+          dragBoundFunc={ pos => {
+            let newY = pos.y < 0 ? 0 : pos.y;
+            let newX = pos.x < 0 ? 0 : pos.x;
+            newY = newY > 710 ? 710 : newY;
+            newX = newX > 855 ? 855 : newX;
+            return {
+              x: newX,
+              y: newY
+            };
           }}
         >
           <TeamTshirt key={player.id + "a"} />
@@ -152,6 +172,16 @@ export default class DragAndDropOnField extends Component {
             };
             this.props.onHandleUpdateBallPosition([newPosition, oldPosition]);
             this.props.onHandleDraging(false);
+          }}
+          dragBoundFunc={ pos => {
+            let newY = pos.y < 0 ? 0 : pos.y;
+            let newX = pos.x < 0 ? 0 : pos.x;
+            newY = newY > 740 ? 740 : newY;
+            newX = newX > 880 ? 880 : newX;
+            return {
+              x: newX,
+              y: newY
+            };
           }}
         />
       </>

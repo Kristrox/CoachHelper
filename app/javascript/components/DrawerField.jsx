@@ -7,7 +7,6 @@ import CustomArrow from "./CustomArrow";
 import field from "./images/field.png";
 
 const FootballFiledImage = props => {
-  console.log(field);
   const [image] = useImage(field);
   return <Image image={image} width={907} height={750} />;
 };
@@ -60,7 +59,6 @@ export default class DrawerField extends Component {
     let lastLine = lines[lines.length - 1];
     lastLine = lastLine.concat([point.x, point.y]);
     lines.splice(lines.length - 1, 1, lastLine);
-    // this.state.lines.concat()
     this.setState({
       lines: lines.concat()
     });
