@@ -69,7 +69,7 @@ export default class TopToolBar extends Component {
           className="TopToolBar btn btn-success"
           onClick={() => this.props.onChangeToFullScreen()}
         >
-          Go Fullscreen
+          Toggle Fullscreen
         </button>
       </div>
     );

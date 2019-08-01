@@ -96,10 +96,13 @@ export default class PlayBook extends Component {
     this.setState({
       saved: true
     });
+    window.location.reload();
   };
 
   handleFullScreen() {
-    this.setState({ isFull: true });
+    this.state.isFull
+      ? this.setState({ isFull: false })
+      : this.setState({ isFull: true });
   }
 
   handleStartDrowingArrows(dashed) {
