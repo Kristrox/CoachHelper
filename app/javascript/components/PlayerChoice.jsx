@@ -21,7 +21,6 @@ export default class PlayerChoice extends Component {
         }
       })
       .then(response => {
-        console.log(response.data.data);
         if (response.data.data.length > 1) {
           this.setState({
             players: response.data.data,
