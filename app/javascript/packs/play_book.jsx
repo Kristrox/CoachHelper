@@ -12,7 +12,7 @@ export default class PlayBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      actionName: "",
+      actionName: [],
       isFull: false,
       isDrawingArrows: false,
       dashed: null,
@@ -21,6 +21,7 @@ export default class PlayBook extends Component {
       imageData: "",
       arrwosArray: [],
       lines: [],
+      oldPlayerPosition: [],
       ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
       enemyPlayers: this.addPlayersToInitialList(18, "enemy")
@@ -46,6 +47,8 @@ export default class PlayBook extends Component {
     this.handleUpdateLines = this.handleUpdateLines.bind(this);
     this.setImageData = this.setImageData.bind(this);
     this.changeName = this.changeName.bind(this);
+    this.updateLines = this.updateLines.bind(this)
+    this.handleUpdateLinesStatus = this.handleUpdateLinesStatus.bind(this)
   }
 
   addPlayersToInitialList(playerNumber, team) {
@@ -119,97 +122,139 @@ export default class PlayBook extends Component {
     const playersPosition = this.state.players;
     const enemyPlayersPosition = this.state.enemyPlayers;
     const playersOldPosition = this.state.oldPlayerPosition;
+    const item = this.state.actionName;
+    const arrows = this.state.arrwosArray;
+    const ballPosition = this.state.ballPosition;
+    const lines = this.state.lines;
 
-    switch (this.state.actionName) {
+    switch (item[item.length - 1]) {
       case "updateArrow":
-        const arrows = this.state.arrwosArray;
         arrows.pop();
+        item.pop();
         this.setState({
           arrwosArray: arrows,
-          actionName: ""
+          actionName: item
         });
         break;
 
       case "updateBall":
-        const ballPosition = this.state.ballPosition;
         ballPosition.reverse();
         this.setState({
           ballPosition: ballPosition,
-          actionName: ""
+          actionName: this.state.actionName.pop()
         });
         break;
 
       case "updateEnemyPlayer":
-        enemyPlayersPosition[playersOldPosition.playerId - 1].x =
-          playersOldPosition.playerX;
-        enemyPlayersPosition[playersOldPosition.playerId - 1].y =
-          playersOldPosition.playerY;
+        if(playersOldPosition.length - 1 < 0) break;
+        enemyPlayersPosition[playersOldPosition[playersOldPosition.length - 1].playerId - 1].x =
+          playersOldPosition[playersOldPosition.length - 1].playerX;
+        enemyPlayersPosition[playersOldPosition[playersOldPosition.length - 1].playerId - 1].y =
+          playersOldPosition[playersOldPosition.length - 1].playerY;
+          playersOldPosition.pop();
+          item.pop();
         this.setState({
           enemyPlayers: enemyPlayersPosition,
-          actionName: ""
+          actionName: item
         });
         break;
 
       case "updatePlayer":
-        playersPosition[playersOldPosition.playerId - 1].x =
-          playersOldPosition.playerX;
-        playersPosition[playersOldPosition.playerId - 1].y =
-          playersOldPosition.playerY;
+          if(playersOldPosition.length - 1 < 0) break;
+          playersPosition[playersOldPosition[playersOldPosition.length - 1].playerId - 1].x =
+            playersOldPosition[playersOldPosition.length - 1].playerX;
+            playersPosition[playersOldPosition[playersOldPosition.length - 1].playerId - 1].y =
+            playersOldPosition[playersOldPosition.length - 1].playerY;
+            playersOldPosition.pop();
+            item.pop();
         this.setState({
           players: playersPosition,
-          actionName: ""
+          actionName: item
         });
         break;
 
       case "updateLine":
-        const lines = this.state.lines;
         lines.pop();
+        item.pop();
+        if (lines.length == 1) { lines.pop(); }
         this.setState({
           lines: lines,
-          actionName: ""
+          actionName: item
+        });
+        break;
+      
+      default:
+        lines.pop();
+        item.pop();
+        this.setState({
+          lines: lines,
+          actionName: item
         });
         break;
     }
   }
 
   handleUpdateArrowsPosition(arrwosArray) {
+    const item = this.state.actionName
+    item.push("updateArrow")
     this.setState({
       arrwosArray: arrwosArray,
-      actionName: "updateArrow"
+      actionName: item
     });
   }
 
   handleUpdateBallPosition(ballPosition) {
     this.setState({
       ballPosition: ballPosition,
-      actionName: "updateBall"
+      // actionName: "updateBall"
+      actionName: this.state.actionName.push("updateBall")
     });
   }
 
   handleUpdateEnemyPlayersPosition(playersPosition) {
+    const item = this.state.actionName
+    item.push("updateEnemyPlayer")
     this.setState({
       enemyPlayers: playersPosition,
-      actionName: "updateEnemyPlayer"
+      actionName: item
     });
   }
 
   handleUpdatePlayersPosition(playersPosition) {
+    const item = this.state.actionName
+    item.push("updatePlayer")
     this.setState({
       players: playersPosition,
-      actionName: "updatePlayer"
+      actionName: item
     });
   }
 
   handleUpdateLines(lines) {
     this.setState({
-      lines: lines,
-      actionName: "updateLine"
+      lines: lines
     });
   }
 
-  handleUpdateOldPlayersPosition(playersPosition) {
+  handleUpdateLinesStatus() {
+    const item = this.state.actionName
+    item.push("updateLine")
     this.setState({
-      oldPlayerPosition: playersPosition
+      actionName: item
+    });
+  }
+
+
+  handleUpdateOldPlayersPosition(playersPosition) {
+    const item = this.state.oldPlayerPosition;
+    item.push(playersPosition)
+    this.setState({
+      oldPlayerPosition: item
+    });
+  }
+
+  updateLines(){
+    this.setState({
+      lines: [...this.state.lines, []]
     });
   }
 
@@ -250,7 +295,9 @@ export default class PlayBook extends Component {
               onHandleUpdatePlayersPosition={this.handleUpdatePlayersPosition}
               onHandleUpdateLines={this.handleUpdateLines}
               onSetImageData={this.setImageData}
+              onUpdateLines={this.updateLines}
               fieldRef={this.fieldRef}
+              onHandleUpdateLinesStatus={this.handleUpdateLinesStatus}
             />
           </div>
         </Fullscreen>

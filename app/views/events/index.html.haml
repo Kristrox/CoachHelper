@@ -42,10 +42,10 @@
         %td.list
     #accordion
       - @events.each do |event|
-        .card-event
+        .card-event{:class => event.closed_match ? 'suspended' : 'available'}
           #headingTwo.card-header
             %h5.mb-0
-              %tr 
+              %tr
                 - if event.closed_match == false
                   %td.date.ls
                     = event.event_date.to_date

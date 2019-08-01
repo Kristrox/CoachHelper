@@ -38,9 +38,6 @@ export default class DragAndDropOnField extends Component {
           const oldPosition = { playerX: x, playerY: y, playerId: player.id };
           this.props.enemyPlayers[player.id - 1].x = e.target.x();
           this.props.enemyPlayers[player.id - 1].y = e.target.y();
-          this.props.onHandleUpdateEnemyPlayersPosition(
-            this.props.enemyPlayers
-          );
           this.props.onHandleUpdateOldPlayersPosition(oldPosition);
           this.props.onHandleDraging(false);
         }}
@@ -104,7 +101,6 @@ export default class DragAndDropOnField extends Component {
             const oldPosition = { playerX: x, playerY: y, playerId: player.id };
             this.props.players[player.id - 1].x = e.target.x();
             this.props.players[player.id - 1].y = e.target.y();
-            this.props.onHandleUpdatePlayersPosition(this.props.players);
             this.props.onHandleUpdateOldPlayersPosition(oldPosition);
             this.props.onHandleDraging(false);
           }}
