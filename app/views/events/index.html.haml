@@ -8,7 +8,7 @@
             %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo", "data-toggle" => "collapse"}
               Create New Event
       .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo"}
-        .card-body
+        .card-body.event
           = bootstrap_form_for @event do |f|
             %tr
               %td.create
