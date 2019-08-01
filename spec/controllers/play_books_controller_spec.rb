@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PlayBooksController, type: :controller do
+    let(:user) { create(:user) }
+    before { sign_in user }
 
     describe 'GET #show' do
         let(:play_book) { create(:play_book) }
