@@ -122,8 +122,7 @@
                       %td= player.name
                       %td= player.surname
                       %td
-                        %button.btn.btn-outline-primary.btn-sm
-                          = link_to 'Add', assign_event_player_path({ event_id: event.id, id: player.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
+                        = button_to 'Add', assign_event_player_path({ event_id: event.id, id: player.id }), method: :patch, class: "baczek"
 
   - @events.each do |event|
     .modal.fade{id: "event-modal-play-book-#{event.id}", "aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
@@ -139,6 +138,5 @@
                   %tr
                     %td= play_book.name
                     %td
-                      %button.btn.btn-outline-primary.btn-sm
-                        = link_to 'Add', event_play_book_path({event_id: event.id, id: play_book.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
+                      = button_to 'Add', event_play_book_path({event_id: event.id, id: play_book.id }), method: :patch, class: "baczek"
 
