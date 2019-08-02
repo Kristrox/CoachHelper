@@ -30,6 +30,9 @@
                           format: 'YYYY-MM-DD'
                       });
                   });
+          %hr        
+          %h4 
+            Import CSV file
           = form_tag import_events_url, multipart: true do
             = file_field_tag :file
             = submit_tag 'Import CSV'
