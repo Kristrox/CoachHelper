@@ -4,9 +4,9 @@ class Events::PlayersController < ApplicationController
     @player = Player.find(params[:id])
     if !@event.players.include?(@player)
       @event.players << @player
-      redirect_to events_path, notice: 'Event was successfully updated.'
+      redirect_to events_path, notice: 'Player was successfully added.'
     else
-      redirect_to events_path, alert: 'Event has not been updated!'
+      redirect_to events_path, alert: 'Player has not been added!'
     end
   end
 

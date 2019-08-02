@@ -19,28 +19,30 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu:400,500,700&display=swap&subset=latin-ext");
 
 body {
-  font-family: 'Graduate', cursive;
+  font-family: "Graduate", cursive;
   background-color: lightgray;
   background-image: url(bc-image.jpeg);
-  background-size:cover;
+  background-size: cover;
 }
 
-
-.content, .table, .td, .tr {
-  font-family: 'Graduate', cursive;
+.content,
+.table,
+.td,
+.tr {
+  font-family: "Graduate", cursive;
 }
 
-.btn.btn-primary.login{
+.btn.btn-primary.login {
   background-color: #4caf50;
   border-color: #4caf50;
 }
 
-.btn.btn-primary.login:hover{
+.btn.btn-primary.login:hover {
   background-color: lightgreen;
   border-color: lightgreen;
 }
 
-footer{
+footer {
   margin-left: 10px;
   color: orange;
   width: 100%;
@@ -48,21 +50,25 @@ footer{
   padding-top: 10px;
 }
 
-.content2nd.footer{
+.content2nd.footer {
   margin-left: 315px;
   background-color: rgba(22, 19, 19, 0.5);
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:somevalue;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: somevalue;
 }
 
-h1.event.start.margin{
+h1.event.start.margin {
   margin-left: 300px;
 }
 
-form-group.name{
+h1.event.start.margin {
+  margin-left: 300px;
+}
+
+form-group.name {
   text-align: center;
   float: center;
 }
@@ -71,28 +77,28 @@ form-group.name{
   font-size: 30px;
 }
 
-.collapse.show{
+.collapse.show {
   text-align: left;
 }
 
-card-event{
-  background-color:rgba(255,255,255,0.5);
+card-event {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .card-header {
-  background:rgba(255,255,255,0.5) !important;
+  background: rgba(255, 255, 255, 0.5) !important;
   height: 100px;
   justify-content: center;
   // margin-bottom: 30px;
 }
 
-button.btn.btn-link.collapsed{
+button.btn.btn-link.collapsed {
   color: black;
   margin-bottom: 20px;
 }
 
-.btn.btn-link.collapsed.przycisk{
-  color:black;
+.btn.btn-link.collapsed.przycisk {
+  color: black;
   padding-left: 10px;
   padding-right: 10px;
   background-color: #4caf50;
@@ -101,8 +107,8 @@ button.btn.btn-link.collapsed{
   font-size: 30px;
   margin-bottom: 0px;
 }
-.btn.btn-link.collapsed.przycisk:hover{
-  color:black;
+.btn.btn-link.collapsed.przycisk:hover {
+  color: black;
   padding-left: 10px;
   padding-right: 10px;
   background-color: lightgreen;
@@ -113,8 +119,8 @@ button.btn.btn-link.collapsed{
   margin-bottom: 0px;
 }
 
-.btn.btn-link.collapsed.przycisk:active{
-  color:black;
+.btn.btn-link.collapsed.przycisk:active {
+  color: black;
   padding-left: 10px;
   padding-right: 10px;
   background-color: #4caf50;
@@ -123,8 +129,8 @@ button.btn.btn-link.collapsed{
   font-size: 30px;
   margin-bottom: 0px;
 }
-.btn.btn-link.collapsed.przycisk:hover::focus{
-  color:black;
+.btn.btn-link.collapsed.przycisk:hover::focus {
+  color: black;
   padding-left: 10px;
   padding-right: 10px;
   background-color: lightgreen;
@@ -134,6 +140,7 @@ button.btn.btn-link.collapsed{
   font-size: 30px;
   margin-bottom: 0px;
 }
+
 
 h5.mb-0.listka{
   margin-bottom: 0.5rem;
@@ -150,22 +157,23 @@ label{
 
 h5.mb-0{
   height:60px;
+
   margin-bottom: 10px;
-  font-size: 1.50rem ;
-//   // background-color: rgba(100, 100, 100, 0.5);
+  font-size: 1.5rem;
+  //   // background-color: rgba(100, 100, 100, 0.5);
 }
 
-.content{
-  font-family: 'Graduate', cursive;
+.content {
+  font-family: "Graduate", cursive;
 }
 
-h1.player, h1.event{
+h1.player,
+h1.event {
   font-size: 60px;
   color: white;
 }
 
-
-btn.btn-outline-primary{
+btn.btn-outline-primary {
   color: white;
   background-color: white;
 }
@@ -178,7 +186,7 @@ btn.btn-outline-primary{
   justify-content: center;
 }
 
-.new_player{
+.new_player {
   justify-content: center;
 }
 
@@ -189,26 +197,58 @@ btn.btn-outline-primary{
 
 .form-control.col-md-3.control-label.player {
   justify-content: center;
-  width: 30%
+  width: 30%;
 }
 
 .field {
-  justify-content: center
+  justify-content: center;
 }
 
-
-.form-group{
-text-align: -moz-center;
-
+.form-group {
+  text-align: -moz-center;
 }
 
-.input-group.date{
+.input-group.date {
   text-align: center;
 }
+
+.form-control.datetimepicker-input {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 150px;
+}
+
+.baczek {
+  display: block;
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 9px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 
 .form-control.datetimepicker-input{
   background-color: rgba(255,255,255,0.5);
   width: 170px;
+
+.baczekClose {
+  display: block;
+  background-color: #fb7171; /* Green */
+  border: none;
+  color: white;
+  padding: 9px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+
 }
 
 .input-group {
@@ -216,25 +256,24 @@ text-align: -moz-center;
   margin-left: 42%;
 }
 
-.submit{
+.submit {
   background-color: red;
   border-color: red;
   border-radius: 20%;
-  font-size:15px;
-  // text-align: center;
+  font-size: 15px;
 }
 
-.form-control{
+.form-control {
   width: 240px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-
-
-td.date1.ls, td.date.ls{
+td.date1.ls,
+td.date.ls {
   background-color: rgba(22, 19, 19, 0.5);
 }
 
-td.date1.ls:hover, td.date.ls:hover{
+td.date1.ls:hover,
+td.date.ls:hover {
   color: white;
 }
