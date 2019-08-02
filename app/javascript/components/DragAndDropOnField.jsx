@@ -38,9 +38,6 @@ export default class DragAndDropOnField extends Component {
           const oldPosition = { playerX: x, playerY: y, playerId: player.id };
           this.props.enemyPlayers[player.id - 1].x = e.target.x();
           this.props.enemyPlayers[player.id - 1].y = e.target.y();
-          this.props.onHandleUpdateEnemyPlayersPosition(
-            this.props.enemyPlayers
-          );
           this.props.onHandleUpdateOldPlayersPosition(oldPosition);
           this.props.onHandleDraging(false);
         }}
@@ -104,7 +101,6 @@ export default class DragAndDropOnField extends Component {
             const oldPosition = { playerX: x, playerY: y, playerId: player.id };
             this.props.players[player.id - 1].x = e.target.x();
             this.props.players[player.id - 1].y = e.target.y();
-            this.props.onHandleUpdatePlayersPosition(this.props.players);
             this.props.onHandleUpdateOldPlayersPosition(oldPosition);
             this.props.onHandleDraging(false);
           }}
@@ -157,20 +153,17 @@ export default class DragAndDropOnField extends Component {
         <Text
           text="⚽"
           fontSize={30}
-          x={this.props.ballPosition[0].ballX}
-          y={this.props.ballPosition[0].ballY}
+          x={this.props.ballPosition[this.props.ballPosition.length - 1].ballX}
+          y={this.props.ballPosition[this.props.ballPosition.length - 1].ballY}
           draggable
           onDragStart={() => {
-            this.props.onHandleUpdateBallPosition(this.props.ballPosition);
             this.props.onHandleDraging(true);
           }}
           onDragEnd={e => {
             const newPosition = { ballX: e.target.x(), ballY: e.target.y() };
-            const oldPosition = {
-              ballX: this.props.ballPosition[0].ballX,
-              ballY: this.props.ballPosition[0].ballY
-            };
-            this.props.onHandleUpdateBallPosition([newPosition, oldPosition]);
+            const item = this.props.ballPosition;
+            item.push(newPosition)
+            this.props.onHandleUpdateBallPosition(item);
             this.props.onHandleDraging(false);
           }}
           dragBoundFunc={ pos => {

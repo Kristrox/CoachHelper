@@ -23,3 +23,20 @@
 $(document).ready(function() {
   $("alert.alert-success").fadeOut(3000);
 });
+
+jQuery(document).ready(function() {
+  jQuery(".active").click(function() {
+    setTimeout(() => {
+      const id = $(this).data("target-cent-id");
+      var viewportWidth = jQuery(window).width(),
+        viewportHeight = jQuery(window).height(),
+        $foo = jQuery(".cent[data-cent-id='" + id + "'].collapse.show"),
+        elWidth = $foo.width(),
+        elHeight = $foo.height(),
+        elOffset = $foo.offset();
+      jQuery(window)
+        .scrollTop(elOffset.top + elHeight / 2 - viewportHeight / 2)
+        .scrollLeft(elOffset.left + elWidth / 2 - viewportWidth / 2);
+    }, 400);
+  });
+});

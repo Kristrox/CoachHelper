@@ -43,10 +43,10 @@
         %td.list
     #accordion
       - @events.each do |event|
-        .card-event
+        .card-event{:class => event.closed_match ? 'suspended' : 'available'}
           #headingTwo.card-header
             %h5.mb-0
-              %tr 
+              %tr
                 - if event.closed_match == false
                   %td.date.ls
                     = event.event_date.to_date
@@ -77,9 +77,9 @@
                   %td.date1.ls
                     = event.opponent.titleize
                   %td.date1.ls
-                    %button.btn.btn-primary.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
+                    %button.btn.btn-primary.collapsed.active{"data-target-cent-id" => event.id, "aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
                       Play books
-        .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
+        .cent.collapse{"data-cent-id" => event.id, "aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
           .card-body
             %table.table.table-striped
               %thead
