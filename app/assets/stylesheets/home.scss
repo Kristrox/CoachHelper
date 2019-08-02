@@ -7,7 +7,7 @@ h1.home, h2.home, h3.home{
 }
 
 h1.home{
-    margin-top: 100px;
+    margin-top: 60px;
     font-size: 65px;
 }
 
@@ -33,4 +33,34 @@ h1.home:hover, h2.home:hover{
     color:greenyellow;
     border-color: transparent;
     font-size: 40px;
+    margin-left: 300px;
 }
+
+.alert.alert-danger{
+    background-color: transparent;
+    text-align: center;
+    color:red;
+    border-color: transparent;
+    font-size: 30px;
+}
+
+h2.event.start{
+    margin-left: 300px;
+}
+
+h1.event.start.next{
+    background-color: rgba(255, 255, 255, 0.856) !important;
+}
+.content.all{
+    margin-left: 0px !important;
+}
+
+// .content.lol{
+//     margin-left: 0px;
+//     height: 110px;
+// }
+
+// .navcontent{
+//     text-align: center;
+//     // margin-right: 20%;
+// }

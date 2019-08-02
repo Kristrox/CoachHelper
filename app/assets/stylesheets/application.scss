@@ -35,13 +35,22 @@ body {
 //   background-color: rgba(100, 100, 100, 0.5)
 // }
 
+h1.event.start.margin {
+  margin-left: 300px;
+}
+
 form-group.name {
-  text-align: left;
-  float: left;
+  text-align: center;
+  float: center;
 }
 
 .btn-link {
   font-size: 30px;
+}
+
+.collapse.show {
+  // background-color: red;
+  text-align: left;
 }
 
 card-event {
