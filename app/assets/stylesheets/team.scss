@@ -10,10 +10,15 @@
     text-align: center;
   }
   
-  tr:hover {
-    background-color: #ffa;
-  }
+  // tr:hover {
+  //   background-color: #ffa;
+  // }
   
+  .field.plej{
+    font-size: 40px;
+  }
+
+
   td, th {
     position: relative;
   }
@@ -21,7 +26,7 @@
   th:hover::after {
     content: "";
     position: absolute;
-    background-color: #ffa;
+    background-color: rgba(22, 19, 19, 0.5);
     left: 0;
     top: -5000px;
     height: 10000px;
@@ -45,11 +50,11 @@
       text-align: center;
     }
   
-  tr{
-      background-color: lightgrey;
-  }
-  tr.list:nth-child(odd) {background-color:#4caf50; // #f2f2f2;
-  }
+  // tr{
+  //     background-color: lightgrey;
+  // }
+  // tr.list:nth-child(odd) {background-color:#4caf50; // #f2f2f2;
+  // }
   
   tr.list{
       height: 10% ;
