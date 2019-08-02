@@ -6,67 +6,66 @@
   text-align: center;
 }
 
-.content2nd{
+.content2nd {
   // background-color:s grey;
-  background:rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 15px;
   margin-top: 2%;
 }
 
-.content2nd.play_books{
+.content2nd.play_books {
   padding-bottom: 15px;
 }
 
-.content2nd.play_books.show{
+.content2nd.play_books.show {
   padding-bottom: 30px;
 }
 
-.content2nd.play_books.new{
-  background:rgba(163, 158, 158, 0.5);
+.content2nd.play_books.new {
+  background: rgba(163, 158, 158, 0.5);
   background-size: contain;
   padding-bottom: 11%;
   // padding-bottom: 100px;
 }
 
-.form.group{
+.form.group {
   margin-bottom: 0rem;
   width: 50% !important;
 }
 
-tr.rate{
+tr.rate {
   color: white;
 }
 
-h1.event{
+h1.event {
   font-size: 40px;
   color: white;
 }
 
-%td.create{
+%td.create {
   color: white;
   font-size: 30px;
 }
 
-.input-group-text{
+.input-group-text {
   height: 40%;
   margin-top: 35px;
   margin-left: 10px;
   border-radius: 25%;
 }
 
-.actions{
-
+.actions {
   margin-top: 1.2rem;
   // margin-left: 5%;
 }
 
-.card-body{
+.card-body {
   justify-content: center;
   // margin-left: 37%;
   text-align: left;
 }
 
-.card-body.event{
+.card-body.event {
   text-align: center;
 }
 
@@ -74,11 +73,12 @@ h1.event{
 //   background-color: lightgreen;
 // }
 
-td.date, td.date1 {
+td.date,
+td.date1 {
   font-size: 23px;
 }
 
-td.date{
+td.date {
   background-color: lightgreen;
 }
 
@@ -97,10 +97,10 @@ td.list {
   font-size: 26px;
 }
 
-td.date.ls, td.date1.ls{
+td.date.ls,
+td.date1.ls {
   margin: 30px;
 }
-
 
 td,
 th {
@@ -134,13 +134,13 @@ p.content {
 
 td {
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 // tr{
 //   background-color: #1daf3871;
 tr {
-  background-color: lightgrey;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 tr.list:nth-child(odd) {
   background-color: #4caf50; // #f2f2f2;
@@ -157,37 +157,38 @@ tr.list {
   margin-top: 10px;
 }
 
-button.btn.btn-outline-primary.btn-sm{
+button.btn.btn-outline-primary.btn-sm {
+  border-radius: 4.5px;
   font-size: 20px;
   color: white;
-  background-color: orange;
+  background-color: rgb(255, 180, 42);
+  padding: 5px 20px;
   // background-color: rgb(184, 230, 184);
   font-weight: bold;
-  border-color: orange;
+  border-color: rgb(255, 180, 42);
 }
 
-button.btn.btn-outline-primary.btn-sm:link{
+button.btn.btn-outline-primary.btn-sm:link {
   color: white;
 }
 
-button.btn.btn-outline-primary.btn-sm:hover{
+button.btn.btn-outline-primary.btn-sm:hover {
   background-color: yellow;
   border-color: yellow;
-  color:black;
+  color: black;
 }
 
-button.btn.btn-outline-primary.btn-sm:hover:active{
+button.btn.btn-outline-primary.btn-sm:hover:active {
   background-color: lightgreen;
-  color:white;
+  color: white;
 }
 
-
-button.btn.btn-outline-primary.btn-sm:hover::after{
-  color:red;
+button.btn.btn-outline-primary.btn-sm:hover::after {
+  color: red;
   background-color: white;
 }
 
-a:hover{
+a:hover {
   color: yellow;
 }
 
@@ -196,17 +197,36 @@ a:hover::after {
   background-color: white;
 }
 
-
-.down{
-width: 100%;
+.down {
+  width: 100%;
 }
 
-.downhalf{
-width: 45%;
-text-align: center;
+.downhalf {
+  width: 45%;
+  text-align: center;
 }
 
 .input-group-text {
-  height: 40px;
+  height: 35px;
   margin-top: 30px;
+
+  // width: 99px;
+  background-color: #4caf50 !important;
+}
+
+.input-group-append {
+  padding-top: 25px;
+}
+
+a:link {
+  color: white;
+}
+a:visited {
+  color: white;
+}
+a:hover {
+  color: white !important;
+}
+a:active {
+  color: white;
 }

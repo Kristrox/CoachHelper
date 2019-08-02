@@ -49,9 +49,9 @@ class EventsController < ApplicationController
     event = Event.find(params[:id])
     Player.remove_players_suspension_after_match(event.players, current_user.id)
     if event.update(closed_match: true)
-      redirect_to events_path, notice: 'Player was successfully updated.'
+      redirect_to events_path, notice: 'Event has been successfully closed.'
     else
-      redirect_to events_path, alert: 'Player has not been updated!'
+      redirect_to events_path, alert: 'Event has not been closed!'
     end
   end
 

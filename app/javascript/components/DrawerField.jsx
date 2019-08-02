@@ -19,30 +19,25 @@ export default class DrawerField extends Component {
       arrowStartPos: { x: 0, y: 0 },
       arrowEndPos: { x: 0, y: 0 },
       countClick: 0,
-      lines: this.props.lines,
       isDrawing: false,
-      isDraging: false,
+      isDraging: false
     };
-    this.stageRef  = React.createRef();
+    this.stageRef = React.createRef();
   }
 
-
-  handleDraging = (isDraging) => {
-    this.setState({isDraging: isDraging})
-  }
-
+  handleDraging = isDraging => {
+    this.setState({ isDraging: isDraging });
+  };
 
   handleMouseDown = () => {
-    this.setState({isDrawing: this.state.isDraging ? false : true})
-    this.setState({
-      lines: [...this.state.lines, []]
-    });
+    this.setState({ isDrawing: this.props.stop ? false : true });
+    this.props.onUpdateLines();
 
     const stage = this.props.fieldRef.current.getStage();
     const point = stage.getPointerPosition();
 
     if (this.props.startDrawingArrows === true) {
-        const localPos = {
+      const localPos = {
         x: point.x,
         y: point.y
       };
@@ -52,23 +47,27 @@ export default class DrawerField extends Component {
   };
 
   handleMouseMove = () => {
-    if(!this.state.isDrawing) { return; }
+    if (!this.state.isDrawing) {
+      return;
+    }
     const stage = this.props.fieldRef.current.getStage();
     const point = stage.getPointerPosition();
-    const lines = this.state.lines;
+    const lines = this.props.lines;
     let lastLine = lines[lines.length - 1];
     lastLine = lastLine.concat([point.x, point.y]);
     lines.splice(lines.length - 1, 1, lastLine);
-    this.setState({
-      lines: lines.concat()
-    });
+    this.props.onHandleUpdateLines(lines.concat());
   };
 
   handleMouseUp = () => {
+    if (
+      this.props.startDrawingArrows === false &&
+      this.state.isDraging === false
+    ) {
+      this.props.onHandleUpdateLinesStatus();
+    }
+
     this.setState({ isDrawing: false });
-    if (this.props.startDrawingArrows === false) {
-      this.props.onHandleUpdateLines(this.state.lines);
-    };
   };
 
   componentDidMount() {
@@ -77,7 +76,6 @@ export default class DrawerField extends Component {
   }
 
   handleDrawingArrows = localPos => {
-
     this.setState({
       fill: "red",
       stroke: "red"
@@ -164,68 +162,76 @@ export default class DrawerField extends Component {
             this.container = node;
           }}
         >
-            <Stage
-              width={907}
-              height={750}
-              onContentMousedown={this.handleMouseDown}
-              onContentMousemove={this.handleMouseMove}
-              onContentMouseup={this.handleMouseUp}
-              listening={this.props.stopDrawing}
-              ref={this.props.fieldRef}
-            >
-              <Layer>
-                <FootballFiledImage />
-              </Layer>
-              <Layer>
-                {this.state.lines.map((line, i) => (
-                  <Line
-                    key={i}
-                    points={line}
-                    stroke="red"
-                    strokeWidth={5}
-                    lineCap="round"
-                    lineJoin="round"
+          <Stage
+            width={907}
+            height={750}
+            onContentMousedown={this.handleMouseDown}
+            onContentMousemove={this.handleMouseMove}
+            onContentMouseup={this.handleMouseUp}
+            listening={this.props.stopDrawing}
+            ref={this.props.fieldRef}
+          >
+            <Layer>
+              <FootballFiledImage />
+            </Layer>
+            <Layer>
+              {this.props.lines.map((line, i) => (
+                <Line
+                  key={i}
+                  points={line}
+                  stroke={"red"}
+                  strokeWidth={5}
+                  lineCap={"round"}
+                  lineJoin={"round"}
+                />
+              ))}
+            </Layer>
+            <Layer>
+              <CustomArrow
+                startPos={this.state.arrowStartPos}
+                endPos={this.state.arrowEndPos}
+                dashed={this.state.dashed}
+                fill={this.state.fill}
+                stroke={this.state.stroke}
+              />
+              {this.props.arrwosArray.map((arrows, index) => {
+                return (
+                  <CustomArrow
+                    key={index}
+                    startPos={arrows.arrowStartPos}
+                    endPos={arrows.arrowEndPos}
+                    dashed={arrows.dashed}
+                    fill={"red"}
+                    stroke={"red"}
                   />
-                ))}
-              </Layer>
-              <Layer>
-                <CustomArrow
-                  startPos={this.state.arrowStartPos}
-                  endPos={this.state.arrowEndPos}
-                  dashed={this.state.dashed}
-                  fill={this.state.fill}
-                  stroke={this.state.stroke}
-                />
-                {this.props.arrwosArray.map((arrows, index) => {
-                  return (
-                    <CustomArrow
-                      key={index}
-                      startPos={arrows.arrowStartPos}
-                      endPos={arrows.arrowEndPos}
-                      dashed={arrows.dashed}
-                      fill={"red"}
-                      stroke={"red"}
-                    />
-                  );
-                })}
-              </Layer>
-              <Layer>
-                <Drag
-                  playerNumber={this.state.playerNumber}
-                  width={this.state.stageWidth}
-                  height={window.innerHeight}
-                  ballPosition={this.props.ballPosition}
-                  players={this.props.players}
-                  enemyPlayers={this.props.enemyPlayers}
-                  onHandleUpdateBallPosition={this.props.onHandleUpdateBallPosition}
-                  onHandleUpdateOldPlayersPosition={this.props.onHandleUpdateOldPlayersPosition}
-                  onHandleUpdateEnemyPlayersPosition={this.props.onHandleUpdateEnemyPlayersPosition}
-                  onHandleUpdatePlayersPosition={this.props.onHandleUpdatePlayersPosition}
-                  onHandleDraging={this.handleDraging}
-                />
-              </Layer>
-            </Stage>
-
+                );
+              })}
+            </Layer>
+            <Layer>
+              <Drag
+                playerNumber={this.state.playerNumber}
+                width={this.state.stageWidth}
+                height={window.innerHeight}
+                ballPosition={this.props.ballPosition}
+                players={this.props.players}
+                enemyPlayers={this.props.enemyPlayers}
+                onHandleUpdateBallPosition={
+                  this.props.onHandleUpdateBallPosition
+                }
+                onHandleUpdateOldPlayersPosition={
+                  this.props.onHandleUpdateOldPlayersPosition
+                }
+                onHandleUpdateEnemyPlayersPosition={
+                  this.props.onHandleUpdateEnemyPlayersPosition
+                }
+                onHandleUpdatePlayersPosition={
+                  this.props.onHandleUpdatePlayersPosition
+                }
+                onHandleDraging={this.handleDraging}
+                stop={this.props.stop}
+              />
+            </Layer>
+          </Stage>
         </div>
       </>
     );

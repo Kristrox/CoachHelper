@@ -16,10 +16,12 @@
           = bootstrap_form_for player, remote: true, url: event_player_path(event.id, player.id, format: :js) do |f|
             .field.align-middle  
               %tr
-                %td
+                %td.color
                   Injury: 
                   .field
                     = f.text_field :injury
-                %td=f.select :yellow_cards, [ 0, 1 ], :prompt => 'Select One'
-                %td=f.select :suspended, [ false, true ], :prompt => 'Select One'
+                %td yellow card
+                %td=f.select :yellow_cards, [ 0, 1 ]
+                %td red card
+                %td=f.select :suspended, [ 0, 1 ]
                 = f.submit "Update" 
