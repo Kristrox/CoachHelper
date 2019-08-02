@@ -24,8 +24,8 @@ export default class TopToolBar extends Component {
       ? "TopToolBar btn btn-danger"
       : "TopToolBar btn btn-success";
     const activeStop = this.state.activeStop
-    ? "TopToolBar btn btn-danger"
-    : "TopToolBar btn btn-success";
+      ? "TopToolBar btn btn-danger"
+      : "TopToolBar btn btn-success";
 
     return (
       <div className="TopToolBar d-flex justify-content-end">
@@ -36,13 +36,13 @@ export default class TopToolBar extends Component {
         <button
           className={activeStop}
           onClick={() => {
-            this.props.onHandleStop()
+            this.props.onHandleStop();
             this.setState({
-              activeStop: !this.state.activeStop,
+              activeStop: !this.state.activeStop
             });
           }}
         >
-          Stop drawing
+          {this.state.activeStop ? "Start drawing" : "Stop drawing"}
         </button>
         <button
           className="TopToolBar btn btn-success"
