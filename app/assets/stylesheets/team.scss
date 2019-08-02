@@ -68,7 +68,50 @@
   
   .available {
     background-color: lightgrey;
-  }
+}
+tr.list:nth-child(odd) {background-color:#4caf50; // #f2f2f2;
+}
+
+tr.list{
+    height: 10% ;
+    color: white;
+    font-weight: bold;
+}
+
+.btn{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.suspended {
+  background-color: #e60000;
+}
+
+.available {
+  background-color: lightgrey;
+}
+
+h1.event.play{
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 100px;
+  font-size: 60px;
+}
+
+.btn-outline-primary.playerbutton:hover{
+  color:black;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.btn-outline-primary.playerbutton{
+  color:black;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: 60px;
+  width: 200px;
+  max-width: 70%;
+  min-width: 50px; 
+}
   
   h1.event.play{
     background-color: rgba(255, 255, 255, 0.5);
