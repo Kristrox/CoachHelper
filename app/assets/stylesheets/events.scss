@@ -207,8 +207,17 @@ a:hover::after {
 }
 
 .input-group-text {
-  height: 40px;
+  height: 35px;
   margin-top: 30px;
+
+  // width: 99px;
+  background-color: #4caf50 !important;
+}
+
+.input-group-append{
+  padding-top: 25px;
+}
+
 }
 
 a:link {
@@ -223,3 +232,4 @@ a:hover {
 a:active {
   color: white;
 }
+
