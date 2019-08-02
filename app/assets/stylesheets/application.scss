@@ -135,7 +135,18 @@ button.btn.btn-link.collapsed{
   margin-bottom: 0px;
 }
 
+h5.mb-0.listka{
+  margin-bottom: 0.5rem;
+}
 
+.p.break{
+  color:transparent;
+  height: 0.5rem;
+}
+
+label{
+  font-size: 30px;
+}
 
 h5.mb-0{
   height:60px;
@@ -197,7 +208,7 @@ text-align: -moz-center;
 
 .form-control.datetimepicker-input{
   background-color: rgba(255,255,255,0.5);
-  width: 150px;
+  width: 170px;
 }
 
 .input-group {
