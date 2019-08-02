@@ -55,7 +55,6 @@ export default class PlayBook extends Component {
   }
 
   handleStop() {
-    console.log(stop)
     this.setState({
       stop: this.state.stop ? false : true
     })
@@ -139,7 +138,6 @@ export default class PlayBook extends Component {
     const arrows = this.state.arrwosArray;
     const ballPosition = this.state.ballPosition;
     const lines = this.state.lines;
-    console.log(this.state.actionName)
 
     switch (item[item.length - 1]) {
       case "updateArrow":
