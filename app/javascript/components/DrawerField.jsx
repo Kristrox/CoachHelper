@@ -32,7 +32,7 @@ export default class DrawerField extends Component {
 
 
   handleMouseDown = () => {
-    this.setState({isDrawing: this.state.isDraging ? false : true})
+    this.setState({isDrawing: this.props.stop ? false : true})
     this.props.onUpdateLines()
 
     const stage = this.props.fieldRef.current.getStage();
@@ -218,6 +218,7 @@ export default class DrawerField extends Component {
                   onHandleUpdateEnemyPlayersPosition={this.props.onHandleUpdateEnemyPlayersPosition}
                   onHandleUpdatePlayersPosition={this.props.onHandleUpdatePlayersPosition}
                   onHandleDraging={this.handleDraging}
+                  stop={this.props.stop}
                 />
               </Layer>
             </Stage>

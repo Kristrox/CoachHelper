@@ -7,7 +7,8 @@ export default class TopToolBar extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.state = {
       activeDashedArrows: false,
-      activeArrows: false
+      activeArrows: false,
+      activeStop: false
     };
   }
 
@@ -22,6 +23,9 @@ export default class TopToolBar extends Component {
     const arrowsClass = this.state.activeArrows
       ? "TopToolBar btn btn-danger"
       : "TopToolBar btn btn-success";
+    const activeStop = this.state.activeStop
+    ? "TopToolBar btn btn-danger"
+    : "TopToolBar btn btn-success";
 
     return (
       <div className="TopToolBar d-flex justify-content-end">
@@ -29,6 +33,17 @@ export default class TopToolBar extends Component {
           name={this.props.name}
           onChangeName={this.props.onChangeName}
         />
+        <button
+          className={activeStop}
+          onClick={() => {
+            this.props.onHandleStop()
+            this.setState({
+              activeStop: !this.state.activeStop,
+            });
+          }}
+        >
+          Stop drawing
+        </button>
         <button
           className="TopToolBar btn btn-success"
           onClick={this.props.onHandleSave}

@@ -25,7 +25,8 @@ export default class PlayBook extends Component {
       // ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
       ballPosition: [{ ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
-      enemyPlayers: this.addPlayersToInitialList(18, "enemy")
+      enemyPlayers: this.addPlayersToInitialList(18, "enemy"),
+      stop: false
     };
 
     this.fieldRef = React.createRef();
@@ -50,6 +51,14 @@ export default class PlayBook extends Component {
     this.changeName = this.changeName.bind(this);
     this.updateLines = this.updateLines.bind(this)
     this.handleUpdateLinesStatus = this.handleUpdateLinesStatus.bind(this)
+    this.handleStop = this.handleStop.bind(this)
+  }
+
+  handleStop() {
+    console.log(stop)
+    this.setState({
+      stop: this.state.stop ? false : true
+    })
   }
 
   addPlayersToInitialList(playerNumber, team) {
@@ -282,6 +291,7 @@ export default class PlayBook extends Component {
               navRef={this.navRef}
               name={this.state.name}
               onChangeName={this.changeName}
+              onHandleStop={this.handleStop}
             />
             <DrawerField
               startDrawingArrows={this.state.isDrawingArrows}
@@ -305,6 +315,7 @@ export default class PlayBook extends Component {
               onUpdateLines={this.updateLines}
               fieldRef={this.fieldRef}
               onHandleUpdateLinesStatus={this.handleUpdateLinesStatus}
+              stop={this.state.stop}
             />
           </div>
         </Fullscreen>
