@@ -25,7 +25,8 @@ export default class PlayBook extends Component {
       // ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
       ballPosition: [{ ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
-      enemyPlayers: this.addPlayersToInitialList(18, "enemy")
+      enemyPlayers: this.addPlayersToInitialList(18, "enemy"),
+      stop: false
     };
 
     this.fieldRef = React.createRef();
@@ -48,8 +49,15 @@ export default class PlayBook extends Component {
     this.handleUpdateLines = this.handleUpdateLines.bind(this);
     this.setImageData = this.setImageData.bind(this);
     this.changeName = this.changeName.bind(this);
-    this.updateLines = this.updateLines.bind(this)
-    this.handleUpdateLinesStatus = this.handleUpdateLinesStatus.bind(this)
+    this.updateLines = this.updateLines.bind(this);
+    this.handleUpdateLinesStatus = this.handleUpdateLinesStatus.bind(this);
+    this.handleStop = this.handleStop.bind(this);
+  }
+
+  handleStop() {
+    this.setState({
+      stop: this.state.stop ? false : true
+    });
   }
 
   addPlayersToInitialList(playerNumber, team) {
@@ -130,7 +138,6 @@ export default class PlayBook extends Component {
     const arrows = this.state.arrwosArray;
     const ballPosition = this.state.ballPosition;
     const lines = this.state.lines;
-    console.log(this.state.actionName)
 
     switch (item[item.length - 1]) {
       case "updateArrow":
@@ -152,13 +159,15 @@ export default class PlayBook extends Component {
         break;
 
       case "updateEnemyPlayer":
-        if(playersOldPosition.length - 1 < 0) break;
-        enemyPlayersPosition[playersOldPosition[playersOldPosition.length - 1].playerId - 1].x =
-          playersOldPosition[playersOldPosition.length - 1].playerX;
-        enemyPlayersPosition[playersOldPosition[playersOldPosition.length - 1].playerId - 1].y =
-          playersOldPosition[playersOldPosition.length - 1].playerY;
-          playersOldPosition.pop();
-          item.pop();
+        if (playersOldPosition.length - 1 < 0) break;
+        enemyPlayersPosition[
+          playersOldPosition[playersOldPosition.length - 1].playerId - 1
+        ].x = playersOldPosition[playersOldPosition.length - 1].playerX;
+        enemyPlayersPosition[
+          playersOldPosition[playersOldPosition.length - 1].playerId - 1
+        ].y = playersOldPosition[playersOldPosition.length - 1].playerY;
+        playersOldPosition.pop();
+        item.pop();
         this.setState({
           enemyPlayers: enemyPlayersPosition,
           actionName: item
@@ -166,13 +175,15 @@ export default class PlayBook extends Component {
         break;
 
       case "updatePlayer":
-          if(playersOldPosition.length - 1 < 0) break;
-          playersPosition[playersOldPosition[playersOldPosition.length - 1].playerId - 1].x =
-            playersOldPosition[playersOldPosition.length - 1].playerX;
-            playersPosition[playersOldPosition[playersOldPosition.length - 1].playerId - 1].y =
-            playersOldPosition[playersOldPosition.length - 1].playerY;
-            playersOldPosition.pop();
-            item.pop();
+        if (playersOldPosition.length - 1 < 0) break;
+        playersPosition[
+          playersOldPosition[playersOldPosition.length - 1].playerId - 1
+        ].x = playersOldPosition[playersOldPosition.length - 1].playerX;
+        playersPosition[
+          playersOldPosition[playersOldPosition.length - 1].playerId - 1
+        ].y = playersOldPosition[playersOldPosition.length - 1].playerY;
+        playersOldPosition.pop();
+        item.pop();
         this.setState({
           players: playersPosition,
           actionName: item
@@ -182,13 +193,15 @@ export default class PlayBook extends Component {
       case "updateLine":
         lines.pop();
         item.pop();
-        if (lines.length == 1) { lines.pop(); }
+        if (lines.length == 1) {
+          lines.pop();
+        }
         this.setState({
           lines: lines,
           actionName: item
         });
         break;
-      
+
       default:
         lines.pop();
         item.pop();
@@ -201,8 +214,8 @@ export default class PlayBook extends Component {
   }
 
   handleUpdateArrowsPosition(arrwosArray) {
-    const item = this.state.actionName
-    item.push("updateArrow")
+    const item = this.state.actionName;
+    item.push("updateArrow");
     this.setState({
       arrwosArray: arrwosArray,
       actionName: item
@@ -210,8 +223,8 @@ export default class PlayBook extends Component {
   }
 
   handleUpdateBallPosition(ballPosition) {
-    const item = this.state.actionName
-    item.push("updateBall")
+    const item = this.state.actionName;
+    item.push("updateBall");
     this.setState({
       ballPosition: ballPosition,
       actionName: item
@@ -219,8 +232,8 @@ export default class PlayBook extends Component {
   }
 
   handleUpdateEnemyPlayersPosition(playersPosition) {
-    const item = this.state.actionName
-    item.push("updateEnemyPlayer")
+    const item = this.state.actionName;
+    item.push("updateEnemyPlayer");
     this.setState({
       enemyPlayers: playersPosition,
       actionName: item
@@ -228,8 +241,8 @@ export default class PlayBook extends Component {
   }
 
   handleUpdatePlayersPosition(playersPosition) {
-    const item = this.state.actionName
-    item.push("updatePlayer")
+    const item = this.state.actionName;
+    item.push("updatePlayer");
     this.setState({
       players: playersPosition,
       actionName: item
@@ -243,23 +256,22 @@ export default class PlayBook extends Component {
   }
 
   handleUpdateLinesStatus() {
-    const item = this.state.actionName
-    item.push("updateLine")
+    const item = this.state.actionName;
+    item.push("updateLine");
     this.setState({
       actionName: item
     });
   }
 
-
   handleUpdateOldPlayersPosition(playersPosition) {
     const item = this.state.oldPlayerPosition;
-    item.push(playersPosition)
+    item.push(playersPosition);
     this.setState({
       oldPlayerPosition: item
     });
   }
 
-  updateLines(){
+  updateLines() {
     this.setState({
       lines: [...this.state.lines, []]
     });
@@ -282,6 +294,7 @@ export default class PlayBook extends Component {
               navRef={this.navRef}
               name={this.state.name}
               onChangeName={this.changeName}
+              onHandleStop={this.handleStop}
             />
             <DrawerField
               startDrawingArrows={this.state.isDrawingArrows}
@@ -305,6 +318,7 @@ export default class PlayBook extends Component {
               onUpdateLines={this.updateLines}
               fieldRef={this.fieldRef}
               onHandleUpdateLinesStatus={this.handleUpdateLinesStatus}
+              stop={this.state.stop}
             />
           </div>
         </Fullscreen>

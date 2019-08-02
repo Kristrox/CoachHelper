@@ -5,8 +5,9 @@
       .card-event
         #headingTwo.card-header
           %h5.mb-0
-            %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo", "data-toggle" => "collapse"}
+            %button.btn.btn-link.collapsed.przycisk{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo", "data-toggle" => "collapse" }
               Create New Event
+        %br
       .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo"}
         .card-body.event
           = bootstrap_form_for @event do |f|
@@ -29,6 +30,9 @@
                           format: 'YYYY-MM-DD'
                       });
                   });
+          %hr        
+          %h4 
+            Import CSV file
           = form_tag import_events_url, multipart: true do
             = file_field_tag :file
             = submit_tag 'Import CSV', class: "baczek"
@@ -76,9 +80,9 @@
                   %td.date1.ls
                     = event.opponent.titleize
                   %td.date1.ls
-                    %button.baczek.collapsed.active{"data-target-cent-id" => event.id, "aria-controls" => "collapse4", "aria-expanded" => "false", "data-target" => "#collapse4#{event.id}", "data-toggle" => "collapse"}
+                    %button.btn.btn-primary.collapsed.active{"data-target-cent-id" => event.id, "aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
                       Play books
-        .cent.collapse{"data-cent-id" => event.id, "aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapse4#{event.id}"}
+        .cent.collapse{"data-cent-id" => event.id, "aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
           .card-body
             %table.table.table-striped
               %thead
@@ -133,10 +137,13 @@
             %button.close{"data-dismiss" => "modal", :type => "button"} x
           .modal-body
             - @play_books.each do |play_book|
-              - unless event.play_books.include?(play_book) 
+              - unless event.play_books.include?(play_book)  
                 %table.table.table-striped
                   %thead
                     %tr
                       %td= play_book.name
                       %td
-                        = button_to 'Add', event_play_book_path({event_id: event.id, id: play_book.id }), method: :patch, class: "baczek"
+                        %button.btn.btn-outline-primary.btn-sm
+                          = link_to 'Add', event_play_book_path({event_id: event.id, id: play_book.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
+
+    %br

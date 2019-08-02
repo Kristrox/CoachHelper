@@ -2,11 +2,11 @@
   .content2nd
     %h1.players Create a new player
     = bootstrap_form_for @player do |f|
-      .field
+      .field.plej
         = f.text_field :name, class: "col-md-3 control-label.player" 
-      .field
+      .field.plej
         = f.text_field :surname, class: "col-md-3 control-label.player"
-      .field
+      .field.pley
         = f.text_field :number, class: "col-md-3 control-label.player"
       #datetimepicker4.input-group.date{"data-target-input" => "nearest"}
         =f.text_field(:birth_date, class: "form-control datetimepicker-input", data: {target:"#datetimepicker4"})
@@ -21,7 +21,7 @@
                 format: 'YYYY-MM-DD'
             });
         });
-      .field
+      .field.plej
         = f.select :trained_in, options_for_select(Player.trained_ins.map { |key, value| [key.humanize, key] }), {prompt: "Choose one of them: ..."}, class: "form-control"
       .actions.new
         = f.submit "Submit", class:"baczek"
