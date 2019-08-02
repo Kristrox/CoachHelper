@@ -25,7 +25,7 @@ export default class DragAndDropOnField extends Component {
     const listPlayers = this.props.enemyPlayers.map(player => (
       <Group
         key={player.id}
-        draggable
+        draggable={this.props.stop}
         x={player.x}
         y={player.y}
         onDragStart={() => {
@@ -88,7 +88,7 @@ export default class DragAndDropOnField extends Component {
       .map(player => (
         <Group
           key={player.id}
-          draggable
+          draggable={this.props.stop}
           x={player.x}
           y={player.y}
           onDragStart={e => {
@@ -155,7 +155,7 @@ export default class DragAndDropOnField extends Component {
           fontSize={30}
           x={this.props.ballPosition[this.props.ballPosition.length - 1].ballX}
           y={this.props.ballPosition[this.props.ballPosition.length - 1].ballY}
-          draggable
+          draggable={this.props.stop}
           onDragStart={() => {
             this.props.onHandleDraging(true);
           }}
