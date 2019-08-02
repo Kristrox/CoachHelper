@@ -19,7 +19,6 @@ export default class DrawerField extends Component {
       arrowStartPos: { x: 0, y: 0 },
       arrowEndPos: { x: 0, y: 0 },
       countClick: 0,
-      lines: this.props.lines,
       isDrawing: false,
       isDraging: false,
     };
@@ -33,10 +32,8 @@ export default class DrawerField extends Component {
 
 
   handleMouseDown = () => {
-    this.setState({isDrawing: this.state.isDraging ? false : true})
-    this.setState({
-      lines: [...this.state.lines, []]
-    });
+    this.setState({isDrawing: this.props.stop ? false : true})
+    this.props.onUpdateLines()
 
     const stage = this.props.fieldRef.current.getStage();
     const point = stage.getPointerPosition();
@@ -55,20 +52,19 @@ export default class DrawerField extends Component {
     if(!this.state.isDrawing) { return; }
     const stage = this.props.fieldRef.current.getStage();
     const point = stage.getPointerPosition();
-    const lines = this.state.lines;
+    const lines = this.props.lines;
     let lastLine = lines[lines.length - 1];
     lastLine = lastLine.concat([point.x, point.y]);
     lines.splice(lines.length - 1, 1, lastLine);
-    this.setState({
-      lines: lines.concat()
-    });
+    this.props.onHandleUpdateLines(lines.concat());
   };
 
   handleMouseUp = () => {
-    this.setState({ isDrawing: false });
-    if (this.props.startDrawingArrows === false) {
-      this.props.onHandleUpdateLines(this.state.lines);
+    if (this.props.startDrawingArrows === false && this.state.isDraging === false) {
+      this.props.onHandleUpdateLinesStatus();
     };
+    
+    this.setState({ isDrawing: false });
   };
 
   componentDidMount() {
@@ -177,14 +173,14 @@ export default class DrawerField extends Component {
                 <FootballFiledImage />
               </Layer>
               <Layer>
-                {this.state.lines.map((line, i) => (
+                {this.props.lines.map((line, i) => (
                   <Line
                     key={i}
                     points={line}
-                    stroke="red"
+                    stroke={"red"}
                     strokeWidth={5}
-                    lineCap="round"
-                    lineJoin="round"
+                    lineCap={"round"}
+                    lineJoin={"round"}
                   />
                 ))}
               </Layer>
@@ -222,6 +218,7 @@ export default class DrawerField extends Component {
                   onHandleUpdateEnemyPlayersPosition={this.props.onHandleUpdateEnemyPlayersPosition}
                   onHandleUpdatePlayersPosition={this.props.onHandleUpdatePlayersPosition}
                   onHandleDraging={this.handleDraging}
+                  stop={this.props.stop}
                 />
               </Layer>
             </Stage>

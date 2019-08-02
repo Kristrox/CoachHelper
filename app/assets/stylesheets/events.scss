@@ -62,15 +62,17 @@ h1.event{
 
 .card-body{
   justify-content: center;
-  margin-left: 37%;
+  // margin-left: 37%;
   text-align: left;
-
-
 }
 
-tr:hover {
-  background-color: lightgreen;
+.card-body.event{
+  text-align: center;
 }
+
+// tr:hover {
+//   background-color: lightgreen;
+// }
 
 td.date, td.date1 {
   font-size: 23px;
@@ -78,18 +80,16 @@ td.date, td.date1 {
 
 td.date{
   background-color: lightgreen;
-
-}
-td.date1{
-  background-color: #1daf3871;
-  color: white;
 }
 
-td.date2{
-  background-color: greenyellow;
-// td.date {
-//   background-color: lightgoldenrodyellow;
-}
+// td.date1{
+//   background-color: #1daf3871;
+//   color: white;
+// }
+
+// td.date2{
+//   background-color: greenyellow;
+// }
 
 td.list {
   padding: 20px;
@@ -106,20 +106,21 @@ td,
 th {
   position: relative;
 }
-td:hover::after,
-th:hover::after {
-  content: "";
-  position: absolute;
-  background-color: #ffa;
-  left: 0;
-  top: -5000px;
-  height: 10000px;
-  width: 100%;
-  z-index: -1;
-}
+
+// td:hover::after,
+// th:hover::after {
+//   content: "";
+//   position: absolute;
+//   background-color: #ffa;
+//   left: 0;
+//   top: -5000px;
+//   height: 10000px;
+//   width: 100%;
+//   z-index: -1;
+// }
 
 .field {
-  text-align: left;
+  text-align: center;
 }
 table {
   overflow: hidden;
@@ -133,13 +134,13 @@ p.content {
 
 td {
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 // tr{
 //   background-color: #1daf3871;
 tr {
-  background-color: lightgrey;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 tr.list:nth-child(odd) {
   background-color: #4caf50; // #f2f2f2;

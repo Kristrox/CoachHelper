@@ -24,6 +24,7 @@ body {
   background-image: url(bc-image.jpeg);
   background-size: cover;
 }
+
 .content,
 .table,
 .td,
@@ -31,17 +32,49 @@ body {
   font-family: "Graduate", cursive;
 }
 
-// .full-screenable-node.d-flex.flex-column{
-//   background-color: rgba(100, 100, 100, 0.5)
-// }
+.btn.btn-primary.login {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.btn.btn-primary.login:hover {
+  background-color: lightgreen;
+  border-color: lightgreen;
+}
+
+footer {
+  margin-left: 10px;
+  color: orange;
+  width: 100%;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+.content2nd.footer {
+  margin-left: 315px;
+  background-color: rgba(22, 19, 19, 0.5);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: somevalue;
+}
+
+h1.event.start.margin {
+  margin-left: 300px;
+}
 
 form-group.name {
-  text-align: left;
-  float: left;
+  text-align: center;
+  float: center;
 }
 
 .btn-link {
   font-size: 30px;
+}
+
+.collapse.show {
+  text-align: left;
 }
 
 card-event {
@@ -58,15 +91,56 @@ card-event {
 button.btn.btn-link.collapsed {
   color: black;
   margin-bottom: 20px;
+}
 
-  //   width: 70%;
-  //   height: 60px;
-  //   margin: 0px;
+.btn.btn-link.collapsed.przycisk {
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #4caf50;
+  border-color: #4caf50;
+  border-radius: 10px;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+.btn.btn-link.collapsed.przycisk:hover {
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: lightgreen;
+  border-color: lightgreen;
+  border-radius: 10px;
+  border-width: 2px;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+
+.btn.btn-link.collapsed.przycisk:active {
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #4caf50;
+  border-color: #4caf50;
+  border-radius: 10px;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+.btn.btn-link.collapsed.przycisk:hover::focus {
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: lightgreen;
+  border-color: lightgreen;
+  border-radius: 10px;
+  border-width: 2px;
+  font-size: 30px;
+  margin-bottom: 0px;
 }
 
 h5.mb-0 {
   height: 60px;
   margin-bottom: 10px;
+  font-size: 1.5rem;
   //   // background-color: rgba(100, 100, 100, 0.5);
 }
 
@@ -111,6 +185,19 @@ btn.btn-outline-primary {
   justify-content: center;
 }
 
+.form-group {
+  text-align: -moz-center;
+}
+
+.input-group.date {
+  text-align: center;
+}
+
+.form-control.datetimepicker-input {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 150px;
+}
+
 .baczek {
   display: block;
   background-color: #4caf50; /* Green */
@@ -123,4 +210,31 @@ btn.btn-outline-primary {
   margin-bottom: 20px;
   cursor: pointer;
   border-radius: 5px;
+}
+.input-group {
+  width: 110%;
+  margin-left: 42%;
+}
+
+.submit {
+  background-color: red;
+  border-color: red;
+  border-radius: 20%;
+  font-size: 15px;
+  // text-align: center;
+}
+
+.form-control {
+  width: 240px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+td.date1.ls,
+td.date.ls {
+  background-color: rgba(22, 19, 19, 0.5);
+}
+
+td.date1.ls:hover,
+td.date.ls:hover {
+  color: white;
 }

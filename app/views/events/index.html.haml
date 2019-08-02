@@ -5,10 +5,11 @@
       .card-event
         #headingTwo.card-header
           %h5.mb-0
-            %button.btn.btn-link.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo", "data-toggle" => "collapse"}
+            %button.btn.btn-link.collapsed.przycisk{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo", "data-toggle" => "collapse" }
               Create New Event
+        %br
       .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo"}
-        .card-body
+        .card-body.event
           = bootstrap_form_for @event do |f|
             %tr
               %td.create
@@ -29,23 +30,26 @@
                           format: 'YYYY-MM-DD'
                       });
                   });
+          %hr        
+          %h4 
+            Import CSV file
           = form_tag import_events_url, multipart: true do
             = file_field_tag :file
             = submit_tag 'Import CSV'
     %table
       %tr.list
-        %td.list Event date
-        %td.list Opponent
-        %td.list Close event
-        %td.list Add player
+        %td.list
+        %td.list
+        %td.list
+        %td.list
         %td.list
         %td.list
     #accordion
       - @events.each do |event|
-        .card-event
+        .card-event{:class => event.closed_match ? 'suspended' : 'available'}
           #headingTwo.card-header
             %h5.mb-0
-              %tr 
+              %tr
                 - if event.closed_match == false
                   %td.date.ls
                     = event.event_date.to_date
@@ -76,9 +80,9 @@
                   %td.date1.ls
                     = event.opponent.titleize
                   %td.date1.ls
-                    %button.btn.btn-primary.collapsed{"aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
+                    %button.btn.btn-primary.collapsed.active{"data-target-cent-id" => event.id, "aria-controls" => "collapseTwo", "aria-expanded" => "false", "data-target" => "#collapseTwo#{event.id}", "data-toggle" => "collapse"}
                       Play books
-        .collapse{"aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
+        .cent.collapse{"data-cent-id" => event.id, "aria-labelledby" => "headingTwo", "data-parent" => "#accordion", :id => "collapseTwo#{event.id}"}
           .card-body
             %table.table.table-striped
               %thead
@@ -114,7 +118,7 @@
             %button.close{"data-dismiss" => "modal", :type => "button"} x
           .modal-body
             - @players.each do |player|
-              - if player.suspended == false && player.injury == ""
+              - if player.suspended == false && player.injury == "" && !event.players.include?(player)
                 %table.table.table-striped
                   %thead
                     %tr
@@ -133,10 +137,13 @@
             %button.close{"data-dismiss" => "modal", :type => "button"} x
           .modal-body
             - @play_books.each do |play_book|
-              %table.table.table-striped
-                %thead
-                  %tr
-                    %td= play_book.name
-                    %td
-                      = button_to 'Add', event_play_book_path({event_id: event.id, id: play_book.id }), method: :patch, class: "baczek"
+              - unless event.play_books.include?(play_book)  
+                %table.table.table-striped
+                  %thead
+                    %tr
+                      %td= play_book.name
+                      %td
+                        %button.btn.btn-outline-primary.btn-sm
+                          = link_to 'Add', event_play_book_path({event_id: event.id, id: play_book.id }), method: :patch, class: ".btn.btn-outline-primary.btn-sm"
 
+    %br
