@@ -46,14 +46,16 @@ footer{
   width: 100%;
   font-weight: bold;
   padding-top: 10px;
-  margin-top: 30px;
 }
 
 .content2nd.footer{
   margin-left: 315px;
-  position: absolute;
-  bottom: auto;
   background-color: rgba(22, 19, 19, 0.5);
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:somevalue;
 }
 
 h1.event.start.margin{
@@ -70,7 +72,6 @@ form-group.name{
 }
 
 .collapse.show{
-  // background-color: red;
   text-align: left;
 }
 
@@ -139,6 +140,7 @@ button.btn.btn-link.collapsed{
 h5.mb-0{
   height:60px;
   margin-bottom: 10px;
+  font-size: 1.50rem ;
 //   // background-color: rgba(100, 100, 100, 0.5);
 }
 
@@ -214,4 +216,14 @@ text-align: -moz-center;
 .form-control{
   width: 240px;
   background-color: rgba(255,255,255,0.5);
+}
+
+
+
+td.date1.ls, td.date.ls{
+  background-color: rgba(22, 19, 19, 0.5);
+}
+
+td.date1.ls:hover, td.date.ls:hover{
+  color: white;
 }
