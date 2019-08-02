@@ -24,20 +24,36 @@ body {
   background-image: url(bc-image.jpeg);
   background-size:cover;
 }
+
+
 .content, .table, .td, .tr {
   font-family: 'Graduate', cursive;
 }
 
+.btn.btn-primary.login{
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.btn.btn-primary.login:hover{
+  background-color: lightgreen;
+  border-color: lightgreen;
+}
+
 footer{
   margin-left: 10px;
-  color: white;
+  color: orange;
   width: 100%;
+  font-weight: bold;
+  padding-top: 10px;
+  margin-top: 30px;
 }
 
 .content2nd.footer{
   margin-left: 315px;
   position: absolute;
-  bottom: 0%;
+  bottom: auto;
+  background-color: rgba(22, 19, 19, 0.5);
 }
 
 h1.event.start.margin{
@@ -76,14 +92,49 @@ button.btn.btn-link.collapsed{
 
 .btn.btn-link.collapsed.przycisk{
   color:black;
-  padding: 10px;
-  background-color: greenyellow;
-  border-color: yellow;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #4caf50;
+  border-color: #4caf50;
+  border-radius: 10px;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+.btn.btn-link.collapsed.przycisk:hover{
+  color:black;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: lightgreen;
+  border-color: lightgreen;
   border-radius: 10px;
   border-width: 2px;
   font-size: 30px;
   margin-bottom: 0px;
 }
+
+.btn.btn-link.collapsed.przycisk:active{
+  color:black;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #4caf50;
+  border-color: #4caf50;
+  border-radius: 10px;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+.btn.btn-link.collapsed.przycisk:hover::focus{
+  color:black;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: lightgreen;
+  border-color: lightgreen;
+  border-radius: 10px;
+  border-width: 2px;
+  font-size: 30px;
+  margin-bottom: 0px;
+}
+
+
 
 h5.mb-0{
   height:60px;
