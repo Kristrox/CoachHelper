@@ -157,7 +157,6 @@ export default class DragAndDropOnField extends Component {
           y={this.props.ballPosition[this.props.ballPosition.length - 1].ballY}
           draggable
           onDragStart={() => {
-            // this.props.onHandleUpdateBallPosition(this.props.ballPosition);
             this.props.onHandleDraging(true);
           }}
           onDragEnd={e => {
