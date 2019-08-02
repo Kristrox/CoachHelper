@@ -22,7 +22,8 @@ export default class PlayBook extends Component {
       arrwosArray: [],
       lines: [],
       oldPlayerPosition: [],
-      ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
+      // ballPosition: [{ ballX: 50, ballY: 20 }, { ballX: 50, ballY: 20 }],
+      ballPosition: [{ ballX: 50, ballY: 20 }],
       players: this.addPlayersToInitialList(99, "ourTeam"),
       enemyPlayers: this.addPlayersToInitialList(18, "enemy")
     };
@@ -138,10 +139,13 @@ export default class PlayBook extends Component {
         break;
 
       case "updateBall":
-        ballPosition.reverse();
+        console.log(item)
+        ballPosition.pop();
+        console.log(ballPosition)
+        item.pop();
         this.setState({
           ballPosition: ballPosition,
-          actionName: this.state.actionName.pop()
+          actionName: item
         });
         break;
 
@@ -204,10 +208,11 @@ export default class PlayBook extends Component {
   }
 
   handleUpdateBallPosition(ballPosition) {
+    const item = this.state.actionName
+    item.push("updateBall")
     this.setState({
       ballPosition: ballPosition,
-      // actionName: "updateBall"
-      actionName: this.state.actionName.push("updateBall")
+      actionName: item
     });
   }
 

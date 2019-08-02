@@ -153,20 +153,18 @@ export default class DragAndDropOnField extends Component {
         <Text
           text="⚽"
           fontSize={30}
-          x={this.props.ballPosition[0].ballX}
-          y={this.props.ballPosition[0].ballY}
+          x={this.props.ballPosition[this.props.ballPosition.length - 1].ballX}
+          y={this.props.ballPosition[this.props.ballPosition.length - 1].ballY}
           draggable
           onDragStart={() => {
-            this.props.onHandleUpdateBallPosition(this.props.ballPosition);
+            // this.props.onHandleUpdateBallPosition(this.props.ballPosition);
             this.props.onHandleDraging(true);
           }}
           onDragEnd={e => {
             const newPosition = { ballX: e.target.x(), ballY: e.target.y() };
-            const oldPosition = {
-              ballX: this.props.ballPosition[0].ballX,
-              ballY: this.props.ballPosition[0].ballY
-            };
-            this.props.onHandleUpdateBallPosition([newPosition, oldPosition]);
+            const item = this.props.ballPosition;
+            item.push(newPosition)
+            this.props.onHandleUpdateBallPosition(item);
             this.props.onHandleDraging(false);
           }}
           dragBoundFunc={ pos => {

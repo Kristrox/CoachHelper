@@ -56,10 +56,6 @@ export default class DrawerField extends Component {
     let lastLine = lines[lines.length - 1];
     lastLine = lastLine.concat([point.x, point.y]);
     lines.splice(lines.length - 1, 1, lastLine);
-    // this.props.lines = lines.concat()
-    // this.setState({
-    //   lines: lines.concat()
-    // });
     this.props.onHandleUpdateLines(lines.concat());
   };
 
